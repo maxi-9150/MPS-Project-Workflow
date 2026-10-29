@@ -1,3 +1,7 @@
+# Current implementation · 29 Oct 2026
+
+See [v4 implementation and coverage](docs/V4-IMPLEMENTATION.md) for the current baseline, runnable path and remaining source-access blocker. The notes below describe the historical 22 Oct prototype and are superseded where the v4 document differs.
+
 # INFO5900 · Figma development workflow
 
 Private F3 usability-test prototype. React + TypeScript + Vite + plain CSS. Sample data only; no real assignments, student records or calendar writes.

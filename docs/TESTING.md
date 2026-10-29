@@ -1,3 +1,7 @@
+# Current verification
+
+See [29 Oct v4 implementation and test results](V4-IMPLEMENTATION.md#verification). The following is the historical first-prototype test record.
+
 # Verification · 22 Oct 2026
 
 ## Completed checks

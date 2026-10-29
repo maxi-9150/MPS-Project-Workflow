@@ -3,7 +3,7 @@
 Newly authored for this repo. No original AGENTS.md was provided or found in the starting workspace.
 
 - Read PRD.md, DESIGN.md and docs/WORKFLOW.md before changing scope.
-- Figma mid-fidelity v3 is the current F3 baseline. Record exact source node IDs for changes.
+- Figma mid-fid v4 / CURRENT BASELINE · Teacher Walkthru.2 · 27 Oct 2026 is the current baseline. Read docs/V4-IMPLEMENTATION.md for verified coverage and unavailable frames. Record exact source node IDs for changes.
 - Read high-fidelity design context and screenshots before implementing affected frames. Reuse applicable existing components and locally stored assets.
 - Keep tokens in src/style.css; use React + TypeScript and plain CSS. Do not introduce Tailwind by default.
 - Separate evidence, teacher action, and lifecycle states. Never infer individual evidence from aggregate coverage.
