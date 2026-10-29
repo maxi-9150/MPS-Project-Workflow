@@ -1,3 +1,7 @@
+# Current implementation · 29 Oct 2026
+
+See [v4 implementation and coverage](docs/V4-IMPLEMENTATION.md) for the current baseline, runnable path and remaining source-access blocker. The notes below describe the historical 22 Oct prototype and are superseded where the v4 document differs.
+
 # F3 PRD · provisional development baseline
 
 Baseline: 22 Oct 2026. Derived from INFO5900 Internal Design Files, **mid-fidelity v3**, F3 handoff specifications. This is a newly authored requirements synthesis, not a recovered original PRD. Final course rubric and production API contracts are not yet provided.

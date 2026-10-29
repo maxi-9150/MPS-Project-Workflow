@@ -1,3 +1,7 @@
+# Current implementation · 29 Oct 2026
+
+See [v4 implementation and coverage](docs/V4-IMPLEMENTATION.md) for the current baseline, runnable path and remaining source-access blocker. The notes below describe the historical 22 Oct prototype and are superseded where the v4 document differs.
+
 # Design baseline and implementation mapping
 
 [Source file](https://www.figma.com/design/evA3w2TOuO6N1AXL5Oldnv/INFO5900-Internal-Design-Files?node-id=98-6048). Read on 22 Oct 2026 through Figma MCP. Figma itself was not edited.
