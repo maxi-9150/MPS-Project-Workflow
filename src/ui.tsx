@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 export function Icon({ name, size = 16 }: { name: string; size?: number }) {
-  return <img alt="" src={`/assets/${name}.svg`} width={size} height={size} />;
+  return <img alt="" src={`${import.meta.env.BASE_URL}assets/${name}.svg`} width={size} height={size} />;
 }
 export function Button({
   children,
@@ -93,7 +93,7 @@ export function Sidebar({
     <aside>
       <img
         className="logo"
-        src="/assets/imgModeText.svg"
+        src={`${import.meta.env.BASE_URL}assets/imgModeText.svg`}
         alt="elicėjus"
         width="103"
         height="32"
