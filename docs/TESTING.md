@@ -1,3 +1,7 @@
+# Current verification · 14 Nov 2026
+
+See [high-fidelity v3 acceptance and limits](HI-V3-IMPLEMENTATION.md#verification). The following records are historical.
+
 # Current verification
 
 See [29 Oct v4 implementation and test results](V4-IMPLEMENTATION.md#verification). The following is the historical first-prototype test record.

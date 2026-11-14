@@ -1,6 +1,6 @@
-# Current implementation · 29 Oct 2026
+# Current baseline · 14 Nov 2026
 
-See [v4 implementation and coverage](docs/V4-IMPLEMENTATION.md) for the current baseline, runnable path and remaining source-access blocker. The notes below describe the historical 22 Oct prototype and are superseded where the v4 document differs.
+The current implementation follows High-fid v1 & Prototyping, v3 section `1699:14238` on page `1351:33703`. [Current requirements, source mapping and acceptance evidence](docs/HI-V3-IMPLEMENTATION.md) supersede the historical requirements below. The local `.fig` export resolved the previous MCP quota blocker. Production API contracts and the final course rubric remain unprovided.
 
 # Design baseline and implementation mapping
 

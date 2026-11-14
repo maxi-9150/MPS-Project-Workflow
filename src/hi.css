@@ -1,0 +1,943 @@
+.hi {
+  background: #fbfaf9;
+  grid-template-columns: 256px minmax(0, 1fr);
+  font-size: calc(14px * var(--user-scale, 1));
+  min-height: 100vh;
+  color: #201f1d;
+}
+.hi main {
+  padding: 0 20px 28px 20px;
+  margin: 0;
+  max-width: none;
+}
+.hi aside {
+  height: 100vh;
+  min-height: 800px;
+  position: sticky;
+  top: 0;
+  align-self: start;
+}
+.hi .profile {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: white;
+  min-height: 55px;
+  padding: 10px 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.hi .profile strong {
+  font-size: 13px;
+}
+.hi .profile small {
+  font-size: 11px;
+}
+.hi .hiheader {
+  height: 64px;
+  margin: 0;
+  padding: 0 0 0 16px;
+}
+.hiheader > div strong {
+  font-size: 20px;
+}
+.hi .hiheader p {
+  margin: 4px 0 0;
+  font-size: 13px;
+}
+.hiheader .textlink {
+  color: #201f1d;
+  font-size: 14px;
+}
+.groupcard {
+  background: white;
+  border: 1px solid #dbd8d2;
+  border-radius: 24px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 16px 0 12px;
+  min-height: 64px;
+}
+.groupcard > .avatar {
+  font-size: 12px;
+  width: 36px;
+  height: 36px;
+  background: #f8f8f6;
+}
+.groupcard .actions {
+  margin-left: auto;
+}
+.hi .hitabs {
+  border-radius: 24px 24px 0 0;
+}
+.hi .hitabs button {
+  height: 68px;
+  background: #f8f8f6;
+  padding: 12px 16px;
+  border-right: 0;
+}
+.hi .hitabs strong {
+  font-size: 16px;
+  font-weight: 500;
+}
+.hi .hitabs small {
+  font-size: 13px;
+}
+.hi .hitabs .selected {
+  background: #ecf9ff;
+  box-shadow: inset 0 -4px #3fc1f5;
+  color: #201f1d;
+}
+.hipanel {
+  border: 1px solid #dbd8d2;
+  border-top: 4px solid #dbd8d2;
+  border-radius: 0 0 24px 24px;
+  padding: 16px;
+  min-height: 550px;
+}
+.hi h1 {
+  font-size: 24px;
+  line-height: 1.2;
+  font-weight: 700;
+  margin: 14px 0 20px;
+}
+.hi h2 {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 22px;
+  margin: 0;
+}
+.hi h3 {
+  font-size: 16px;
+  line-height: 22px;
+  font-weight: 600;
+  margin: 8px 0;
+}
+.hi p {
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 12px 0;
+}
+.hi small {
+  font-size: 12px;
+  color: #5d5951;
+  line-height: 1.5;
+}
+.hi button {
+  border-radius: 12px;
+  min-height: 36px;
+}
+.hi .primary {
+  background: #074dc6;
+}
+.hi .textlink {
+  box-shadow: none;
+  border: 0;
+  min-height: 0;
+  padding: 4px;
+  background: transparent;
+  color: #201f1d;
+  font-size: 14px;
+}
+.hi .textlink:hover {
+  color: #074dc6;
+  text-decoration: underline;
+}
+.hi .segmented {
+  padding: 0;
+  gap: 0;
+  border: 0;
+  background: #ecebe8;
+  border-radius: 14px;
+  margin-bottom: 0;
+}
+.hi .segmented button {
+  padding: 8px 12px;
+  min-height: 38px;
+  border: 1px solid transparent;
+}
+.hi .segmented .selected {
+  background: white;
+  color: #201f1d;
+  border-color: #dbd8d2;
+  border-radius: 12px;
+  box-shadow: 0 1px 1px #0001;
+}
+.infostrip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #f8f8f6;
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-size: 13px;
+}
+.infostrip small {
+  font-size: 11px;
+}
+.hifilters {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 12px 0;
+}
+.hi select,
+.hi input:not([type="checkbox"]):not([type="radio"]) {
+  border-radius: 12px;
+  min-height: 40px;
+  font-size: 14px;
+  background: white;
+}
+.hifilters select {
+  width: auto;
+  font-size: 12px !important;
+  min-height: 40px !important;
+}
+.hibadge {
+  display: inline-flex;
+  border-radius: 999px;
+  border: 1px solid #dbd8d2;
+  background: #f8f8f6;
+  padding: 2px 10px;
+  font-size: 12px;
+  line-height: 16px;
+  white-space: nowrap;
+  font-weight: 500;
+  align-self: center;
+  color: #201f1d;
+}
+.hibadge.orange {
+  background: #fed7aa;
+  border-color: transparent;
+}
+.hibadge.green {
+  background: #b6f7d0;
+  border-color: transparent;
+}
+.hibadge.blue {
+  background: #ecf9ff;
+  border-color: transparent;
+}
+.suggestion {
+  border: 1px solid #dbd8d2;
+  border-radius: 24px;
+  background: white;
+  padding: 12px 16px;
+  display: grid;
+  grid-template-columns: minmax(220px, 1.2fr) minmax(140px, 0.7fr) minmax(
+      200px,
+      1fr
+    ) auto;
+  gap: 14px;
+  align-items: center;
+  margin: 12px 0;
+}
+.suggestion h3 {
+  font-size: 16px;
+  margin: 0 0 2px;
+}
+.suggestion .actions {
+  gap: 6px;
+}
+.suggestion > .actions .textlink {
+  font-size: 13px;
+  white-space: nowrap;
+}
+.suggestion small {
+  display: block;
+}
+.suggestion > .row {
+  gap: 6px;
+  justify-content: flex-start;
+  font-size: 13px;
+}
+.avatars {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+}
+.avatars span {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #f8f8f6;
+  border: 1px solid white;
+  font-size: 12px;
+  color: #5d5951;
+  margin-left: -4px;
+}
+.avatars span:first-child {
+  margin-left: 0;
+}
+.suggestionevidence {
+  grid-column: 1/-1;
+  border-top: 1px solid var(--border);
+  padding-top: 8px;
+}
+.hicard {
+  border: 1px solid #dbd8d2;
+  border-radius: 20px;
+  padding: 20px;
+  background: white;
+  margin: 16px 0;
+}
+.hicard > .row {
+  margin-bottom: 16px;
+}
+.facts {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding: 16px 0;
+}
+.facts p {
+  margin: 4px 0;
+}
+.tableline {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 0.7fr auto;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 0;
+  border-bottom: 1px solid #e9e7e2;
+  font-size: 14px;
+}
+.tableline:last-child {
+  border-bottom: 0;
+}
+.tableline small {
+  display: block;
+}
+.tableline.head {
+  color: #5d5951;
+  font-size: 12px;
+  font-weight: 500;
+}
+.tableline .hibadge {
+  justify-self: start;
+}
+.tableline .start {
+  justify-content: flex-start;
+}
+.hi .avatar {
+  display: inline-grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+.gaprow {
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid #e9e7e2;
+  background: transparent;
+  box-shadow: none !important;
+  grid-template-columns: 2fr 1fr 1fr;
+  text-align: left;
+  border-radius: 0 !important;
+}
+.gaprow:hover {
+  background: #f8f8f6;
+}
+.inlineevidence {
+  padding: 16px 20px;
+  background: #f8f8f6;
+  border-radius: 12px;
+}
+.evidencerow {
+  display: grid;
+  grid-template-columns: 40px 1fr auto;
+  gap: 12px;
+  padding: 12px 0;
+}
+.evidencerow small {
+  display: block;
+  margin-top: 4px;
+}
+.backlabel {
+  display: block;
+  margin: 0 0 16px;
+}
+.histages {
+  display: flex;
+  gap: 8px;
+  padding: 12px 0;
+  border-bottom: 1px solid #dbd8d2;
+  margin: 0 0 20px;
+}
+.histages > span {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  font-size: 12px;
+  color: #5d5951;
+  white-space: nowrap;
+}
+.histages b {
+  width: 24px;
+  height: 24px;
+  display: grid;
+  place-items: center;
+  background: #ecebe8;
+  border-radius: 50%;
+  font-size: 12px;
+}
+.histages .active {
+  color: #074dc6;
+  font-weight: 600;
+}
+.histages .active b {
+  color: white;
+  background: #074dc6;
+}
+.histages .done b {
+  color: #074dc6;
+  background: #e1f0ff;
+}
+.materiallayout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 250px;
+  gap: 20px;
+}
+.hisummary {
+  border: 1px solid #dbd8d2;
+  background: white;
+  border-radius: 20px;
+  padding: 20px;
+  margin: 16px 0;
+  align-self: start;
+  position: sticky;
+  top: 20px;
+}
+.hisummary h2 {
+  margin-bottom: 20px;
+}
+.hisummary > small {
+  display: block;
+  margin: 14px 0 4px;
+}
+.hisummary p {
+  margin: 4px 0;
+}
+.rule {
+  height: 1px;
+  background: var(--border);
+  margin: 20px 0;
+}
+.himaterial {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 0;
+  border-bottom: 1px solid #e9e7e2;
+}
+.himaterial:last-of-type {
+  border-bottom: 0;
+}
+.himaterial h3 {
+  margin: 8px 0;
+}
+.himaterial small {
+  display: block;
+}
+.himaterial > .actions {
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+.himaterial .grow {
+  min-width: 0;
+}
+.himaterial button {
+  font-size: 13px;
+  padding: 8px 10px;
+}
+.hi footer {
+  border: 0;
+  position: sticky;
+  bottom: 0;
+  background: #fbfaf9;
+  padding: 16px 0 0;
+  z-index: 3;
+  gap: 12px;
+}
+.hi footer > button,
+.hi footer > .actions > button {
+  min-height: 40px;
+}
+.hi .banner {
+  padding: 16px;
+  border-radius: 12px;
+  background: #ecf9ff;
+  margin: 16px 0;
+  font-size: 14px;
+}
+.hi .banner.warn {
+  background: #fff4d9;
+  color: #795307;
+}
+.banner p {
+  margin: 8px 0 0;
+}
+.supportmap {
+  grid-template-columns: 140px 1fr 80px;
+}
+.supportmap strong {
+  font-size: 13px;
+}
+.hiaction {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 16px;
+  border: 1px solid #dbd8d2;
+  background: white;
+  border-radius: 20px;
+  padding: 24px;
+  margin: 16px 0;
+  cursor: pointer;
+}
+.hiaction > div {
+  flex: 1;
+  color: #201f1d;
+}
+.hiaction.chosen {
+  border: 2px solid #074dc6;
+  padding: 23px;
+}
+.hiaction input {
+  margin-top: 3px;
+}
+.libraryfilters {
+  display: flex;
+  gap: 12px;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  margin: 20px 0;
+}
+.libraryfilters > label {
+  flex: 1;
+  min-width: 120px;
+}
+.libraryfilters label:first-child {
+  min-width: 180px;
+}
+.libraryfilters input,
+.libraryfilters select {
+  width: 100%;
+}
+.libraryresult {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  border: 1px solid #dbd8d2;
+  border-radius: 16px;
+  background: white;
+  padding: 16px;
+  margin: 12px 0;
+}
+.libraryresult > .grow {
+  min-width: 0;
+}
+.libraryresult h3 {
+  margin: 6px 0;
+}
+.libraryresult button {
+  font-size: 12px;
+  padding: 8px;
+}
+.blankstate {
+  padding: 60px 20px;
+  text-align: center;
+}
+.blankstate .actions {
+  justify-content: center;
+  margin-top: 24px;
+}
+.timetableitem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px;
+  border: 1px solid #dbd8d2;
+  border-radius: 12px;
+  margin: 12px 0;
+  background: #f8f8f6;
+}
+.timetableitem.blue {
+  background: #ecf9ff;
+}
+.confirmation {
+  padding: 16px 0;
+  font-size: 14px;
+}
+.confirmation input {
+  width: 20px;
+  height: 20px;
+}
+.hi table th {
+  font-weight: 500;
+  color: #5d5951;
+  font-size: 12px;
+}
+.hi table td {
+  font-size: 14px;
+  padding: 16px 10px;
+}
+.hi table small {
+  display: block;
+  margin-top: 4px;
+}
+.hi table {
+  min-width: 620px;
+}
+.hi .studenttable {
+  min-width: 640px;
+}
+.hi .v4modal {
+  font-family: "DM Sans", Arial, sans-serif;
+}
+.v4modal .pickstudent {
+  padding: 14px 0;
+  border-bottom: 1px solid #e9e7e2;
+  gap: 12px;
+}
+.pickstudent small {
+  display: block;
+  margin-top: 3px;
+}
+.beforeafter {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.beforeafter article {
+  margin: 0;
+  background: #f8f8f6;
+}
+.testpanel {
+  margin: 20px 4px 0;
+  color: #5d5951;
+  font-size: 12px;
+}
+.testpanel > summary {
+  cursor: pointer;
+}
+.testpanel p {
+  font-size: 12px;
+}
+.hi .calendarwrap {
+  margin-top: 24px;
+  overflow: auto;
+  border: 1px solid #dbd8d2;
+  border-radius: 16px;
+  background: white;
+}
+.hicalendar {
+  display: grid;
+  min-width: 1250px;
+  row-gap: 0;
+}
+.calhead {
+  padding: 18px 12px;
+  min-height: 72px;
+  border-bottom: 1px solid #e9e7e2;
+  font-size: 13px;
+}
+.calhead small {
+  display: block;
+}
+.calhead p {
+  margin: 4px 0;
+}
+.calcell {
+  padding: 6px;
+  border-bottom: 1px solid #e9e7e2;
+  border-left: 1px solid #e9e7e2;
+  min-height: 110px;
+}
+.calevent {
+  display: block;
+  white-space: normal;
+  background: #ecf9ff;
+  border-color: #b8ddf3;
+  padding: 8px 6px;
+  text-align: left;
+  font-size: 12px;
+  box-shadow: none;
+  max-width: 100%;
+  margin: 4px 0;
+}
+.calevent small {
+  display: block;
+}
+.testevent {
+  background: #fff4d9;
+  border-color: #efd79e;
+}
+.hi .pending {
+  font-family: "DM Sans", Arial, sans-serif;
+}
+.hi input[type="radio"],
+.hi input[type="checkbox"] {
+  accent-color: #074dc6;
+}
+.hi .textsize button {
+  min-height: 36px;
+}
+.hi .infostrip img {
+  flex-shrink: 0;
+}
+@media (min-width: 1500px) {
+  .hi main {
+    max-width: 1440px;
+    margin: 0 auto;
+  }
+}
+@media (max-width: 1250px) {
+  .suggestion {
+    grid-template-columns: 1.2fr 0.7fr 1fr;
+    gap: 12px;
+  }
+  .suggestion > .actions {
+    grid-column: 3;
+    justify-content: flex-end;
+  }
+  .suggestion > .actions button {
+    font-size: 12px;
+  }
+  .materiallayout {
+    grid-template-columns: minmax(0, 1fr) 225px;
+  }
+  .himaterial {
+    flex-wrap: wrap;
+  }
+  .himaterial > .actions {
+    width: 100%;
+  }
+  .histages {
+    gap: 4px;
+  }
+  .histages > span {
+    gap: 4px;
+    font-size: 11px;
+  }
+  .groupcard .actions button {
+    font-size: 12px;
+  }
+  .hi .hitabs strong {
+    font-size: 14px;
+  }
+}
+@media (max-width: 1024px) {
+  .hi {
+    grid-template-columns: 200px minmax(0, 1fr);
+  }
+  .hi main {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  .hi aside {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+  .materiallayout {
+    grid-template-columns: 1fr;
+  }
+  .hisummary {
+    position: static;
+    display: none;
+  }
+  .suggestion {
+    grid-template-columns: 1fr 1fr;
+  }
+  .suggestion > .actions {
+    grid-column: 2;
+  }
+  .suggestion > div:nth-child(3) {
+    grid-column: 1;
+  }
+  .hi .hitabs button {
+    padding: 10px 12px;
+  }
+  .infostrip {
+    align-items: flex-start;
+    flex-wrap: wrap;
+    border-radius: 12px;
+  }
+  .facts {
+    gap: 12px;
+  }
+  .hi .profile strong {
+    font-size: 12px;
+  }
+  .histages {
+    flex-wrap: wrap;
+  }
+  .histages > span {
+    min-width: 100px;
+  }
+  .libraryresult {
+    flex-wrap: wrap;
+  }
+}
+@media (max-width: 760px) {
+  .hi {
+    display: block;
+  }
+  .hi aside {
+    height: auto;
+    min-height: 0;
+    position: static;
+  }
+  .hi aside .profile,
+  .hi .community,
+  .hi .textsize {
+    display: none;
+  }
+  .hi .hiheader {
+    padding: 0;
+    height: 64px;
+  }
+  .hi main {
+    padding: 0 12px 20px;
+  }
+  .hiheader .primary {
+    font-size: 12px;
+    padding: 8px;
+  }
+  .groupcard {
+    padding: 10px;
+    border-radius: 16px;
+    flex-wrap: wrap;
+  }
+  .groupcard .actions {
+    gap: 6px;
+  }
+  .groupcard .actions button {
+    font-size: 11px;
+    min-height: 32px;
+    padding: 6px 8px;
+  }
+  .hi .hitabs {
+    grid-template-columns: repeat(2, 1fr);
+    border-radius: 16px 16px 0 0;
+  }
+  .hi .hitabs button {
+    height: 56px;
+  }
+  .hipanel {
+    padding: 12px;
+    border-radius: 0 0 16px 16px;
+  }
+  .hi h1 {
+    font-size: 21px;
+  }
+  .hifilters {
+    flex-wrap: wrap;
+  }
+  .hifilters select {
+    flex: 1;
+    min-width: 130px;
+  }
+  .suggestion {
+    grid-template-columns: 1fr;
+    padding: 16px;
+    border-radius: 20px;
+  }
+  .suggestion > div:nth-child(3),
+  .suggestion > .actions {
+    grid-column: auto;
+  }
+  .suggestion > .actions {
+    justify-content: flex-end;
+  }
+  .facts {
+    grid-template-columns: 1fr;
+  }
+  .facts p {
+    margin: 4px 0;
+  }
+  .hicard {
+    padding: 16px;
+    border-radius: 16px;
+  }
+  .hicard .row {
+    flex-wrap: wrap;
+  }
+  .hicard h2 {
+    font-size: 15px;
+  }
+  .himaterial .actions {
+    justify-content: flex-start;
+  }
+  .histages {
+    gap: 8px;
+  }
+  .histages > span {
+    flex: none;
+    font-size: 10px;
+    min-width: 0;
+  }
+  .histages b {
+    width: 20px;
+    height: 20px;
+  }
+  .hiaction {
+    padding: 16px;
+    flex-wrap: wrap;
+  }
+  .hiaction.chosen {
+    padding: 15px;
+  }
+  .hiaction > .hibadge {
+    margin-left: 34px;
+  }
+  .hi footer {
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .hi footer > .actions {
+    margin-left: auto;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .hi footer button {
+    font-size: 12px;
+    padding: 8px 10px;
+  }
+  .supportmap {
+    grid-template-columns: 90px 1fr 40px;
+    font-size: 12px;
+  }
+  .libraryfilters {
+    gap: 10px;
+  }
+  .libraryfilters > label {
+    min-width: 140px !important;
+  }
+  .libraryresult {
+    padding: 14px;
+    gap: 10px;
+  }
+  .libraryresult > .grow {
+    flex-basis: 70%;
+  }
+  .beforeafter {
+    grid-template-columns: 1fr;
+  }
+  .hi .banner.row {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+  .hi .segmented button {
+    font-size: 12px;
+    padding: 8px 10px;
+  }
+  .hi .studenttable {
+    min-width: 660px;
+  }
+}

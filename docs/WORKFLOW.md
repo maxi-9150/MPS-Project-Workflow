@@ -1,6 +1,6 @@
 # Repeatable design-to-code workflow
 
-1. **Choose a bounded journey.** Start with one mature F3 path. Link its frame and adjacent handoff specification in an issue. Separate unfinished Calendar/design-system work.
+1. **Choose a bounded journey.** Use the current high-fidelity v3 baseline and select an explicit journey. Link its frame and adjacent handoff specification in an issue. Record reference-only and external integration states.
 2. **Read source context.** Create/reuse a Figma MCP task session; inspect page metadata; retrieve high-fidelity design context with screenshots for changed frames. Inspect Code Connect and existing components when present. Do not build from metadata alone.
 3. **Record requirements.** Update PRD acceptance criteria, DESIGN node mapping and an explicit list of source contradictions. Keep source facts separate from implementation choices and unfinished requirements.
 4. **Implement in a branch.** Reuse tokens/components. Download every required static asset locally. Use React state for transitions, editable fields, validation and derived totals. Keep backend operations behind explicit confirmation.
@@ -8,7 +8,7 @@
 6. **Review and merge.** Commit source, lockfile, docs, asset provenance and verification notes together. Open a PR describing the trigger, resulting behavior, source nodes, checks and remaining gaps. CI runs build/type checking and domain tests. No deployment is automatic.
 7. **Repeat after design changes.** Re-read only affected frames and adjacent state rules; update node mapping, tokens and acceptance criteria; rerun relevant tests. Never replace working interaction code wholesale with generated static JSX.
 
-## Suggested next slices
+## Historical suggested slices
 
 Full evidence/error states → material preview/editor and source failures → version mapping → calendar plan configuration/conflict preview → backend/auth/submission idempotency → final rubric audit.
 

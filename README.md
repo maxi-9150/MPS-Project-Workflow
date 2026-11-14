@@ -1,10 +1,16 @@
-# Current implementation · 29 Oct 2026
+# Current implementation · High-fidelity v3 · 14 Nov 2026
 
-See [v4 implementation and coverage](docs/V4-IMPLEMENTATION.md) for the current baseline, runnable path and remaining source-access blocker. The notes below describe the historical 22 Oct prototype and are superseded where the v4 document differs.
+Interactive React + TypeScript frontend built from **High-fid v1 & Prototyping → BBright baseline v3 · Client feedback**. See [implementation, coverage and limits](docs/HI-V3-IMPLEMENTATION.md). This supersedes the historical mid-fidelity notes below. The repository is public; all student activity is synthetic.
+
+Run `pnpm install --frozen-lockfile`, then `pnpm dev`. Open the URL printed by Vite. Start at **Finding equivalent fractions → View details → Create review** (or **Assign test**). Follow Assemble material → Differentiate → Review draft → Choose action → Confirm. Assignment and class planning are separate actions; both require explicit consent. Use **Prototype test scenarios** to explore failures. Drafts and created records are saved in this browser only.
+
+Validation: `pnpm test` and `pnpm build`. No backend, authentication, real student delivery or real calendar integration is connected.
+
+## Historical prototype notes
 
 # INFO5900 · Figma development workflow
 
-Private F3 usability-test prototype. React + TypeScript + Vite + plain CSS. Sample data only; no real assignments, student records or calendar writes.
+Original F3 usability-test prototype. React + TypeScript + Vite + plain CSS. Sample data only; no real assignments, student records or calendar writes.
 
 ## Run
 
