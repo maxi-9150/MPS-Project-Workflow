@@ -412,3 +412,126 @@
     margin-top: 16px;
   }
 }
+
+/* Actions belong after content: absolute/sticky bars inside the scrolling
+   panel can cover rows when the panel scrolls or text wraps. */
+.hi .panelbody:has(> footer) {
+  padding-bottom: 16px;
+}
+.hi .panelbody > footer {
+  position: static;
+  inset: auto;
+  width: 100%;
+  height: auto;
+  min-height: 0;
+  margin: 24px 0 0;
+  padding: 16px 0 0;
+  box-shadow: none;
+}
+/* Keep the title/close control visible; scroll only the dialog body. */
+.v4modal[open] {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  width: min(560px, calc(100vw - 32px));
+  max-height: calc(100dvh - 32px);
+  padding: clamp(16px, 3vw, 24px);
+}
+.v4modal > .row {
+  flex: 0 0 auto;
+  min-width: 0;
+  align-items: flex-start;
+}
+.v4modal > .row > h2 {
+  min-width: 0;
+  flex: 1;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+.v4modal > .row > button {
+  flex: 0 0 32px;
+  width: 32px;
+  height: 32px;
+  min-height: 32px;
+  line-height: 1;
+}
+.v4modal .modalbody {
+  min-height: 0;
+  min-width: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+.v4modal .modalbody footer {
+  position: static;
+  height: auto;
+  min-height: 0;
+  margin: 20px 0 0;
+  padding: 16px 0 0;
+  gap: 8px;
+}
+.v4modal .modalbody :is(button, input, select, textarea) {
+  max-width: 100%;
+  min-width: 0;
+}
+.v4modal .modalbody button {
+  height: auto;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.v4modal .pickstudent {
+  flex-wrap: wrap;
+}
+.v4modal .pickstudent > input {
+  flex-shrink: 0;
+}
+.v4modal .pickstudent > span:not(.avatar):not(.hibadge) {
+  min-width: 0;
+  flex: 1 1 120px;
+}
+@media (max-width: 480px) {
+  .v4modal .beforeafter,
+  .v4modal .previewdetails > div {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.hi .v4modal :is(.datepicker, .timemenu) {
+  position: static;
+  inset: auto;
+  width: 100%;
+  min-width: 0;
+  min-height: 0;
+  max-width: 100%;
+  padding: 0;
+  border: 0;
+  box-shadow: none;
+}
+.hi .v4modal .dategrid {
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+}
+.hi .v4modal .dategrid button {
+  min-width: 0;
+  padding: 4px;
+}
+/* Calendar/time controls use the shared top-layer dialog, so panel scrolling
+   and narrow form rails cannot clip an absolutely positioned popover. */
+.hi .v4modal :is(.datepicker, .timemenu) {
+  position: static;
+  inset: auto;
+  width: 100%;
+  min-width: 0;
+  min-height: 0;
+  max-width: 100%;
+  margin: 0;
+  padding: 4px 0;
+  border: 0;
+  box-shadow: none;
+}
+.hi .v4modal .dategrid {
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+}
+.hi .v4modal .dategrid button {
+  width: 100%;
+  min-width: 0;
+  padding: 4px 0;
+}

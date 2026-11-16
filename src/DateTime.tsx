@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Icon } from "./ui";
+import { Icon, Modal } from "./ui";
 function useDismiss(open: boolean, close: () => void) {
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -57,7 +57,8 @@ export function DateControl({
         </span>
       </button>
       {open && (
-        <div className="datepicker" role="dialog" aria-label={label}>
+        <Modal title={label} onClose={() => setOpen(false)}>
+        <div className="datepicker">
           <div className="monthnav">
             <button
               type="button"
@@ -116,6 +117,7 @@ export function DateControl({
             })}
           </div>
         </div>
+        </Modal>
       )}
     </div>
   );
@@ -144,7 +146,8 @@ export function TimeControl({
         <span>⌄</span>
       </button>
       {open && (
-        <div className="timemenu" role="dialog" aria-label={label}>
+        <Modal title={label} onClose={() => setOpen(false)}>
+        <div className="timemenu">
           {["09:20", "09:30", "10:00", "10:15", "10:30", "11:00", "11:30"].map(
             (t) => (
               <button
@@ -170,6 +173,7 @@ export function TimeControl({
             />
           </label>
         </div>
+        </Modal>
       )}
     </div>
   );

@@ -33,3 +33,14 @@ See [29 Oct v4 implementation and test results](V4-IMPLEMENTATION.md#verificatio
 ## Remaining verification
 
 Full automated browser regression, narrow viewport visual QA, modal focus trapping, full assistive-technology audit, save/restore after refresh, both action branches with all invalid/empty combinations, complete asset geometry comparison across all design frames, live backend/calendar operations and GitHub Actions result. Domain tests are not a substitute for these checks. CI configuration is included; its remote result must be checked separately.
+
+
+## 2026-11-16 — action-bar overlap and dialogs
+
+The earlier responsive audit missed vertical overlap: absolutely positioned action bars covered student rows and material cards while scrolling. All direct panel action bars now follow content in normal flow (scroll to the end for actions); removed the footer-height observer. This intentionally changes the web positioning while preserving the design content.
+
+All five application dialog types were exercised: information, students (Save), unsaved support (Continue without changes), resource preview (Close), follow-up evidence (Back to progress). Date/time controls now use the same top-layer modal instead of absolute popovers that could be clipped by the form rail or panel. Date and time selections both updated the form, and explicit confirmation successfully created the prototype assignment.
+
+Checks in production Chromium preview: six footer states at six sizes (1440×900, 1280×600, 1024×768, 800×600, 390×844, 320×568) had no overlap with preceding content and no page horizontal overflow. Dialog measurements at five sizes found no viewport escape, horizontal body overflow or escaping controls. All five application modal types plus date/time were checked. See [raw results](screenshots/overlay-fix/checks.json), [materials](screenshots/overlay-fix/materials.png), [footer after content](screenshots/overlay-fix/materials-footer.png), and [mobile date picker](screenshots/overlay-fix/date-mobile.png).
+
+`pnpm test`: 23 passing. `pnpm build`: TypeScript and Vite production build pass. This supersedes the previous measured-height/fixed-footer approach in RESPONSIVE-FIX.md.
