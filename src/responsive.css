@@ -1,0 +1,537 @@
+/* Web layout rules take precedence over the fixed Figma reference geometry.
+   Reflow content instead of allowing min-content widths to escape cards. */
+.hi main {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.hi .hiheader,
+.hi .groupcard,
+.hi .hitabs {
+  flex-shrink: 0;
+}
+.hi .hipanel {
+  flex: 1 1 auto;
+  height: auto;
+  min-height: 0;
+  min-width: 0;
+}
+.hi .panelbody {
+  container: review-panel / inline-size;
+  min-width: 0;
+}
+.hi .panelbody:has(> footer) {
+  padding-bottom: calc(var(--action-bar-height, 53px) + 32px);
+}
+.hi .hiheader {
+  flex-wrap: wrap;
+  height: auto;
+  min-height: 52px;
+  gap: 8px 16px;
+}
+.hi .groupcard {
+  flex-wrap: wrap;
+  height: auto;
+  min-height: 66px;
+}
+.hi .groupcard .actions {
+  flex-wrap: wrap;
+}
+.hi .panelbody > footer {
+  height: auto;
+  min-height: 53px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.hi .panelbody > footer > .actions {
+  min-width: 0;
+  max-width: 100%;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+.hi .panelbody > footer button {
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.hi .confirmation {
+  flex: 1 1 20rem;
+  width: auto;
+  max-width: none;
+}
+.hi .panelbody > footer .confirmation input {
+  flex-shrink: 0;
+}
+.hi
+  .panelbody
+  :is(
+    .row,
+    .actions,
+    .grow,
+    .hicard,
+    .suggestion,
+    .materiallayout,
+    .confirmlayout,
+    .schedulelayout,
+    .conflictlayout,
+    .librarysearch,
+    .librarycontext,
+    .librarylist,
+    .reviewdetails,
+    .tablewrap
+  ) {
+  min-width: 0;
+  max-width: 100%;
+}
+.hi .panelbody :is(h1, h2, h3, p, small) {
+  overflow-wrap: anywhere;
+}
+.hi .panelbody .suggestion {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.7fr) minmax(0, 1fr) auto;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  gap: 12px;
+}
+.hi .panelbody .suggestion > * {
+  min-width: 0;
+  max-width: 100%;
+  grid-column: auto;
+  grid-row: auto;
+}
+.hi .panelbody .suggestion > .actions {
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+}
+.hi .panelbody .suggestion .actions {
+  min-width: 0;
+  max-width: 100%;
+  flex-wrap: wrap;
+}
+.hi .panelbody .suggestion .hibadge {
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.hi .panelbody .suggestion button {
+  max-width: 100%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.hi .panelbody .suggestion .suggestionevidence {
+  grid-column: 1/-1;
+}
+.hi .panelbody .suggestion h3 {
+  font-size: calc(16px * var(--user-scale, 1));
+  line-height: 1.25;
+}
+.hi .panelbody .suggestion :is(small, .hibadge) {
+  font-size: calc(12px * var(--user-scale, 1));
+  line-height: 1.35;
+}
+.hi .panelbody .suggestion .actions button {
+  font-size: calc(14px * var(--user-scale, 1));
+  line-height: 1.4;
+}
+.hi .panelbody .suggestion > .row {
+  flex-wrap: wrap;
+  font-size: calc(13px * var(--user-scale, 1));
+}
+.hi .panelbody .histages {
+  height: auto;
+  flex-wrap: wrap;
+  gap: 8px 0;
+  max-width: 100%;
+}
+.hi .panelbody .histages > span {
+  width: auto !important;
+  min-width: 0;
+  max-width: 100%;
+  flex: 0 1 auto;
+}
+.hi .panelbody .histages b {
+  flex-shrink: 0;
+}
+.hi .panelbody .histages > span::after {
+  flex-shrink: 1;
+}
+.hi .panelbody .materiallayout > *,
+.hi .panelbody .confirmlayout > *,
+.hi .panelbody .schedulelayout > *,
+.hi .panelbody .conflictlayout > * {
+  min-width: 0;
+  max-width: 100%;
+}
+.hi .panelbody .himaterial {
+  min-width: 0;
+  flex-wrap: wrap;
+}
+.hi .panelbody .himaterial > .actions {
+  width: auto;
+  max-width: 100%;
+  flex-wrap: wrap;
+  margin-left: auto;
+}
+.hi .panelbody .himaterial > .grow {
+  flex: 1 1 10rem;
+  min-width: 0;
+}
+.hi .panelbody .libraryresult {
+  flex-wrap: wrap;
+  min-width: 0;
+  height: auto;
+}
+.hi .panelbody .libraryresult .grow {
+  min-width: 0;
+  flex: 1 1 12rem;
+}
+.hi .panelbody .librarylist.ordered .libraryresult {
+  height: auto;
+}
+.hi .panelbody .librarycontext {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 130px), 1fr));
+}
+.hi .panelbody .librarycontext p {
+  white-space: normal;
+}
+.hi .panelbody .searchrow {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+.hi .panelbody .searchrow input {
+  min-width: 0;
+}
+.hi .panelbody .searchfilters {
+  flex-wrap: wrap;
+}
+.hi .panelbody .legacyfilters {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr));
+}
+.hi .panelbody .legacyfilters select {
+  max-width: 100%;
+  width: 100%;
+  grid-column: auto;
+}
+.hi .panelbody .compactmaterial {
+  grid-template-columns: minmax(70px, 96px) minmax(0, 1fr) minmax(38px, 70px);
+}
+.hi .panelbody .compactmaterial > * {
+  min-width: 0;
+}
+.hi .panelbody .calendarheading {
+  flex-wrap: wrap;
+}
+.hi .panelbody .calendarheading > .actions {
+  flex-wrap: wrap;
+  max-width: 100%;
+}
+.hi .panelbody .calendarheading > div:first-child {
+  flex: 1 1 20rem;
+}
+.hi .panelbody .schedulefields {
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr) minmax(50px, 0.5fr);
+}
+.hi .panelbody .schedulefields > * {
+  min-width: 0;
+}
+.hi .panelbody .datetrigger {
+  white-space: normal;
+  height: auto;
+  min-height: 40px;
+}
+.hi .panelbody .datetrigger > span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.hi .panelbody .tablewrap {
+  width: 100%;
+  overflow-x: auto;
+}
+.hi .panelbody .assignedfilters {
+  flex-wrap: wrap;
+}
+.hi .panelbody .assignedfilters .actions {
+  flex-wrap: wrap;
+}
+.hi .panelbody .assignedfilters select,
+.hi .panelbody .assignedfilters input {
+  min-width: 0;
+  flex: 1 1 8rem;
+}
+.v4modal {
+  max-width: calc(100vw - 32px);
+}
+.v4modal :is(.row, .actions, .previewdetails, .beforeafter) {
+  min-width: 0;
+  max-width: 100%;
+}
+.v4modal h2,
+.v4modal p,
+.v4modal span {
+  overflow-wrap: anywhere;
+}
+.v4modal .actions,
+.v4modal footer {
+  flex-wrap: wrap;
+}
+
+@container review-panel (max-width:940px) {
+  .hi .panelbody .suggestion {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 12px 16px;
+  }
+  .hi .panelbody .suggestion > :nth-child(1) {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  .hi .panelbody .suggestion > :nth-child(2) {
+    grid-column: 2;
+    grid-row: 1;
+  }
+  .hi .panelbody .suggestion > :nth-child(3) {
+    grid-column: 1;
+    grid-row: 2;
+  }
+  .hi .panelbody .suggestion > .actions {
+    grid-column: 2;
+    grid-row: 2;
+  }
+  .hi .panelbody .suggestion > .suggestionevidence {
+    grid-column: 1/-1;
+    grid-row: auto;
+  }
+}
+@container review-panel (max-width:800px) {
+  .hi
+    .panelbody
+    :is(.materiallayout, .confirmlayout, .schedulelayout, .conflictlayout) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .hi .panelbody .hisummary {
+    display: block;
+    width: 100%;
+  }
+  .hi .panelbody .supportcollapsed .row {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .hi .panelbody .supportcollapsed .actions {
+    flex-wrap: wrap;
+  }
+  .hi .panelbody .confirmcallout {
+    height: auto;
+  }
+  .hi .panelbody .confirmcallout > strong {
+    height: auto;
+  }
+  .hi .panelbody .fieldrows > label,
+  .hi .panelbody .fieldrows > div {
+    grid-template-columns: 80px minmax(0, 1fr);
+  }
+}
+@container review-panel (max-width:600px) {
+  .hi .panelbody .suggestion {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .hi
+    .panelbody
+    .suggestion
+    > :is(:nth-child(1), :nth-child(2), :nth-child(3), .actions) {
+    grid-column: 1;
+    grid-row: auto;
+  }
+  .hi .panelbody .suggestion > .actions {
+    justify-content: flex-start;
+  }
+  .hi .panelbody .facts,
+  .hi .panelbody .snapshotgrid,
+  .hi .panelbody .statusmeta,
+  .hi .panelbody .statusplan,
+  .hi .panelbody .comparison {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .hi .panelbody .flowtitle {
+    flex-wrap: wrap;
+  }
+  .hi .panelbody .hifilters {
+    flex-wrap: wrap;
+  }
+  .hi .panelbody .hifilters select {
+    width: auto;
+    min-width: 0;
+    flex: 1 1 10rem;
+  }
+  .hi .panelbody .confirmation {
+    flex-basis: 100%;
+  }
+  .hi .panelbody .hiaction > .hibadge {
+    position: static;
+    margin: 0;
+  }
+  .hi .panelbody .hiaction {
+    flex-wrap: wrap;
+  }
+  .hi .panelbody .hiaction h2 {
+    padding-right: 0;
+  }
+  .hi .panelbody .schedulefields {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+  .hi .panelbody .evidencerow {
+    grid-template-columns: 24px minmax(0, 1fr);
+  }
+  .hi .panelbody .evidencerow > :is(small, .hibadge) {
+    grid-column: 2;
+    grid-row: auto;
+  }
+}
+@media (max-width: 760px) {
+  .hi main {
+    height: auto;
+    overflow: visible;
+  }
+  .hi .hiheader {
+    min-height: 64px;
+  }
+  .hi .hipanel {
+    flex: none;
+    min-height: 0;
+  }
+  .hi .panelbody {
+    height: auto;
+  }
+  .hi .panelbody:has(> footer) {
+    padding-bottom: 12px;
+  }
+  .hi .panelbody > footer {
+    position: sticky;
+    padding-bottom: 8px;
+    margin-top: 16px;
+  }
+}
+
+/* Actions belong after content: absolute/sticky bars inside the scrolling
+   panel can cover rows when the panel scrolls or text wraps. */
+.hi .panelbody:has(> footer) {
+  padding-bottom: 16px;
+}
+.hi .panelbody > footer {
+  position: static;
+  inset: auto;
+  width: 100%;
+  height: auto;
+  min-height: 0;
+  margin: 24px 0 0;
+  padding: 16px 0 0;
+  box-shadow: none;
+}
+/* Keep the title/close control visible; scroll only the dialog body. */
+.v4modal[open] {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  width: min(560px, calc(100vw - 32px));
+  max-height: calc(100dvh - 32px);
+  padding: clamp(16px, 3vw, 24px);
+}
+.v4modal > .row {
+  flex: 0 0 auto;
+  min-width: 0;
+  align-items: flex-start;
+}
+.v4modal > .row > h2 {
+  min-width: 0;
+  flex: 1;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+.v4modal > .row > button {
+  flex: 0 0 32px;
+  width: 32px;
+  height: 32px;
+  min-height: 32px;
+  line-height: 1;
+}
+.v4modal .modalbody {
+  min-height: 0;
+  min-width: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+.v4modal .modalbody footer {
+  position: static;
+  height: auto;
+  min-height: 0;
+  margin: 20px 0 0;
+  padding: 16px 0 0;
+  gap: 8px;
+}
+.v4modal .modalbody :is(button, input, select, textarea) {
+  max-width: 100%;
+  min-width: 0;
+}
+.v4modal .modalbody button {
+  height: auto;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.v4modal .pickstudent {
+  flex-wrap: wrap;
+}
+.v4modal .pickstudent > input {
+  flex-shrink: 0;
+}
+.v4modal .pickstudent > span:not(.avatar):not(.hibadge) {
+  min-width: 0;
+  flex: 1 1 120px;
+}
+@media (max-width: 480px) {
+  .v4modal .beforeafter,
+  .v4modal .previewdetails > div {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.hi .v4modal :is(.datepicker, .timemenu) {
+  position: static;
+  inset: auto;
+  width: 100%;
+  min-width: 0;
+  min-height: 0;
+  max-width: 100%;
+  padding: 0;
+  border: 0;
+  box-shadow: none;
+}
+.hi .v4modal .dategrid {
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+}
+.hi .v4modal .dategrid button {
+  min-width: 0;
+  padding: 4px;
+}
+/* Calendar/time controls use the shared top-layer dialog, so panel scrolling
+   and narrow form rails cannot clip an absolutely positioned popover. */
+.hi .v4modal :is(.datepicker, .timemenu) {
+  position: static;
+  inset: auto;
+  width: 100%;
+  min-width: 0;
+  min-height: 0;
+  max-width: 100%;
+  margin: 0;
+  padding: 4px 0;
+  border: 0;
+  box-shadow: none;
+}
+.hi .v4modal .dategrid {
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+}
+.hi .v4modal .dategrid button {
+  width: 100%;
+  min-width: 0;
+  padding: 4px 0;
+}

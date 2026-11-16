@@ -1,3 +1,7 @@
+# Current baseline · 14 Nov 2026
+
+The current implementation follows High-fid v1 & Prototyping, v3 section `1699:14238` on page `1351:33703`. [Current requirements, source mapping and acceptance evidence](docs/HI-V3-IMPLEMENTATION.md) supersede the historical requirements below. The local `.fig` export resolved the previous MCP quota blocker. Production API contracts and the final course rubric remain unprovided.
+
 # F3 PRD · provisional development baseline
 
 Baseline: 22 Oct 2026. Derived from INFO5900 Internal Design Files, **mid-fidelity v3**, F3 handoff specifications. This is a newly authored requirements synthesis, not a recovered original PRD. Final course rubric and production API contracts are not yet provided.

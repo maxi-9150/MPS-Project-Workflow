@@ -1,0 +1,644 @@
+[
+  {
+    "id": "1699:14239",
+    "name": "v3 · D01 · Recommendation overview",
+    "texts": 70,
+    "interactions": 10
+  },
+  {
+    "id": "1699:14352",
+    "name": "v3 · D02 · Recommendation detail",
+    "texts": 64,
+    "interactions": 8
+  },
+  {
+    "id": "1699:14472",
+    "name": "v3 · D03 · Step 1 · Assemble material",
+    "texts": 86,
+    "interactions": 10
+  },
+  {
+    "id": "1699:14579",
+    "name": "v3 · Step 3 · Review draft",
+    "texts": 80,
+    "interactions": 6
+  },
+  {
+    "id": "1699:14673",
+    "name": "v3 · D20 · Assigned test progress",
+    "texts": 64,
+    "interactions": 4
+  },
+  {
+    "id": "1699:14761",
+    "name": "v3 · Overlay · Edit students · from D02 (Save applies + closes)",
+    "texts": 19,
+    "interactions": 4
+  },
+  {
+    "id": "1699:14787",
+    "name": "v3 · Overlay · Material preview · Lesson",
+    "texts": 10,
+    "interactions": 2
+  },
+  {
+    "id": "1699:14809",
+    "name": "v3 · Overlay · Material preview · Station",
+    "texts": 10,
+    "interactions": 2
+  },
+  {
+    "id": "1699:14831",
+    "name": "v3 · Overlay · Material preview · Practice set",
+    "texts": 10,
+    "interactions": 2
+  },
+  {
+    "id": "1699:14853",
+    "name": "v3 · Overlay · Follow-up evidence · Amelia",
+    "texts": 11,
+    "interactions": 2
+  },
+  {
+    "id": "1699:14872",
+    "name": "v3 · Overlay · Follow-up evidence · Noah",
+    "texts": 12,
+    "interactions": 3
+  },
+  {
+    "id": "1699:14892",
+    "name": "v3 · Overlay · Follow-up evidence · Sofia",
+    "texts": 11,
+    "interactions": 2
+  },
+  {
+    "id": "1699:14911",
+    "name": "v3 · Stepper · 5 steps (local — no published source)",
+    "texts": 40,
+    "interactions": 0
+  },
+  {
+    "id": "1699:15037",
+    "name": "v3 · Step 4 · Choose action",
+    "texts": 57,
+    "interactions": 5
+  },
+  {
+    "id": "1699:15073",
+    "name": "v3 · Step 5A · Confirm assignment",
+    "texts": 110,
+    "interactions": 8
+  },
+  {
+    "id": "1699:15193",
+    "name": "v3 · Follow-up draft · Step 1 · Assemble material",
+    "texts": 70,
+    "interactions": 4
+  },
+  {
+    "id": "1699:15257",
+    "name": "v3 · D02 · Inline evidence open · Amelia Reed",
+    "texts": 78,
+    "interactions": 8
+  },
+  {
+    "id": "1699:15377",
+    "name": "v3 · D02 · Inline evidence open · Noah Wilson",
+    "texts": 78,
+    "interactions": 8
+  },
+  {
+    "id": "1699:15497",
+    "name": "v3 · D02 · Inline evidence open · Sofia Martin",
+    "texts": 70,
+    "interactions": 8
+  },
+  {
+    "id": "1699:15617",
+    "name": "v3 · D02 · Variant · Stale / disputed evidence",
+    "texts": 65,
+    "interactions": 4
+  },
+  {
+    "id": "1699:15728",
+    "name": "v3 · Overlay · Edit students · in draft (Save applies + closes)",
+    "texts": 19,
+    "interactions": 4
+  },
+  {
+    "id": "1699:15754",
+    "name": "v3 · Overlay · Toast · Draft saved",
+    "texts": 2,
+    "interactions": 2
+  },
+  {
+    "id": "1699:15756",
+    "name": "v3 · D02 · Recommendation detail · Decimal place value",
+    "texts": 55,
+    "interactions": 3
+  },
+  {
+    "id": "1699:15811",
+    "name": "v3 · D02 · Recommendation detail · Percentages",
+    "texts": 56,
+    "interactions": 3
+  },
+  {
+    "id": "1699:15866",
+    "name": "v3 · D01 · Inline evidence open · Finding equivalent fractions",
+    "texts": 77,
+    "interactions": 9
+  },
+  {
+    "id": "1699:15979",
+    "name": "v3 · D01 · Inline evidence open · Decimal place value",
+    "texts": 77,
+    "interactions": 9
+  },
+  {
+    "id": "1699:16092",
+    "name": "v3 · D01 · Inline evidence open · Percentages",
+    "texts": 77,
+    "interactions": 9
+  },
+  {
+    "id": "1699:16257",
+    "name": "v3 · F4 · Results (add mode)",
+    "texts": 98,
+    "interactions": 10
+  },
+  {
+    "id": "1699:16379",
+    "name": "v3 · F4 · Results · 1 selected",
+    "texts": 99,
+    "interactions": 11
+  },
+  {
+    "id": "1699:16502",
+    "name": "v3 · F4 · Loading",
+    "texts": 74,
+    "interactions": 3
+  },
+  {
+    "id": "1699:16567",
+    "name": "v3 · Overlay · F4 Preview · Equivalent fractions on a number line",
+    "texts": 10,
+    "interactions": 2
+  },
+  {
+    "id": "1699:16589",
+    "name": "v3 · F4 · Review selection",
+    "texts": 75,
+    "interactions": 4
+  },
+  {
+    "id": "1699:16650",
+    "name": "v3 · Overlay · Preview · Equivalent fractions on a number line (in draft)",
+    "texts": 10,
+    "interactions": 2
+  },
+  {
+    "id": "1699:16672",
+    "name": "v3 · F4 · Results (replace mode)",
+    "texts": 86,
+    "interactions": 4
+  },
+  {
+    "id": "1699:16759",
+    "name": "v3 · F4 · Review replacement",
+    "texts": 68,
+    "interactions": 3
+  },
+  {
+    "id": "1699:16809",
+    "name": "v3 · F4 · Adjacent · Empty / no matching content",
+    "texts": 71,
+    "interactions": 5
+  },
+  {
+    "id": "1699:16861",
+    "name": "v3 · F4 · Adjacent · Retrieval failure (source unavailable)",
+    "texts": 69,
+    "interactions": 5
+  },
+  {
+    "id": "1699:16911",
+    "name": "v3 · F4 · Adjacent · Partial results",
+    "texts": 97,
+    "interactions": 11
+  },
+  {
+    "id": "1699:17027",
+    "name": "v3 · F4 · Adjacent · Permission restricted",
+    "texts": 97,
+    "interactions": 9
+  },
+  {
+    "id": "1699:17143",
+    "name": "v3 · F4 · Adjacent · Stale selection",
+    "texts": 75,
+    "interactions": 5
+  },
+  {
+    "id": "1699:17204",
+    "name": "v3 · F4 · Adjacent · Apply failed · Retry",
+    "texts": 76,
+    "interactions": 5
+  },
+  {
+    "id": "1699:17266",
+    "name": "v3 · Step 2 · Differentiate · Default (one shared version)",
+    "texts": 57,
+    "interactions": 5
+  },
+  {
+    "id": "1699:17319",
+    "name": "v3 · Step 2 · Differentiate · Editing (expanded)",
+    "texts": 80,
+    "interactions": 6
+  },
+  {
+    "id": "1699:17428",
+    "name": "v3 · D03 · Layout density study · Card + summary rail",
+    "texts": 80,
+    "interactions": 0
+  },
+  {
+    "id": "1699:17507",
+    "name": "v3 · Assignment · Submitting · Initial",
+    "texts": 44,
+    "interactions": 1
+  },
+  {
+    "id": "1699:17535",
+    "name": "v3 · Assignment · Created",
+    "texts": 65,
+    "interactions": 2
+  },
+  {
+    "id": "1699:17569",
+    "name": "v3 · Assignment · Submit failed",
+    "texts": 60,
+    "interactions": 2
+  },
+  {
+    "id": "1699:17597",
+    "name": "v3 · Assignment · Checking previous submission",
+    "texts": 59,
+    "interactions": 1
+  },
+  {
+    "id": "1699:17625",
+    "name": "v3 · Assignment · Recovered",
+    "texts": 65,
+    "interactions": 2
+  },
+  {
+    "id": "1699:17668",
+    "name": "v3 · Follow-up · Decision · Noah Wilson",
+    "texts": 56,
+    "interactions": 3
+  },
+  {
+    "id": "1699:17719",
+    "name": "v3 · Calendar · J05-03 · Schedule setup",
+    "texts": 77,
+    "interactions": 4
+  },
+  {
+    "id": "1699:17789",
+    "name": "v3 · Calendar · J05-04 · Conflict review",
+    "texts": 74,
+    "interactions": 7
+  },
+  {
+    "id": "1699:17834",
+    "name": "v3 · Calendar · J06-03 · Confirm curriculum plan",
+    "texts": 75,
+    "interactions": 7
+  },
+  {
+    "id": "1699:17940",
+    "name": "v3 · Calendar · J06-04 · Submitting",
+    "texts": 35,
+    "interactions": 1
+  },
+  {
+    "id": "1699:17961",
+    "name": "v3 · Calendar · J06-04 · Planned and synced",
+    "texts": 46,
+    "interactions": 4
+  },
+  {
+    "id": "1699:18001",
+    "name": "v3 · C01 · Calendar arrival · Equivalent fractions",
+    "texts": 71,
+    "interactions": 10
+  },
+  {
+    "id": "1699:18063",
+    "name": "v3 · Calendar · Undoing linked records",
+    "texts": 69,
+    "interactions": 8
+  },
+  {
+    "id": "1699:18124",
+    "name": "v3 · Calendar · Undo complete",
+    "texts": 65,
+    "interactions": 8
+  },
+  {
+    "id": "1699:18167",
+    "name": "v3 · Calendar · J05-03 · Choose another date",
+    "texts": 77,
+    "interactions": 3
+  },
+  {
+    "id": "1699:18238",
+    "name": "v3 · Calendar · J05-03 · Choose another date · Date picker open",
+    "texts": 78,
+    "interactions": 4
+  },
+  {
+    "id": "1699:18310",
+    "name": "v3 · Calendar · J05-03 · Choose another date · Date selected",
+    "texts": 74,
+    "interactions": 4
+  },
+  {
+    "id": "1699:18380",
+    "name": "v3 · Calendar · J05-03 · Choose another date · Time menu open",
+    "texts": 78,
+    "interactions": 9
+  },
+  {
+    "id": "1699:18453",
+    "name": "v3 · Calendar · J05-03 · Choose another date · Ready to review",
+    "texts": 74,
+    "interactions": 5
+  },
+  {
+    "id": "1699:18524",
+    "name": "v3 · Calendar · J05-04 · Alternative date available",
+    "texts": 70,
+    "interactions": 4
+  },
+  {
+    "id": "1699:18582",
+    "name": "v3 · Calendar · J05-04 · Schedule changed",
+    "texts": 62,
+    "interactions": 3
+  },
+  {
+    "id": "1699:18626",
+    "name": "v3 · Calendar · J05-03 · Calendar access unavailable",
+    "texts": 58,
+    "interactions": 3
+  },
+  {
+    "id": "1699:18664",
+    "name": "v3 · Calendar · J05-03 · No schedulable content",
+    "texts": 56,
+    "interactions": 3
+  },
+  {
+    "id": "1699:18702",
+    "name": "v3 · Calendar · J06-04 · Submission failed",
+    "texts": 36,
+    "interactions": 2
+  },
+  {
+    "id": "1699:18721",
+    "name": "v3 · Calendar · J06-04 · Checking previous submission",
+    "texts": 35,
+    "interactions": 1
+  },
+  {
+    "id": "1699:18743",
+    "name": "v3 · Calendar · J06-04 · Recovered linked items",
+    "texts": 44,
+    "interactions": 2
+  },
+  {
+    "id": "1699:18785",
+    "name": "v3 · C01 · Undo failed",
+    "texts": 64,
+    "interactions": 2
+  },
+  {
+    "id": "1699:18849",
+    "name": "v3 · C01 · Undo expired",
+    "texts": 63,
+    "interactions": 1
+  },
+  {
+    "id": "1699:18914",
+    "name": "v3 · Step 2 · Differentiate · Teacher adjustment not saved",
+    "texts": 82,
+    "interactions": 6
+  },
+  {
+    "id": "1699:19006",
+    "name": "v3 · Step 2 · Differentiate · Level menu open · Amelia",
+    "texts": 85,
+    "interactions": 13
+  },
+  {
+    "id": "1699:19097",
+    "name": "v3 · Step 2 · Differentiate · Save support failed",
+    "texts": 85,
+    "interactions": 6
+  },
+  {
+    "id": "1699:19198",
+    "name": "v3 · Step 2 · Differentiate · Editing saved support",
+    "texts": 81,
+    "interactions": 7
+  },
+  {
+    "id": "1699:19289",
+    "name": "v3 · Step 2 · Differentiate · Level menu open · Amelia · Saved Satisfactory",
+    "texts": 86,
+    "interactions": 18
+  },
+  {
+    "id": "1699:19386",
+    "name": "v3 · Step 2 · Differentiate · Level menu open · Amelia · Unsaved Satisfactory",
+    "texts": 87,
+    "interactions": 19
+  },
+  {
+    "id": "1699:19481",
+    "name": "v3 · Calendar · J05-03 · Choose another date · Time menu open · 10:15 selected",
+    "texts": 78,
+    "interactions": 9
+  },
+  {
+    "id": "1699:19600",
+    "name": "v3 · Step 2 · Differentiate · Teacher support not saved · Sofia",
+    "texts": 80,
+    "interactions": 4
+  },
+  {
+    "id": "1699:19689",
+    "name": "v3 · Step 2 · Differentiate · Level menu open · Sofia",
+    "texts": 86,
+    "interactions": 21
+  },
+  {
+    "id": "1699:19782",
+    "name": "v3 · D01b · Recommended review · Class knowledge gaps (existing list)",
+    "texts": 55,
+    "interactions": 4
+  },
+  {
+    "id": "1704:28302",
+    "name": "v3 · Assigned tests · Review tracked after assigning",
+    "texts": 59,
+    "interactions": 4
+  },
+  {
+    "id": "1707:29520",
+    "name": "v3 · Calendar · Existing Month / Day views (reference)",
+    "texts": 9,
+    "interactions": 6
+  },
+  {
+    "id": "1708:28315",
+    "name": "v3 · F4 · Real BBright example · Grade 9 (reference only)",
+    "texts": 9,
+    "interactions": 1
+  },
+  {
+    "id": "1709:28318",
+    "name": "v3 · Walkthrough guide · Both branches from the same review",
+    "texts": 20,
+    "interactions": 4
+  },
+  {
+    "id": "1709:28364",
+    "name": "v3 · Handoff · Flags to verify and design review",
+    "texts": 11,
+    "interactions": 0
+  },
+  {
+    "id": "1714:28342",
+    "name": "v3 · DEMO · Failed submission route (start)",
+    "texts": 3,
+    "interactions": 1
+  },
+  {
+    "id": "1716:28333",
+    "name": "v3 · Review draft · After adding to class plan (saved choices)",
+    "texts": 72,
+    "interactions": 7
+  },
+  {
+    "id": "1716:28659",
+    "name": "v3 · Overlay · Day view unavailable in this prototype",
+    "texts": 3,
+    "interactions": 1
+  },
+  {
+    "id": "1733:28514",
+    "name": "v3 · D01c · Recommended review · Suggested groups · Return state",
+    "texts": 70,
+    "interactions": 11
+  },
+  {
+    "id": "1735:28722",
+    "name": "v3 · F2-10 · Step 2 · Differentiate · Teacher support not saved · Sofia · Not set",
+    "texts": 80,
+    "interactions": 4
+  },
+  {
+    "id": "1735:29038",
+    "name": "v3 · F2-09 · Step 2 · Differentiate · Level menu open · Sofia · Saved Threshold",
+    "texts": 86,
+    "interactions": 23
+  },
+  {
+    "id": "1754:29193",
+    "name": "v3 · F2-11 · Step 2 · Differentiate · Teacher adjustment not saved · Amelia Basic (saved was Satisfactory)",
+    "texts": 80,
+    "interactions": 4
+  },
+  {
+    "id": "1789:29421",
+    "name": "v3 · Handoff · Calendar branch · Evidence and components",
+    "texts": 269,
+    "interactions": 0
+  },
+  {
+    "id": "1789:29551",
+    "name": "v3 · Handoff · Calendar branch · Unverified dependencies",
+    "texts": 47,
+    "interactions": 0
+  },
+  {
+    "id": "1811:29424",
+    "name": "Final deliverable header · F3 Teacher Review Journey",
+    "texts": 7,
+    "interactions": 0
+  },
+  {
+    "id": "1818:29433",
+    "name": "v3 · Handoff · Generative UI principles and safety",
+    "texts": 56,
+    "interactions": 0
+  },
+  {
+    "id": "1818:29515",
+    "name": "v3 · Handoff · Final recommendation and decision matrix",
+    "texts": 85,
+    "interactions": 0
+  },
+  {
+    "id": "1819:29433",
+    "name": "Responsive reference · 1024 · M01 · Recommended review (not connected)",
+    "texts": 57,
+    "interactions": 3
+  },
+  {
+    "id": "1819:29742",
+    "name": "Responsive reference · 1024 · M03 · Assemble material (not connected)",
+    "texts": 73,
+    "interactions": 0
+  },
+  {
+    "id": "1819:30056",
+    "name": "Responsive reference · 1024 · F4 · Results (not connected)",
+    "texts": 85,
+    "interactions": 0
+  },
+  {
+    "id": "1819:30444",
+    "name": "Responsive reference · 1024 · F2 · Differentiate (not connected)",
+    "texts": 67,
+    "interactions": 0
+  },
+  {
+    "id": "1819:30756",
+    "name": "Responsive reference · 1024 · A01 · Confirm assigned test (not connected)",
+    "texts": 97,
+    "interactions": 0
+  },
+  {
+    "id": "1819:31130",
+    "name": "Responsive reference · 1024 · C01 · Schedule setup (not connected)",
+    "texts": 64,
+    "interactions": 0
+  },
+  {
+    "id": "1819:31407",
+    "name": "Responsive reference · 1024 · C06 · Calendar arrival (not connected)",
+    "texts": 59,
+    "interactions": 7
+  },
+  {
+    "id": "1819:31691",
+    "name": "Responsive reference · 1024 · A05 · Assigned test progress (not connected)",
+    "texts": 51,
+    "interactions": 1
+  }
+]

@@ -1,0 +1,2919 @@
+/* High-fid v3: shared geometry comes from the 1280 × 800 source frames.
+   Containers resize; scroll bodies and action bars remain independent. */
+.hi {
+  --hi-surface: #fbfaf9;
+  --hi-radius: 24px;
+}
+.hi main {
+  padding: 16px 20px 24px;
+}
+.hi .hiheader {
+  height: 52px;
+  padding: 0 0 0 16px;
+}
+.hi .hiheader > div strong {
+  font-size: 20px;
+  line-height: 20px;
+}
+.hi .hiheader p {
+  font-size: 14px;
+  line-height: 20px;
+  margin-top: 6px;
+}
+.hi button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 14px;
+  line-height: 20px;
+  padding: 8px 16px;
+}
+.hi .primary {
+  background: #074dc6;
+  border-color: #074dc6;
+}
+.hi .primary:disabled {
+  opacity: 1;
+  background: #80aae9;
+  border-color: #80aae9;
+  color: #fff;
+}
+.hi .logo {
+  flex-shrink: 0;
+}
+.hi nav button {
+  justify-content: flex-start;
+  padding: 8px 12px;
+}
+.hi nav button.active {
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+}
+.hi .community {
+  margin-top: 0;
+  padding-top: 12px;
+}
+.hi .community button {
+  width: 100%;
+  padding: 8px 12px;
+  justify-content: flex-start;
+  font-size: 14px;
+}
+.hi .textsize {
+  padding-top: 0;
+}
+.hi .textsize button {
+  width: 36px;
+  padding: 8px;
+}
+.hi .textsize output {
+  line-height: 18px;
+}
+.hi .profile .avatar {
+  width: 28px;
+  height: 28px;
+}
+.hi .groupcard {
+  margin: 12px 0;
+  height: 66px;
+  min-height: 66px;
+  padding: 12px 16px;
+}
+.hi .groupcard > .avatar {
+  height: 40px;
+  width: 40px;
+}
+.hi .groupcard .actions button {
+  font-size: 14px;
+}
+.hi .hitabs {
+  height: 70px;
+  border-radius: 24px 24px 0 0;
+  border-bottom: 4px solid var(--border);
+}
+.hi .hitabs button {
+  display: block;
+  height: 66px;
+  padding: 10px 16px;
+  text-align: left;
+  border-right: 1px solid var(--border);
+}
+.hi .hitabs button:last-child {
+  border-right: 0;
+}
+.hi .hitabs strong {
+  line-height: 22px;
+  font-size: 16px;
+}
+.hi .hitabs small {
+  font-size: 14px;
+  line-height: 20px;
+  margin-top: 2px;
+}
+.hi .hitabs button.selected {
+  box-shadow: inset 0 -4px #3fc1f5;
+}
+.hi .hipanel {
+  position: relative;
+  padding: 0;
+  border-top: 0;
+  height: calc(100dvh - 252px);
+  min-height: 400px;
+  overflow: hidden;
+}
+.hi .panelbody {
+  height: 100%;
+  overflow: auto;
+  padding: 16px;
+  scrollbar-width: thin;
+  overscroll-behavior: contain;
+}
+.hi .panelbody:has(> footer) {
+  padding-bottom: 102px;
+}
+.hi .panelbody > footer {
+  position: absolute;
+  z-index: 5;
+  bottom: 16px;
+  left: 16px;
+  right: 16px;
+  height: 53px;
+  min-height: 53px;
+  margin: 0;
+  padding: 12px 0 0;
+  border-top: 1px solid var(--border);
+  background: var(--hi-surface);
+  box-shadow: 0 -16px 0 var(--hi-surface);
+  justify-content: flex-end;
+}
+.hi .panelbody > footer > button:first-child:not(:last-child) {
+  margin-right: auto;
+}
+.hi[data-page="confirm"] .panelbody > footer > button:first-of-type {
+  margin-right: 0;
+}
+.hi h1 {
+  font-size: 24px;
+  line-height: 24px;
+  margin: 8px 0 16px;
+  font-weight: 700;
+}
+.hi h2,
+.hi h3 {
+  font-size: 16px;
+  line-height: 20px;
+}
+.hi p {
+  line-height: 20px;
+}
+.hi small {
+  line-height: 16px;
+}
+.hi .backlabel {
+  height: 36px;
+  min-height: 36px;
+  padding: 8px 12px;
+  margin: 0 0 8px;
+  text-align: left;
+  justify-content: flex-start;
+}
+.hi .flowtitle {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.hi .flowtitle h1 {
+  margin: 0;
+}
+.hi .flowsubtitle {
+  font-size: 13px;
+  line-height: 16px;
+  color: var(--muted);
+  margin: 8px 0 16px;
+}
+.hi .histages {
+  display: flex;
+  gap: 0;
+  border: 0;
+  padding: 0;
+  margin: 0 0 16px;
+  height: 24px;
+  max-width: 950px;
+}
+.hi .histages > span {
+  flex: none;
+  min-width: 0;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--muted);
+}
+.hi .histages > span:not(:last-child)::after {
+  content: "";
+  height: 1px;
+  background: #dbd8d2;
+  width: 24px;
+  margin: 0 12px;
+}
+.hi .histages .done::after {
+  background: #074dc6 !important;
+}
+.hi .histages b {
+  background: transparent;
+  border: 1px solid var(--border);
+  width: 24px;
+  height: 24px;
+  font-weight: 400;
+}
+.hi .histages .active,
+.hi .histages .done {
+  color: #201f1d;
+}
+.hi .histages .active b,
+.hi .histages .done b {
+  background: #074dc6;
+  color: white;
+  border-color: #074dc6;
+}
+.hi[data-page="confirm"] .histages {
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+.hi .hibadge {
+  padding: 1px 9px;
+  line-height: 16px;
+  font-size: 12px;
+  min-height: 20px;
+}
+.hi .hibadge.orange {
+  background: #fed7aa;
+}
+.hi .hibadge.green {
+  background: #b6f7d0;
+}
+.hi .hibadge.solidblue {
+  background: #074dc6;
+  border-color: #074dc6;
+  color: white;
+}
+.hi .hicard {
+  border-radius: 24px;
+  padding: 16px;
+  margin: 12px 0;
+  background: white;
+}
+.hi .hicard > .row {
+  margin-bottom: 12px;
+}
+.hi .hicard > .row h2 > small {
+  display: block;
+  font-size: 12px;
+  line-height: 16px;
+  margin-top: 4px;
+  font-weight: 400;
+}
+.hi .materiallayout {
+  grid-template-columns: minmax(0, 1fr) 280px;
+  gap: 16px;
+  align-items: start;
+}
+.hi .materiallayout .hicard,
+.hi .hisummary {
+  margin: 0;
+  padding: 16px;
+  border-radius: 24px;
+}
+.hi .hisummary {
+  position: static;
+}
+.hi .hisummary h2 {
+  font-size: 14px;
+  line-height: 20px;
+  margin: 0 0 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+.hi .hisummary > small {
+  margin: 12px 0 4px;
+  font-size: 12px;
+}
+.hi .hisummary > p {
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+  font-size: 14px;
+  line-height: 20px;
+}
+.hi .hisummary .row {
+  gap: 8px;
+}
+.hi .hisummary .row button {
+  margin-left: auto;
+  padding: 4px 8px;
+  border: 0;
+  box-shadow: none;
+}
+.hi .hisummary .avatars span {
+  width: 32px;
+  height: 32px;
+}
+.hi .hisummary .rule {
+  margin: 12px 0;
+}
+.hi .himaterial {
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 12px;
+  margin: 12px 0;
+  gap: 12px;
+  align-items: center;
+  min-height: 64px;
+}
+.hi .himaterial:last-of-type {
+  border-bottom: 1px solid var(--border);
+}
+.hi .materialtype {
+  width: 96px;
+  flex-shrink: 0;
+}
+.hi .himaterial h3 {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  margin: 0 0 2px;
+}
+.hi .himaterial small {
+  font-size: 12px;
+  line-height: 16px;
+  color: #201f1d;
+}
+.hi .himaterial .actions {
+  flex-wrap: nowrap;
+  gap: 12px;
+}
+.hi .himaterial button {
+  border: 0;
+  box-shadow: none;
+  padding: 8px 12px;
+  border-radius: 12px;
+  min-height: 36px;
+  font-size: 14px;
+}
+.hi .supportcollapsed {
+  margin: 0;
+}
+.hi .supportcollapsed .row {
+  margin-bottom: 12px;
+}
+.hi .supportcollapsed p {
+  margin: 4px 0 0;
+  color: var(--muted);
+}
+.hi .supportcollapsed small {
+  display: block;
+}
+.hi .supportcollapsed .actions {
+  flex-shrink: 0;
+}
+.hi .hiaction {
+  padding: 12px 16px;
+  margin: 8px 0;
+  gap: 8px;
+  border-radius: 16px;
+  max-width: 760px;
+}
+.hi .hiaction.chosen {
+  border-color: #074dc6;
+  background: #ecf9ff;
+  padding: 11px 15px;
+}
+.hi .hiaction input {
+  width: 16px;
+  height: 16px;
+  margin: 2px 0;
+}
+.hi .hiaction h2 {
+  font-size: 14px;
+  font-weight: 400;
+}
+.hi .hiaction p {
+  color: var(--muted);
+  font-size: 14px;
+  margin: 4px 0 0;
+}
+.hi .hiaction small {
+  font-size: 14px;
+  line-height: 20px;
+}
+.hi .hiaction .hibadge {
+  align-self: flex-start;
+}
+.hi .hiaction.chosen .hibadge {
+  background: #074dc6;
+  border-color: #074dc6;
+  color: white;
+}
+.hi .reviewdetails {
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  background: white;
+}
+.hi .reviewdetails > .hicard {
+  border: 0;
+  border-radius: 0;
+  padding: 0 0 12px;
+  margin: 0 0 12px;
+  border-bottom: 1px solid var(--border);
+}
+.hi .reviewdetails > .hicard:last-child {
+  border-bottom: 0;
+  margin-bottom: 0;
+}
+.hi .reviewdetails .hicard > .row {
+  justify-content: flex-start;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.hi .reviewdetails button {
+  border: 0;
+  box-shadow: none;
+}
+.hi .reviewdetails .avatars + p {
+  display: inline-block;
+  margin-left: 12px;
+}
+.hi .sequencecard .himaterial {
+  display: grid;
+  grid-template-columns: 96px minmax(0, 1fr);
+  padding: 0;
+  border: 0 !important;
+  min-height: 20px;
+  margin: 6px 0;
+}
+.hi .sequencecard .himaterial .grow {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+.hi .sequencecard .himaterial h3 {
+  width: 260px;
+  margin: 0;
+}
+.hi .sequencecard .himaterial small {
+  color: var(--muted);
+  font-size: 13px;
+}
+.hi .sequencecard .himaterial .actions {
+  display: none;
+}
+.hi .sequencecard > p.blue {
+  color: #201f1d;
+  margin: 12px 0 4px;
+}
+.hi[data-page="detail"] .panelbody > h1 {
+  margin: 8px 0 12px;
+}
+.hi[data-page="detail"] .panelbody > .actions {
+  gap: 8px;
+}
+.hi[data-page="detail"] .facts {
+  margin: 12px 0;
+  padding: 12px 16px;
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  background: white;
+  gap: 16px;
+}
+.hi[data-page="detail"] .facts p {
+  font-size: 14px;
+  margin: 4px 0 0;
+}
+.hi[data-page="detail"] .detailstudents {
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  margin: 12px 0;
+  background: transparent;
+}
+.hi .detailstudents > .row {
+  margin-bottom: 12px;
+  min-height: 36px;
+}
+.hi .studenttable {
+  width: 100%;
+  min-width: 700px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  background: white;
+}
+.hi .studenttable .tableline {
+  grid-template-columns: 34% 27.5% 19% minmax(124px, 1fr);
+  gap: 0;
+  padding: 12px 16px;
+  min-height: 61px;
+}
+.hi .studenttable .tableline.head {
+  min-height: 40px;
+  height: 40px;
+  padding: 10px 12px;
+  background: #fcfcfb;
+  font-size: 12px;
+  font-weight: 400;
+}
+.hi .studenttable .tableline .avatar {
+  width: 36px;
+  height: 36px;
+  background: #f8f8f6;
+  color: #5d5951;
+}
+.hi .studenttable .tableline .outline {
+  justify-self: end;
+  padding: 8px 12px;
+  font-size: 14px;
+}
+.hi .whyaccordion {
+  border-bottom: 1px solid var(--border);
+  margin-top: 12px;
+}
+.hi .whyaccordion summary {
+  cursor: pointer;
+  padding: 16px 0;
+  font-size: 14px;
+  font-weight: 500;
+  list-style: none;
+}
+.hi .whyaccordion summary::after {
+  content: "⌄";
+  float: right;
+}
+.hi .whyaccordion p {
+  padding: 0 12px 12px;
+}
+.hi .inlineevidence {
+  border-radius: 0;
+  background: #f8f8f6;
+  padding: 16px;
+}
+.hi .banner {
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: white;
+  padding: 16px;
+  margin: 12px 0;
+  font-size: 14px;
+}
+.hi .banner.warn {
+  background: #fff9eb;
+  border-color: #efd79e;
+}
+.hi .banner h2 {
+  font-size: 16px;
+}
+.hi .banner p {
+  margin: 8px 0 0;
+}
+.hi .confirmation {
+  padding: 0;
+  margin: 0 auto 0 0;
+  max-width: calc(100% - 270px);
+  font-size: 14px;
+  gap: 8px;
+}
+.hi .confirmation input {
+  width: 16px;
+  height: 16px;
+}
+.hi table {
+  min-width: 0;
+}
+.hi table th {
+  background: transparent;
+  font-size: 12px;
+  font-weight: 400;
+  padding: 8px 0;
+  border: 0;
+}
+.hi table td {
+  font-size: 14px;
+  padding: 8px 0;
+}
+.hi .testpanel {
+  position: relative;
+  margin: 10px 0 0;
+  padding: 4px 0;
+  font-size: 12px;
+}
+.hi .blankstate {
+  text-align: left;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  background: white;
+}
+.hi .blankstate .actions {
+  justify-content: flex-start;
+}
+.hi[data-page="calendar"] .hipanel {
+  height: calc(100dvh - 40px);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+}
+.hi[data-page="calendar"] .panelbody {
+  padding: 16px;
+}
+/* Native modal semantics; geometry and visual structure from the v3 overlays. */
+.v4modal {
+  width: min(560px, calc(100vw - 32px));
+  max-height: calc(100dvh - 48px);
+  padding: 24px;
+  border-radius: 16px;
+  box-shadow: 0 16px 80px #0003;
+}
+.v4modal > .row {
+  align-items: flex-start;
+  gap: 16px;
+}
+.v4modal > .row > h2 {
+  font-size: 18px;
+  line-height: 24px;
+}
+.v4modal > .row > button {
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  font-size: 24px;
+  line-height: 16px;
+  min-height: 16px;
+  width: 16px;
+  padding: 0;
+}
+.v4modal .modalbody {
+  padding-top: 8px;
+}
+.v4modal .modalbody > p:first-child {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 20px;
+  margin: 0 0 20px;
+}
+.v4modal .pickstudent {
+  padding: 8px;
+  min-height: 56px;
+  margin: 4px 0;
+  border: 0;
+}
+.v4modal .pickstudent > .avatar {
+  display: none;
+}
+.v4modal .pickstudent small {
+  font-size: 12px;
+  color: var(--muted);
+}
+.v4modal .pickstudent > .hibadge {
+  margin-left: auto;
+}
+.v4modal footer {
+  height: 100px;
+  margin: 20px 0 0;
+  padding: 30px 0;
+  border: 0;
+  justify-content: flex-end;
+  gap: 8px;
+}
+.v4modal footer > small {
+  margin-right: auto;
+}
+.v4modal .previewarea {
+  height: 160px;
+  background: #f8f8f6;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0;
+}
+.v4modal .previewdetails > div {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 12px;
+  margin: 12px 0;
+  font-size: 14px;
+  line-height: 20px;
+}
+.v4modal .previewdetails small {
+  font-size: 12px;
+  color: var(--muted);
+}
+@media (min-width: 761px) {
+  .hi aside {
+    min-height: 800px;
+  }
+}
+@media (max-width: 1100px) and (min-width: 761px) {
+  .hi {
+    grid-template-columns: 200px minmax(0, 1fr);
+  }
+  .hi .materiallayout {
+    grid-template-columns: minmax(0, 1fr) 230px;
+  }
+  .hi .histages > span:not(:last-child)::after {
+    width: 16px;
+    margin: 0 6px;
+  }
+  .hi .histages > span {
+    font-size: 11px;
+    gap: 6px;
+  }
+  .hi .himaterial {
+    flex-wrap: wrap;
+  }
+  .hi .himaterial .actions {
+    width: auto;
+    margin-left: auto;
+  }
+  .hi .hisummary {
+    display: block;
+  }
+  .hi .hitabs strong {
+    font-size: 14px;
+  }
+}
+@media (max-width: 760px) {
+  .hi main {
+    padding: 0 12px 20px;
+  }
+  .hi .hiheader {
+    height: 64px;
+    padding: 0;
+  }
+  .hi .groupcard {
+    height: auto;
+    margin: 12px 0;
+  }
+  .hi .hitabs {
+    height: 112px;
+    border-radius: 16px 16px 0 0;
+  }
+  .hi .hitabs button {
+    height: 54px;
+    padding: 8px 12px;
+  }
+  .hi .hipanel {
+    height: auto;
+    min-height: 550px;
+    overflow: visible;
+  }
+  .hi .panelbody {
+    height: auto;
+    overflow: visible;
+    padding: 12px;
+  }
+  .hi .panelbody:has(> footer) {
+    padding-bottom: 0;
+  }
+  .hi .panelbody > footer {
+    position: sticky;
+    bottom: 0;
+    left: auto;
+    right: auto;
+    height: auto;
+    min-height: 64px;
+    flex-wrap: wrap;
+    padding: 12px 0;
+    margin-top: 16px;
+    box-shadow: 0 -8px 0 var(--hi-surface);
+  }
+  .hi .flowtitle {
+    gap: 8px;
+    align-items: flex-start;
+  }
+  .hi h1 {
+    font-size: 21px;
+    line-height: 26px;
+  }
+  .hi .histages {
+    height: auto;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 12px 0 16px;
+  }
+  .hi .histages > span {
+    font-size: 10px;
+    gap: 4px;
+  }
+  .hi .histages > span:not(:last-child)::after {
+    display: none;
+  }
+  .hi .histages b {
+    width: 20px;
+    height: 20px;
+  }
+  .hi .materiallayout {
+    grid-template-columns: 1fr;
+  }
+  .hi .hisummary {
+    display: block;
+  }
+  .hi .materialtype {
+    width: auto;
+  }
+  .hi .himaterial {
+    flex-wrap: wrap;
+  }
+  .hi .himaterial > .grow {
+    flex-basis: 65%;
+  }
+  .hi .himaterial .actions {
+    width: 100%;
+    justify-content: flex-end;
+    gap: 4px;
+  }
+  .hi .supportcollapsed .row,
+  .hi .supportcollapsed .actions {
+    flex-wrap: wrap;
+  }
+  .hi .facts {
+    grid-template-columns: 1fr;
+  }
+  .hi .hicard {
+    border-radius: 20px;
+  }
+  .hi .sequencecard .himaterial {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+  .hi .sequencecard .himaterial .grow {
+    display: block;
+  }
+  .hi .sequencecard .himaterial h3 {
+    width: auto;
+  }
+  .hi .confirmation {
+    max-width: 100%;
+    width: 100%;
+    font-size: 12px;
+    margin: 0 0 8px;
+  }
+  .hi .hiaction {
+    flex-wrap: nowrap;
+  }
+  .hi .hiaction .hibadge {
+    margin: 0;
+    font-size: 10px;
+    white-space: normal;
+  }
+  .hi .studenttable {
+    min-width: 700px;
+  }
+  .hi .panelbody > footer button {
+    font-size: 12px;
+    padding: 8px 10px;
+  }
+  .v4modal {
+    padding: 20px;
+  }
+  .v4modal .previewdetails > div {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+  .v4modal footer {
+    height: auto;
+    padding: 16px 0 0;
+    flex-wrap: wrap;
+  }
+}
+.hi .compactmaterials {
+  margin: 8px 0;
+}
+.hi .compactmaterial {
+  display: grid;
+  grid-template-columns: 96px minmax(0, 1fr) 1fr;
+  gap: 12px;
+  align-items: center;
+  margin: 6px 0;
+  font-size: 14px;
+  line-height: 20px;
+}
+.hi .compactmaterial small {
+  font-size: 13px;
+  line-height: 20px;
+}
+.hi .confirmlayout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  gap: 16px;
+  align-items: start;
+  margin-top: 10px;
+}
+.hi .confirmlayout .hicard {
+  margin: 0;
+  min-width: 0;
+}
+.hi .confirmcallout {
+  margin: 0;
+  min-height: 100px;
+}
+.hi .confirmcallout strong {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+}
+.hi .confirmcallout p {
+  margin: 8px 0 0;
+  padding-left: 26px;
+}
+.hi .confirmsection {
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 12px;
+  margin-bottom: 12px;
+}
+.hi .confirmsection:last-child {
+  border: 0;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+.hi .confirmsection > .row {
+  margin: 0 0 8px;
+}
+.hi .confirmsection button {
+  border: 0;
+  box-shadow: none;
+  padding: 4px 8px;
+  font-size: 14px;
+}
+.hi .confirmsection h2,
+.hi .confirmrail h2 {
+  font-size: 14px;
+  line-height: 20px;
+}
+.hi .confirmlayout .compactmaterial {
+  grid-template-columns: 96px minmax(0, 1fr) 40px;
+}
+.hi .confirmlayout table td {
+  border: 0;
+  padding: 4px 0;
+  line-height: 20px;
+}
+.hi .confirmlayout .compactmaterial > small {
+  text-align: right;
+}
+.hi .fieldrows {
+  margin: 8px 0 12px;
+}
+.hi .fieldrows > div,
+.hi .fieldrows > label {
+  display: grid;
+  grid-template-columns: 80px minmax(0, 1fr);
+  gap: 12px;
+  align-items: start;
+  margin: 8px 0;
+  line-height: 20px;
+  font-size: 12px;
+}
+.hi .fieldrows > div > span {
+  font-size: 14px;
+}
+.hi .fieldrows label input {
+  padding: 2px 4px !important;
+  min-height: 26px !important;
+  font-size: 13px !important;
+  border-radius: 6px !important;
+}
+.hi .confirmrail .row {
+  gap: 4px;
+}
+.hi .confirmrail .row button {
+  padding: 4px;
+  font-size: 12px;
+}
+.hi .librarycontext {
+  display: grid;
+  grid-template-columns: 1.6fr 0.35fr 1.15fr 1fr 1.2fr 1.2fr;
+  gap: 24px;
+  padding: 12px 16px;
+  border: 1px solid var(--border);
+  background: white;
+  border-radius: 24px;
+  margin-bottom: 12px;
+}
+.hi .librarycontext p {
+  margin: 4px 0 0;
+  font-size: 14px;
+  white-space: nowrap;
+}
+.hi .librarysearch {
+  padding: 12px;
+  background: #f8f8f6;
+  border-radius: 16px;
+  margin-bottom: 12px;
+}
+.hi .searchrow {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.hi .searchrow input {
+  flex: 1;
+  background: transparent !important;
+  border: 0;
+  border-bottom: 1px solid var(--border);
+  border-radius: 0 !important;
+  box-shadow: none;
+  padding: 8px 12px;
+}
+.hi .searchrow button {
+  flex-shrink: 0;
+}
+.hi .searchfilters {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+.hi .searchfilters select {
+  width: auto;
+  min-height: 40px;
+  font-size: 13px;
+}
+.hi .resultcount {
+  margin: 16px 0;
+}
+.hi .selectioncount {
+  margin-right: auto;
+  color: #201f1d;
+  font-size: 14px;
+}
+.hi[data-page="library"] .panelbody > footer > button:first-of-type {
+  margin-right: 0;
+}
+.hi .libraryresult {
+  border-radius: 24px;
+  padding: 16px;
+  min-height: 86px;
+  margin: 12px 0;
+}
+.hi .libraryresult h3 {
+  font-size: 14px;
+  font-weight: 400;
+  margin: 4px 0;
+}
+.hi .libraryresult .hibadge {
+  font-size: 12px;
+}
+.hi .libraryresult input {
+  width: 16px;
+  height: 16px;
+}
+.hi .libraryresult button {
+  font-size: 14px;
+}
+@media (max-width: 1100px) and (min-width: 761px) {
+  .hi .confirmlayout {
+    grid-template-columns: minmax(0, 1fr) 250px;
+  }
+  .hi .librarycontext {
+    grid-template-columns: 2fr 0.4fr 1.4fr;
+    gap: 12px;
+  }
+  .hi .compactmaterial {
+    grid-template-columns: 96px minmax(0, 1fr) 50px;
+  }
+}
+@media (max-width: 760px) {
+  .hi .confirmlayout {
+    grid-template-columns: 1fr;
+  }
+  .hi .librarycontext {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .hi .librarycontext p {
+    white-space: normal;
+  }
+  .hi .searchfilters {
+    flex-wrap: wrap;
+  }
+  .hi .searchfilters select {
+    flex: 1;
+    min-width: 130px;
+  }
+  .hi .compactmaterial,
+  .hi .confirmlayout .compactmaterial {
+    grid-template-columns: 85px minmax(0, 1fr) 40px;
+    gap: 6px;
+    font-size: 12px;
+  }
+  .hi .compactmaterial small {
+    font-size: 12px;
+  }
+  .hi .confirmcallout strong {
+    font-size: 14px;
+  }
+  .hi .confirmcallout p {
+    padding-left: 0;
+  }
+}
+.hi .profile {
+  height: 55px;
+  min-height: 55px;
+}
+.hi .profile strong {
+  line-height: 17px;
+  display: block;
+}
+.hi .profile small {
+  line-height: 16px;
+}
+.hi nav {
+  margin-top: 16px;
+}
+.hi nav button {
+  display: flex;
+  height: 36px;
+  min-height: 36px;
+  margin: 4px 0;
+  padding: 7px 12px;
+}
+.hi nav button:last-child {
+  margin-bottom: 0;
+}
+.hi .community {
+  margin-top: 12px;
+  padding-top: 16px;
+}
+.hi .community button {
+  height: 36px;
+}
+.hi .hitabs button {
+  border-radius: 0;
+}
+.hi button {
+  padding-top: 7px;
+  padding-bottom: 7px;
+}
+.hi .hiheader .primary {
+  min-height: 40px;
+}
+.hi .histages .active {
+  font-weight: 400;
+}
+.hi[data-page="detail"] .panelbody > h1 {
+  margin-top: 0;
+}
+.hi[data-page="detail"] .facts {
+  min-height: 66px;
+}
+.hi[data-page="detail"] .facts small {
+  display: block;
+}
+.hi .materiallayout .hicard > .row {
+  margin-bottom: 24px;
+}
+.hi .materiallayout .hicard h2 > small {
+  margin-top: 0;
+}
+.hi[data-page="overview"] .segmented {
+  height: 40px;
+}
+.hi[data-page="overview"] .segmented button {
+  height: 40px;
+  min-height: 40px;
+}
+.hi[data-page="overview"] h1 {
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+.hi .hifilters {
+  margin: 12px 0;
+}
+.hi .hifilters select {
+  width: 170px;
+}
+.hi .hifilters select#evidence {
+  width: 200px;
+}
+.hi .suggestion {
+  grid-template-columns: 240px 172px minmax(220px, 1fr) auto;
+  gap: 16px;
+  margin: 12px 0;
+  padding: 12px 16px;
+  min-height: 68px;
+}
+.hi .suggestion h3 {
+  line-height: 20px;
+}
+.hi .suggestion .avatars span {
+  width: 32px;
+  height: 32px;
+}
+.hi .suggestion > .actions {
+  grid-column: auto;
+  gap: 8px;
+}
+.hi,
+.v4modal {
+  font-optical-sizing: none;
+  font-variation-settings: "opsz" 9;
+}
+.hi .schedulelayout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  gap: 16px;
+  align-items: start;
+}
+.hi .schedulelayout .hicard,
+.hi .conflictlayout .hicard {
+  margin: 0;
+}
+.hi .schedulelayout h2,
+.hi .conflictlayout h2 {
+  font-size: 14px;
+}
+.hi .schedulelayout .rule,
+.hi .conflictlayout .rule {
+  margin: 12px 0;
+}
+.hi .schedulelayout .compactmaterial {
+  grid-template-columns: 96px minmax(0, 1fr) 40px;
+}
+.hi .schedulefields {
+  display: grid;
+  grid-template-columns: minmax(160px, 1.4fr) minmax(100px, 1fr) 70px;
+  gap: 12px;
+  align-items: end;
+  margin-top: 12px;
+}
+.hi .schedulefields p {
+  margin: 8px 0;
+}
+.hi .timetableitem {
+  display: block;
+  border-radius: 12px;
+  padding: 10px 12px;
+  margin: 12px 0;
+  background: white;
+}
+.hi .timetableitem strong {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+}
+.hi .timetableitem > small {
+  display: block;
+  margin: 4px 0;
+}
+.hi .timetableitem > .hibadge,
+.hi .timetableitem > .actions {
+  margin-top: 8px;
+}
+.hi .timetableitem.blue {
+  background: #ecf9ff;
+}
+.hi .conflictlayout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  gap: 16px;
+  align-items: start;
+}
+.hi .comparison {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.hi .comparison .timetableitem {
+  margin: 4px 0 0;
+}
+.hi .conflictlayout .fieldrows {
+  margin: 16px 0 12px;
+}
+.hi .conflictlayout .fieldrows > div {
+  grid-template-columns: 90px minmax(0, 1fr);
+}
+.hi .conflictlayout .hicard > button {
+  margin-top: 12px;
+}
+.hi .resolution {
+  align-items: flex-start;
+  margin: 0;
+}
+.hi .resolution small {
+  display: block;
+}
+.hi .datecontrol {
+  position: relative;
+  color: var(--text);
+  font-size: 14px;
+}
+.hi .datetrigger {
+  width: 100%;
+  height: 40px;
+  justify-content: space-between;
+  font-size: 14px;
+  padding: 8px 12px;
+  box-shadow: none;
+}
+.hi .datepicker,
+.hi .timemenu {
+  position: absolute;
+  z-index: 9;
+  left: 0;
+  top: calc(100% + 6px);
+  padding: 12px;
+  background: white;
+  box-shadow: 0 6px 18px #0002;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  min-width: 280px;
+}
+.hi .monthnav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.hi .monthnav button {
+  min-height: 28px;
+  width: 28px;
+  padding: 0;
+  box-shadow: none;
+}
+.hi .dategrid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 3px;
+  margin-top: 12px;
+}
+.hi .dategrid small {
+  text-align: center;
+  padding-bottom: 6px;
+}
+.hi .dategrid button {
+  min-height: 32px;
+  height: 32px;
+  padding: 0;
+  border: 0;
+  box-shadow: none;
+  border-radius: 8px;
+}
+.hi .dategrid .picked,
+.hi .timemenu .picked {
+  background: #074dc6;
+  color: white;
+}
+.hi .timemenu {
+  min-width: 180px;
+}
+.hi .timemenu > button {
+  width: 100%;
+  box-shadow: none;
+  border: 0;
+  justify-content: space-between;
+}
+.hi .timemenu label {
+  margin-top: 8px;
+}
+.hi .calendarheading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.hi .calendarheading h1 {
+  margin: 0 0 8px;
+}
+.hi .calendarheading p {
+  font-size: 14px;
+  color: var(--muted);
+  margin: 0 0 4px;
+}
+.hi .calendarheading > div:first-child {
+  flex: 1;
+  min-width: 0;
+}
+.hi .calendarheading > .actions {
+  flex-shrink: 0;
+}
+.hi .calendarheading .segmented button {
+  font-size: 14px;
+  padding: 8px 12px;
+  min-height: 40px;
+}
+.hi .calendarheading > .actions > button {
+  min-height: 40px;
+  padding: 8px 16px;
+}
+.hi .calendarheading + .banner {
+  margin: 16px 0;
+}
+.hi .timelinewrap {
+  overflow: auto;
+  margin-top: 16px;
+}
+.hi .timeline {
+  min-width: 800px;
+}
+.hi .timelinedays,
+.hi .timelinelane {
+  display: grid;
+  grid-template-columns: 170px repeat(14, minmax(0, 1fr));
+  gap: 0 0;
+  padding: 0 8px;
+}
+.hi .timelinedays {
+  gap: 0;
+  margin-bottom: 8px;
+  min-height: 58px;
+}
+.hi .timelinedays > div:not(:first-child) {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  text-align: center;
+  padding: 8px 0;
+}
+.hi .timelinedays > div.current {
+  background: #d4def3;
+  border-color: #074dc6;
+  color: #074dc6;
+}
+.hi .timelinedays p {
+  margin: 4px 0 0;
+  font-size: 14px;
+}
+.hi .timelinedays small {
+  font-size: 12px;
+}
+.hi .timelinelane {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: white;
+  min-height: 118px;
+  margin: 8px 0;
+  padding: 8px;
+}
+.hi .timelinelane.linked {
+  border-color: #074dc6;
+}
+.hi .lanelabel {
+  padding: 0 8px 0 0;
+}
+.hi .lanelabel strong {
+  font-weight: 500;
+  font-size: 14px;
+}
+.hi .lanelabel small {
+  display: block;
+  font-size: 12px;
+  margin-top: 4px;
+}
+.hi .daycell {
+  border-left: 1px solid var(--border);
+  min-width: 0;
+}
+.hi .timelineevent {
+  display: block;
+  box-shadow: none;
+  border-radius: 12px;
+  width: calc(100% - 2px);
+  padding: 4px;
+  font-size: 12px;
+  min-height: 44px;
+  line-height: 16px;
+  text-align: left;
+  white-space: normal;
+}
+.hi .timelineevent small {
+  display: block;
+  font-size: 12px;
+}
+.hi .timelineevent.linked {
+  background: #d4def3;
+  border-color: #074dc6;
+}
+.hi .timelineevent.plannedtest {
+  border-color: #d24a2a;
+}
+@media (max-width: 1100px) and (min-width: 761px) {
+  .hi .schedulelayout {
+    grid-template-columns: minmax(0, 1fr) 240px;
+  }
+  .hi .conflictlayout {
+    grid-template-columns: minmax(0, 1fr) 280px;
+  }
+  .hi .calendarheading {
+    flex-wrap: wrap;
+  }
+  .hi .calendarheading > .actions {
+    flex-wrap: wrap;
+  }
+  .hi .schedulefields {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (max-width: 760px) {
+  .hi .schedulelayout,
+  .hi .conflictlayout {
+    grid-template-columns: 1fr;
+  }
+  .hi .schedulefields {
+    grid-template-columns: 1fr 1fr;
+  }
+  .hi .calendarheading {
+    flex-wrap: wrap;
+  }
+  .hi .calendarheading > .actions {
+    flex-wrap: wrap;
+  }
+  .hi[data-page="calendar"] .hipanel {
+    height: auto;
+  }
+  .hi .timelinelane,
+  .hi .timelinedays {
+    grid-template-columns: 140px repeat(14, minmax(0, 1fr));
+  }
+  .hi .timeline {
+    min-width: 900px;
+  }
+  .hi .comparison {
+    grid-template-columns: 1fr;
+  }
+}
+.hi .statuscard {
+  margin: 0;
+}
+.hi .statusheading {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.hi .statusheading h1 {
+  margin: 0;
+}
+.hi .statusglyph {
+  border: 2px solid currentColor;
+  border-radius: 50%;
+  height: 24px;
+  width: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #074dc6;
+  font-size: 16px;
+  line-height: 20px;
+  flex-shrink: 0;
+}
+.hi .statusglyph.complete {
+  color: #00884f;
+}
+.hi .statusglyph.failure {
+  color: #b32a20;
+}
+.hi .statusglyph.loading {
+  border: 0;
+  font-size: 28px;
+  animation: statusspin 1s linear infinite;
+}
+@keyframes statusspin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hi .statusglyph.loading {
+    animation: none;
+  }
+}
+.hi .statuscard > p {
+  margin: 12px 0;
+  color: var(--muted);
+}
+.hi .snapshotgrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px 24px;
+  margin-top: 20px;
+}
+.hi .snapshotgrid p,
+.hi .statusmeta p,
+.hi .statusplan p {
+  margin: 4px 0 0;
+}
+.hi .statusmeta {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1.8fr;
+  gap: 32px;
+}
+.hi .statusplan {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 20px;
+}
+.hi .statuscard .banner.row {
+  margin: 16px 0 0;
+  border-radius: 12px;
+  padding: 12px 16px;
+}
+.hi .statuscard .banner.row p {
+  margin: 4px 0 0;
+  font-size: 12px;
+}
+.hi .progressnotice {
+  margin: 0 0 16px;
+  min-height: 80px;
+}
+.hi .progressnotice strong {
+  font-size: 16px;
+  font-weight: 500;
+}
+.hi[data-page="progress"] .flowtitle {
+  margin-bottom: 12px;
+}
+.hi[data-page="progress"] .flowtitle h1 {
+  margin: 0;
+}
+.hi[data-page="progress"] .flowtitle + p {
+  margin: 0 0 40px;
+  color: var(--muted);
+}
+.hi .progresstable {
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: white;
+  margin-top: 16px;
+}
+.hi .progresstable table {
+  table-layout: fixed;
+  min-width: 900px;
+}
+.hi .progresstable th {
+  background: #fcfcfb;
+  height: 40px;
+}
+.hi .progresstable th,
+.hi .progresstable td {
+  padding: 12px 16px;
+}
+.hi .progresstable th:nth-child(1) {
+  width: 23%;
+}
+.hi .progresstable th:nth-child(2) {
+  width: 21%;
+}
+.hi .progresstable th:nth-child(3) {
+  width: 15%;
+}
+.hi .progresstable th:nth-child(4) {
+  width: 25%;
+}
+.hi .progresstable th:nth-child(5) {
+  width: 16%;
+}
+.hi .progresstable td {
+  height: 61px;
+}
+.hi[data-page="assigned"] .hipanel {
+  height: calc(100dvh - 40px);
+  border: 0;
+  border-radius: 0;
+}
+.hi[data-page="assigned"] .panelbody {
+  padding: 0;
+}
+.hi[data-page="assigned"] .panelbody > footer {
+  left: 0;
+  right: 0;
+}
+.hi .assignedheader {
+  height: 52px;
+  margin: 0 0 16px;
+}
+.hi .assignedheader h1 {
+  margin: 0;
+}
+.hi .assignedfilters {
+  margin: 20px 0 12px;
+}
+.hi .assignedfilters .actions {
+  flex: 1;
+  justify-content: flex-end;
+}
+.hi .assignedfilters select {
+  max-width: 150px;
+}
+.hi .assignedfilters input {
+  max-width: 180px;
+}
+.hi .assignedtable {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+}
+.hi .assignedtable table {
+  min-width: 950px;
+}
+.hi .assignedtable th,
+.hi .assignedtable td {
+  padding: 12px 16px;
+}
+.hi .assignedtable th {
+  background: #f8f8f6;
+}
+.hi .assignedtable td:first-child {
+  min-width: 250px;
+  max-width: 350px;
+}
+.hi .assignedtable td small {
+  margin-top: 8px;
+}
+.hi .assignedtable .hibadge {
+  margin-left: 4px;
+}
+.hi[data-page="draft"][data-step="1"] .panelbody > .hicard {
+  margin: 0;
+}
+.hi[data-page="draft"][data-step="1"] .tablewrap {
+  margin: 12px 0 20px;
+}
+.hi[data-page="draft"][data-step="1"] table td {
+  height: 64px;
+  border-bottom: 1px solid var(--border);
+  padding: 12px 0;
+}
+.hi[data-page="draft"][data-step="1"] table td:first-child {
+  width: 220px;
+}
+.hi[data-page="draft"][data-step="1"] table td:nth-child(2) {
+  width: 430px;
+}
+.hi[data-page="draft"][data-step="1"] table select {
+  font-size: 14px;
+  max-width: 240px;
+}
+.hi .supportmap {
+  grid-template-columns: 130px 1fr 60px;
+  gap: 12px;
+  padding: 4px 0;
+  border: 0;
+  font-size: 13px;
+}
+.hi .supportnote {
+  font-size: 12px;
+  margin: 12px 16px;
+}
+.hi .panelbody > footer button {
+  white-space: nowrap;
+}
+@media (max-width: 760px) {
+  .hi .snapshotgrid,
+  .hi .statusplan,
+  .hi .statusmeta {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .hi .assignedfilters {
+    display: block;
+  }
+  .hi .assignedfilters .actions {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    margin-top: 12px;
+  }
+  .hi[data-page="assigned"] .hipanel {
+    height: auto;
+  }
+  .hi[data-page="assigned"] .panelbody > footer {
+    left: auto;
+    right: auto;
+  }
+  .hi .progresstable th,
+  .hi .progresstable td {
+    padding: 12px;
+  }
+  .hi .statusheading h1 {
+    font-size: 20px;
+  }
+  .hi .supportmap {
+    grid-template-columns: 90px 1fr 45px;
+    font-size: 12px;
+  }
+}
+.hi {
+  height: 100dvh;
+  overflow: hidden;
+}
+.hi main {
+  height: 100dvh;
+  overflow: hidden;
+}
+.hi .testpanel {
+  position: fixed;
+  left: 20px;
+  bottom: 8px;
+  z-index: 15;
+  max-width: calc(100vw - 40px);
+  max-height: 65vh;
+  overflow: auto;
+  background: white;
+  border: 1px solid var(--border);
+  padding: 8px 12px;
+  border-radius: 12px;
+}
+.hi .testpanel[hidden] {
+  display: none;
+}
+.hi .librarycontext > div > small {
+  display: block;
+}
+.hi .librarycontext {
+  grid-template-columns: 184px 36px 132px 110px 128px minmax(0, 1fr);
+}
+.hi .flowsubtitle {
+  margin-bottom: 12px;
+}
+.hi[data-page="draft"][data-step="0"] .flowsubtitle,
+.hi[data-page="draft"][data-step="2"] .flowsubtitle {
+  margin-bottom: 16px;
+}
+.hi[data-page="draft"][data-step="2"] .histages,
+.hi[data-page="draft"][data-step="1"] .histages,
+.hi[data-page="draft"][data-step="3"] .histages,
+.hi[data-page="schedule"] .histages,
+.hi[data-page="conflict"] .histages,
+.hi[data-page="library"] .histages {
+  margin-bottom: 12px;
+}
+.hi[data-page="library"] .panelbody:has(.ordered) .flowsubtitle {
+  margin-bottom: 16px;
+}
+.hi[data-page="library"] .panelbody:has(.ordered) .histages {
+  margin-bottom: 16px;
+}
+.hi .librarylist {
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  overflow: hidden;
+  background: white;
+  margin: 12px 0;
+}
+.hi .librarylist .libraryresult {
+  min-height: 64px;
+  border: 0;
+  border-bottom: 1px solid var(--border);
+  margin: 0;
+  border-radius: 0;
+  padding: 12px 16px;
+  gap: 12px;
+}
+.hi .librarylist .libraryresult:last-child {
+  border: 0;
+}
+.hi .librarylist .libraryresult > .materialtype {
+  width: 96px;
+}
+.hi .librarylist .libraryresult h3 {
+  margin: 0 0 4px;
+}
+.hi .librarylist .libraryresult button {
+  border: 0;
+  box-shadow: none;
+  padding: 8px 12px;
+}
+.hi .librarylist.ordered > .libraryresult > .number {
+  background: transparent;
+  min-width: 20px;
+  width: 20px;
+}
+.hi .librarylist.ordered > .libraryresult {
+  height: 64px;
+}
+.hi select,
+.hi input:not([type="checkbox"]):not([type="radio"]) {
+  height: 40px;
+}
+.v4modal footer {
+  background: white;
+}
+.hi .panelbody > footer > .actions:first-child {
+  margin-left: auto;
+}
+@media (max-width: 1100px) {
+  .hi .librarycontext {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+  }
+}
+@media (max-width: 760px) {
+  .hi,
+  .hi main {
+    height: auto;
+    overflow: visible;
+  }
+  .hi .librarycontext {
+    grid-template-columns: 1fr 1fr;
+  }
+  .hi .suggestion {
+    grid-template-columns: 1fr;
+  }
+  .hi .suggestion > .actions,
+  .hi .suggestion > div:nth-child(3) {
+    grid-column: auto;
+  }
+  .hi .librarylist .libraryresult {
+    flex-wrap: wrap;
+  }
+  .hi .librarylist .libraryresult > .materialtype {
+    width: auto;
+  }
+  .hi .librarylist.ordered > .libraryresult {
+    height: auto;
+  }
+  .hi .librarycontext p {
+    white-space: normal;
+  }
+}
+
+.hi .timelinedays,
+.hi .timelinelane {
+  grid-template-columns: 178px repeat(14, minmax(0, 1fr));
+}
+.hi .panelbody:has(.gaprow) > .hicard {
+  padding: 0;
+  border-radius: 16px;
+  overflow: hidden;
+}
+.hi .panelbody:has(.gaprow) .tableline {
+  grid-template-columns: 300px 330px minmax(0, 1fr);
+}
+.hi .panelbody:has(.gaprow) .tableline.head {
+  background: #f8f8f6;
+  padding: 10px 16px;
+  height: 40px;
+}
+.hi .gaprow {
+  display: grid;
+  min-height: 53px;
+  height: 53px;
+  padding: 8px 16px;
+  font-size: 14px;
+  justify-content: stretch;
+}
+.hi .gaprow strong {
+  color: #074dc6;
+  font-weight: 400;
+}
+.hi .suggestionevidence .facts {
+  padding: 0;
+  gap: 16px;
+}
+.hi .suggestionevidence .facts small {
+  font-size: 12px;
+}
+.hi .suggestionevidence .facts p {
+  margin: 4px 0 0;
+  font-size: 14px;
+}
+.hi .inlineevidence {
+  padding: 12px 16px;
+}
+.hi .inlineevidence > small {
+  display: block;
+}
+.hi .evidencerow {
+  grid-template-columns: 24px 220px minmax(0, 1fr) 80px;
+  gap: 12px;
+  padding: 0;
+  margin-top: 8px;
+  align-items: center;
+  font-size: 13px;
+}
+.hi .evidencerow > small {
+  margin: 0;
+}
+.hi .inlineevidence > p {
+  font-size: 12px;
+  line-height: 16px;
+  margin: 8px 0 0;
+}
+.hi .followupcard {
+  margin-top: 16px;
+}
+.hi .followupcard h2 {
+  font-size: 14px;
+}
+.hi .followupfacts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+.hi .followupfacts p {
+  margin: 4px 0 0;
+}
+.hi .followupcard .row {
+  margin: 8px 0;
+  justify-content: flex-start;
+  gap: 12px;
+}
+.hi .followupcard .compactmaterial {
+  grid-template-columns: 96px minmax(0, 1fr) 1fr;
+}
+.hi[data-page="followup"] .flowtitle h1 {
+  margin: 0;
+}
+.hi .panelbody > footer .primary {
+  min-height: 40px;
+}
+.hi[data-page="draft"][data-step="0"]
+  .panelbody
+  > footer
+  .actions
+  button:first-child,
+.hi[data-page="draft"][data-step="1"]
+  .panelbody
+  > footer
+  .actions
+  button:nth-last-child(2) {
+  border: 0;
+  box-shadow: none;
+  background: transparent;
+}
+.hi .groupcard > strong {
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 600;
+}
+.hi .hicard > .row h2 {
+  font-weight: 600;
+}
+.v4modal .beforeafter {
+  gap: 12px;
+}
+.v4modal .beforeafter article {
+  padding: 12px;
+  border-radius: 12px;
+  background: #f8f8f6;
+}
+.v4modal .beforeafter h3 {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  color: var(--muted);
+}
+.v4modal .beforeafter p {
+  font-size: 18px;
+  line-height: 24px;
+  margin: 8px 0;
+}
+.v4modal .followevidencelabel {
+  font-size: 14px;
+  margin: 16px 0 8px;
+}
+@media (max-width: 760px) {
+  .hi .evidencerow {
+    grid-template-columns: 24px minmax(0, 1fr) 80px;
+  }
+  .hi .evidencerow > small {
+    grid-column: 2;
+  }
+  .hi .evidencerow > .hibadge {
+    grid-column: 3;
+    grid-row: auto;
+  }
+  .hi .followupfacts {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .hi .panelbody:has(.gaprow) .tableline {
+    grid-template-columns: 1fr 70px 90px;
+  }
+  .hi .groupcard > strong {
+    font-size: 14px;
+  }
+  .hi .followupcard .compactmaterial {
+    grid-template-columns: 80px minmax(0, 1fr) 40px;
+  }
+}
+.hi .schedulefields {
+  grid-template-columns: 220px 140px minmax(0, 1fr);
+}
+.hi .datepicker {
+  top: auto;
+  bottom: 0;
+  left: calc(100% + 8px);
+  width: 320px;
+  min-height: 337px;
+  padding: 16px;
+}
+.hi .dategrid {
+  gap: 4px;
+  margin-top: 16px;
+}
+.hi .dategrid button {
+  height: 32px;
+  min-height: 32px;
+}
+.hi .dategrid button.outside {
+  color: #a29d96;
+}
+.hi .dategrid button.picked {
+  color: white;
+}
+.hi .timemenu {
+  top: auto;
+  bottom: calc(100% + 6px);
+}
+@media (max-width: 1100px) {
+  .hi .schedulefields {
+    grid-template-columns: minmax(140px, 1fr) 120px 60px;
+  }
+}
+@media (max-width: 760px) {
+  .hi .schedulefields {
+    grid-template-columns: 1fr 1fr;
+  }
+  .hi .datepicker {
+    left: 0;
+    bottom: calc(100% + 8px);
+    width: min(320px, calc(100vw - 80px));
+    min-width: 250px;
+  }
+}
+.hi aside {
+  min-height: 0;
+}
+.hi .histages > span {
+  font-weight: 500;
+  line-height: 16px;
+}
+.hi .histages > span.active {
+  font-size: 14px;
+  line-height: 20px;
+}
+.hi .histages > span {
+  flex-shrink: 0;
+}
+.hi .histages > span:nth-child(1) {
+  width: 186px;
+}
+.hi .histages > span:nth-child(1).active {
+  width: 203px;
+}
+.hi .histages > span:nth-child(2) {
+  width: 152px;
+}
+.hi .histages > span:nth-child(2).active {
+  width: 163px;
+}
+.hi .histages > span:nth-child(3) {
+  width: 151px;
+}
+.hi .histages > span:nth-child(3).active {
+  width: 162px;
+}
+.hi .histages > span:nth-child(4) {
+  width: 163px;
+}
+.hi .histages > span:nth-child(4).active {
+  width: 176px;
+}
+.hi .histages > span::after {
+  flex-shrink: 0;
+}
+.hi[data-page="confirm"] .backlabel {
+  margin-bottom: 6px;
+}
+.hi[data-page="confirm"] .histages {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.hi[data-page="draft"][data-step="1"]
+  .panelbody
+  > footer
+  .actions
+  button:nth-last-child(2) {
+  border: 1px solid var(--border);
+  box-shadow: inset 0 -2px 0 var(--border);
+  background: white;
+}
+.hi[data-page="draft"][data-step="1"]
+  .panelbody:has(.supportcollapsed)
+  > footer
+  .actions
+  button:first-child {
+  border: 0;
+  box-shadow: none;
+  background: transparent;
+}
+.hi .confirmrail .datetrigger {
+  padding: 0;
+  min-height: 20px;
+  height: auto;
+  border: 0;
+  box-shadow: none;
+  font-size: 14px;
+  line-height: 20px;
+  white-space: normal;
+  text-align: left;
+}
+.hi .confirmrail .datetrigger img,
+.hi .confirmrail .datetrigger > span:last-child:not(:first-child) {
+  display: none;
+}
+.hi .confirmrail .datepicker {
+  left: auto;
+  right: 0;
+  bottom: calc(100% + 8px);
+}
+@media (max-width: 1100px) and (min-width: 761px) {
+  .hi .histages > span {
+    width: auto !important;
+  }
+  .hi .histages > span.active {
+    font-size: 12px;
+  }
+}
+@media (max-width: 760px) {
+  .hi .histages > span {
+    width: auto !important;
+  }
+  .hi .histages > span.active {
+    font-size: 10px;
+  }
+}
+.hi .confirmcallout {
+  height: 100px;
+  padding: 15px;
+}
+.hi .confirmcallout > strong {
+  display: block;
+  height: 24px;
+  line-height: 24px;
+}
+.hi .confirmcallout > p {
+  margin-top: 4px;
+}
+.hi .confirmlayout thead {
+  background: transparent;
+}
+.hi .confirmsection {
+  padding-bottom: 8px;
+  margin-bottom: 8px;
+}
+.hi .confirmsection > .row {
+  margin-bottom: 4px;
+}
+.hi .confirmlayout table th {
+  padding: 0 0 6px;
+  line-height: 16px;
+}
+.hi .confirmlayout table td {
+  padding: 2px 0;
+  line-height: 20px;
+}
+.hi .confirmrail textarea {
+  border: 0;
+  padding: 0;
+  border-radius: 0;
+  resize: vertical;
+  min-height: 40px;
+  font-size: 14px;
+  line-height: 20px;
+}
+.hi .fieldrows > label:has(textarea) {
+  margin-top: 0;
+}
+.hi .confirmrail .fieldrows > div > small {
+  line-height: 16px;
+}
+.hi .confirmrail .fieldrows > div > span {
+  line-height: 20px;
+}
+@media (max-width: 760px) {
+  .hi .confirmcallout {
+    height: auto;
+  }
+  .hi .confirmcallout > strong {
+    height: auto;
+  }
+}
+.hi .reviewdetails > .hicard:first-child > .avatars {
+  vertical-align: middle;
+}
+.hi .reviewdetails > .hicard:first-child > .avatars span {
+  width: 32px;
+  height: 32px;
+}
+.hi .reviewdetails > .hicard:first-child > .avatars + p {
+  margin: 0 0 0 12px;
+  vertical-align: middle;
+}
+.hi .reviewdetails > .hicard:first-child > small {
+  display: block;
+  margin-top: 4px;
+  line-height: 16px;
+}
+.hi .reviewdetails h2 {
+  font-size: 14px;
+  line-height: 20px;
+}
+.hi .reviewdetails .compactmaterial {
+  grid-template-columns: 96px 270px minmax(0, 1fr);
+}
+.hi .reviewdetails .compactmaterial > small {
+  text-align: left;
+}
+.hi .hiaction {
+  position: relative;
+}
+.hi .hiaction > .hibadge {
+  position: absolute;
+  right: 16px;
+  top: 12px;
+}
+.hi .hiaction h2 {
+  padding-right: 140px;
+}
+.hi[data-page="draft"][data-step="3"] .panelbody > h2 {
+  line-height: 16px;
+}
+.hi[data-page="draft"][data-step="3"] .hiaction + p {
+  font-size: 12px;
+  line-height: 16px;
+}
+.hi .snapshotgrid {
+  margin-top: 12px;
+}
+.hi .snapshotgrid small,
+.hi .statusmeta small,
+.hi .statusplan small {
+  display: block;
+  line-height: 14px;
+}
+.hi .snapshotgrid p {
+  margin: 4px 0 0;
+}
+.hi .statuscard .rule {
+  margin: 12px 0;
+}
+.hi .statusmeta {
+  grid-template-columns: 111px 328px minmax(0, 1fr);
+}
+.hi .followupfacts small,
+.hi .followupcard > small {
+  display: block;
+  line-height: 14px;
+}
+.hi .followupfacts p {
+  margin: 4px 0 0;
+}
+.hi .followupcard > p {
+  margin: 4px 0 10px;
+}
+.hi .followupcard .rule {
+  margin: 10px 0;
+}
+.hi .followupcard .row {
+  margin: 0 0 4px;
+}
+@media (max-width: 760px) {
+  .hi .reviewdetails .compactmaterial {
+    grid-template-columns: 80px minmax(0, 1fr) 40px;
+  }
+  .hi .hiaction h2 {
+    padding-right: 105px;
+  }
+  .hi .statusmeta {
+    grid-template-columns: 1fr;
+  }
+}
+.hi .schedulelayout .compactmaterials {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 8px 0;
+}
+.hi .schedulelayout .compactmaterial {
+  margin: 0;
+  min-height: 20px;
+}
+.hi .schedulelayout .hicard > small {
+  display: block;
+  line-height: 16px;
+}
+.hi .schedulelayout .rule,
+.hi .conflictlayout .rule {
+  height: 0;
+  position: relative;
+  margin: 8px 0;
+}
+.hi .schedulelayout .rule::after,
+.hi .conflictlayout .rule::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 1px;
+  background: var(--border);
+}
+.hi .schedulefields {
+  margin-top: 8px;
+}
+.hi .schedulefields label {
+  font-size: 12px;
+  line-height: 14px;
+  gap: 8px;
+}
+.hi .timetableitem {
+  padding: 8px 12px;
+}
+.hi .timetableitem > .hibadge {
+  display: flex;
+  width: max-content;
+  margin-top: 0;
+}
+.hi .timetableitem > .actions {
+  margin-top: 0;
+  height: 20px;
+}
+.hi .timetablerail .timetableitem {
+  margin: 8px 0;
+}
+.hi .timetablerail > small {
+  display: block;
+  line-height: 16px;
+}
+.hi .comparison > div > small {
+  display: block;
+  line-height: 16px;
+}
+.hi .conflictlayout .rule {
+  margin: 12px 0;
+}
+.hi[data-page="schedule"] .panelbody > footer > button:first-child,
+.hi[data-page="conflict"] .panelbody > footer > button:first-child {
+  margin-right: 0;
+}
+.hi .calendarheading h1 {
+  margin-bottom: 6px;
+}
+.hi .calendarheading > div:first-child > small {
+  display: block;
+  line-height: 14px;
+}
+.hi .linkedstatus {
+  padding: 12px 16px;
+  min-height: 66px;
+  gap: 12px;
+}
+.hi .linkedstatus > div {
+  flex: 1;
+  min-width: 0;
+}
+.hi .linkedstatus strong {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+}
+.hi .linkedstatus p,
+.hi .statuscard .linkedstatus p {
+  font-size: 12px;
+  line-height: 16px;
+  margin: 4px 0 0;
+}
+.hi .timelinedays small {
+  display: block;
+  line-height: 16px;
+}
+/* Adjacent library states retain the explicitly designed facet layout. */
+.hi[data-page="library"][data-library-review="false"]:is(
+    [data-scenario="empty"],
+    [data-scenario="unavailable"],
+    [data-scenario="partial"],
+    [data-scenario="restricted"]
+  )
+  .flowsubtitle {
+  margin-bottom: 16px;
+}
+.hi[data-page="library"][data-library-review="false"]:is(
+    [data-scenario="empty"],
+    [data-scenario="unavailable"],
+    [data-scenario="partial"],
+    [data-scenario="restricted"]
+  )
+  .histages {
+  margin-bottom: 16px;
+}
+.hi[data-page="library"]:is(
+    [data-scenario="empty"],
+    [data-scenario="unavailable"],
+    [data-scenario="partial"],
+    [data-scenario="restricted"]
+  )
+  .librarycontext {
+  padding: 16px 20px;
+  margin-bottom: 16px;
+}
+.hi[data-page="library"]:is(
+    [data-scenario="empty"],
+    [data-scenario="unavailable"],
+    [data-scenario="partial"],
+    [data-scenario="restricted"]
+  )
+  .librarysearch {
+  padding: 0;
+  background: transparent;
+  margin: 16px 0;
+}
+.hi[data-page="library"]:is(
+    [data-scenario="empty"],
+    [data-scenario="unavailable"],
+    [data-scenario="partial"],
+    [data-scenario="restricted"]
+  )
+  .searchrow {
+  width: 606px;
+  height: 44px;
+  align-items: center;
+  margin-bottom: 16px;
+}
+.hi[data-page="library"]:is(
+    [data-scenario="empty"],
+    [data-scenario="unavailable"],
+    [data-scenario="partial"],
+    [data-scenario="restricted"]
+  )
+  .searchrow
+  input {
+  height: 44px;
+  border: 1px solid var(--border);
+  border-radius: 12px !important;
+  background: white !important;
+}
+.hi .legacyfilters {
+  display: grid;
+  grid-template-columns: 150px 220px 150px 150px 150px;
+  gap: 8px;
+}
+.hi .legacyfilters select {
+  width: 100%;
+  font-size: 14px;
+}
+.hi .legacyfilters select:last-child {
+  grid-column: 1;
+  width: 180px;
+}
+.hi[data-page="library"]:is(
+    [data-scenario="empty"],
+    [data-scenario="unavailable"],
+    [data-scenario="partial"],
+    [data-scenario="restricted"]
+  )
+  .resultcount {
+  height: 36px;
+  margin: 16px 0;
+}
+.hi[data-page="library"] .blankstate {
+  min-height: 330px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.hi[data-page="library"] .blankstate p {
+  max-width: 500px;
+}
+.hi .supporteditor .supporterror {
+  min-height: 80px;
+  padding: 16px;
+  background: #fff0ef;
+  border-color: #e6b1ab;
+  color: #a42a22;
+}
+.hi .supporteditor .supporterror strong {
+  font-size: 16px;
+  line-height: 24px;
+}
+.hi .supporterroractions {
+  margin: 12px 0;
+}
+@media (max-width: 1100px) {
+  .hi .legacyfilters {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .hi .legacyfilters select:last-child {
+    grid-column: auto;
+    width: 100%;
+  }
+}
+@media (max-width: 760px) {
+  .hi .legacyfilters {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .hi[data-page="library"]:is(
+      [data-scenario="empty"],
+      [data-scenario="unavailable"],
+      [data-scenario="partial"],
+      [data-scenario="restricted"]
+    )
+    .searchrow {
+    width: 100%;
+  }
+}
+.hi select {
+  appearance: none;
+  background-image: url("../public/assets/imgIconChevronDown.svg");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px 16px;
+  padding-right: 36px;
+}
+.hi .searchrow input {
+  background-image: url("../public/assets/imgIconSearch.svg") !important;
+  background-repeat: no-repeat !important;
+  background-position: 12px center !important;
+  background-size: 16px 16px !important;
+  padding-left: 36px;
+}
+.hi .datebutton {
+  justify-content: flex-start;
+  padding-left: 15px;
+  padding-right: 15px;
+  gap: 8px;
+}
+.hi .confirmrail .datebutton {
+  padding-left: 0;
+  padding-right: 0;
+}
+/* The source's 1024px references collapse the teacher sidebar to a 72px icon rail. */
+@media (min-width: 761px) and (max-width: 1100px) {
+  .hi {
+    grid-template-columns: 72px minmax(0, 1fr);
+  }
+  .hi aside {
+    padding: 20px 16px 16px;
+    overflow: hidden;
+  }
+  .hi aside .logo,
+  .hi aside .textsize {
+    display: none;
+  }
+  .hi aside .profile {
+    width: 39px;
+    height: 50px;
+    min-height: 50px;
+    padding: 8px 4px;
+    justify-content: center;
+    gap: 0;
+  }
+  .hi aside .profile > span:nth-child(2),
+  .hi aside .profile > img {
+    display: none;
+  }
+  .hi nav button {
+    width: 39px;
+    font-size: 0;
+    padding: 7px 11px;
+  }
+  .hi nav button img {
+    flex-shrink: 0;
+  }
+  .hi .community button {
+    width: 39px;
+    min-height: 32px;
+    height: 32px;
+    padding: 8px 12px;
+    font-size: 0;
+  }
+  .hi .community button > img:last-child {
+    display: none;
+  }
+  .hi .materiallayout {
+    grid-template-columns: minmax(0, 1fr) 280px;
+  }
+  .hi .confirmlayout,
+  .hi .schedulelayout {
+    grid-template-columns: minmax(0, 1fr) 300px;
+  }
+  .hi .conflictlayout {
+    grid-template-columns: minmax(0, 1fr) 340px;
+  }
+  .hi .histages > span {
+    font-size: 12px;
+    gap: 8px;
+  }
+  .hi .histages > span.active {
+    font-size: 14px;
+  }
+  .hi .histages > span:nth-child(1) {
+    width: 186px !important;
+  }
+  .hi .histages > span:nth-child(1).active {
+    width: 203px !important;
+  }
+  .hi .histages > span:nth-child(2) {
+    width: 152px !important;
+  }
+  .hi .histages > span:nth-child(2).active {
+    width: 163px !important;
+  }
+  .hi .histages > span:nth-child(3) {
+    width: 151px !important;
+  }
+  .hi .histages > span:nth-child(3).active {
+    width: 162px !important;
+  }
+  .hi .histages > span:nth-child(4) {
+    width: 163px !important;
+  }
+  .hi .histages > span:nth-child(4).active {
+    width: 176px !important;
+  }
+  .hi .histages > span:not(:last-child)::after {
+    width: 24px;
+    margin: 0 12px;
+  }
+  .hi .hitabs strong {
+    font-size: 16px;
+  }
+  .hi .suggestion {
+    grid-template-columns: minmax(180px, 1fr) 150px minmax(180px, 1fr) auto;
+  }
+  .hi .suggestion > .actions,
+  .hi .suggestion > div:nth-child(3) {
+    grid-column: auto;
+  }
+  .hi .suggestion > .actions {
+    gap: 4px;
+  }
+  .hi .suggestion > .actions button {
+    font-size: 12px;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+  .hi .calendarheading {
+    flex-wrap: nowrap;
+  }
+  .hi .calendarheading > .actions {
+    flex-wrap: nowrap;
+  }
+  .hi .calendarheading .segmented button,
+  .hi .calendarheading > .actions > button {
+    font-size: 12px;
+    padding: 8px 10px;
+  }
+  .hi .calendarheading > div:first-child {
+    flex-basis: 330px;
+  }
+  .hi .librarycontext {
+    grid-template-columns: 184px 36px 132px 110px 128px minmax(0, 1fr);
+    gap: 12px;
+  }
+  .hi .legacyfilters {
+    grid-template-columns: 150px 220px 150px 150px;
+  }
+  .hi .legacyfilters select:last-child {
+    width: 180px;
+  }
+  .hi .schedulefields {
+    grid-template-columns: 220px 140px minmax(0, 1fr);
+  }
+  .hi .reviewdetails .compactmaterial {
+    grid-template-columns: 96px 270px minmax(0, 1fr);
+  }
+}
+.v4modal > .row {
+  flex-wrap: nowrap;
+}
+.v4modal > .row > h2 {
+  flex: 1;
+  min-width: 0;
+}
+.hi .confirmrail .datebutton > span {
+  display: inline !important;
+}
+.hi .confirmrail textarea {
+  resize: none;
+}
+.hi .confirmcallout > strong {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.hi .infomark {
+  display: inline-block;
+  width: 16px;
+  flex: 0 0 16px;
+  text-align: center;
+  font-size: 16px;
+}
+.hi[data-page="library"][data-library-review="true"]
+  .panelbody
+  > footer
+  > button:first-child {
+  margin-right: auto;
+}
+.hi .exactsummary h2 {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  height: 20px;
+  line-height: 20px;
+}
+.hi .exactsummary .summaryblock {
+  margin: 12px 0 0;
+  padding-top: 12px;
+  position: relative;
+}
+.hi .exactsummary .summaryblock::before {
+  content: "";
+  height: 1px;
+  background: var(--border);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+.hi .exactsummary small {
+  display: block;
+  font-size: 12px;
+  line-height: 16px;
+}
+.hi .exactsummary p {
+  font-size: 14px;
+  line-height: 20px;
+  margin: 4px 0 0;
+  padding: 0;
+  border: 0;
+}
+.hi .exactsummary p > small {
+  margin-top: 4px;
+}
+.hi .exactsummary .summaryvalue {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+  height: 32px;
+}
+.hi .exactsummary .summaryvalue .avatars span {
+  width: 32px;
+  height: 32px;
+}
+.hi .exactsummary .summaryvalue .avatars span:not(:first-child) {
+  margin-left: -6px;
+}
+.hi .exactsummary .summarystudents button {
+  position: absolute;
+  right: 0;
+  top: 20px;
+  padding: 8px 12px;
+  border: 0;
+  box-shadow: none;
+}
+.hi .exactsummary .summaryblock > .row {
+  height: 20px;
+}
+.hi .exactsummary .summaryassigned {
+  margin-top: 12px;
+}
+.hi .exactsummary .summaryassigned > small {
+  line-height: 14px;
+}
+.hi .schedulealert {
+  margin: 0 0 12px;
+  padding: 15px;
+  min-height: 80px;
+}
+.hi .schedulealert h2 {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+}
+.hi .schedulealert p {
+  margin: 4px 0 0;
+  padding-left: 28px;
+}
+.hi .schedulestatus {
+  margin: 0;
+}
+.hi .schedulestatus .fieldrows {
+  margin: 0;
+}
+.hi .schedulestatus .fieldrows > div {
+  margin: 8px 0;
+  grid-template-columns: 140px minmax(0, 1fr);
+}
+.hi .schedulestatus .fieldrows > div:first-child {
+  margin-top: 0;
+}
+.hi .schedulestatus .fieldrows > div:last-child {
+  margin-bottom: 0;
+}

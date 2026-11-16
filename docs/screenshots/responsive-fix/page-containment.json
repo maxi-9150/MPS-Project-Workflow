@@ -1,0 +1,462 @@
+[
+  {
+    "page": "group",
+    "escapes": [],
+    "overflow": false,
+    "width": 1280
+  },
+  {
+    "page": "group",
+    "escapes": [],
+    "overflow": false,
+    "width": 1152
+  },
+  {
+    "page": "group",
+    "escapes": [],
+    "overflow": false,
+    "width": 1024
+  },
+  {
+    "page": "group",
+    "escapes": [],
+    "overflow": false,
+    "width": 900
+  },
+  {
+    "page": "group",
+    "escapes": [
+      {
+        "container": "hicard detailstudents",
+        "text": "Show evidence"
+      },
+      {
+        "container": "hicard detailstudents",
+        "text": "Show evidence"
+      },
+      {
+        "container": "hicard detailstudents",
+        "text": "Show evidence"
+      }
+    ],
+    "overflow": false,
+    "width": 800
+  },
+  {
+    "page": "group",
+    "escapes": [
+      {
+        "container": "hicard detailstudents",
+        "text": "Show evidence"
+      },
+      {
+        "container": "hicard detailstudents",
+        "text": "Show evidence"
+      },
+      {
+        "container": "hicard detailstudents",
+        "text": "Show evidence"
+      }
+    ],
+    "overflow": false,
+    "width": 640
+  },
+  {
+    "page": "group",
+    "escapes": [
+      {
+        "container": "hicard detailstudents",
+        "text": "Repeated evidence"
+      },
+      {
+        "container": "hicard detailstudents",
+        "text": "Show evidence"
+      },
+      {
+        "container": "hicard detailstudents",
+        "text": "Repeated evidence"
+      },
+      {
+        "container": "hicard detailstudents",
+        "text": "Show evidence"
+      },
+      {
+        "container": "hicard detailstudents",
+        "text": "Insufficient evidence"
+      },
+      {
+        "container": "hicard detailstudents",
+        "text": "Show evidence"
+      }
+    ],
+    "overflow": false,
+    "width": 390
+  },
+  {
+    "page": "group",
+    "escapes": [
+      {
+        "container": "hicard detailstudents",
+        "text": "Repeated evidence"
+      },
+      {
+        "container": "hicard detailstudents",
+        "text": "Show evidence"
+      },
+      {
+        "container": "hicard detailstudents",
+        "text": "Repeated evidence"
+      },
+      {
+        "container": "hicard detailstudents",
+        "text": "Show evidence"
+      },
+      {
+        "container": "hicard detailstudents",
+        "text": "Insufficient evidence"
+      },
+      {
+        "container": "hicard detailstudents",
+        "text": "Show evidence"
+      }
+    ],
+    "overflow": false,
+    "width": 320
+  },
+  {
+    "page": "assemble",
+    "escapes": [],
+    "overflow": false,
+    "width": 1280
+  },
+  {
+    "page": "assemble",
+    "escapes": [],
+    "overflow": false,
+    "width": 1152
+  },
+  {
+    "page": "assemble",
+    "escapes": [],
+    "overflow": false,
+    "width": 1024
+  },
+  {
+    "page": "assemble",
+    "escapes": [],
+    "overflow": false,
+    "width": 900
+  },
+  {
+    "page": "assemble",
+    "escapes": [],
+    "overflow": false,
+    "width": 800
+  },
+  {
+    "page": "assemble",
+    "escapes": [],
+    "overflow": false,
+    "width": 640
+  },
+  {
+    "page": "assemble",
+    "escapes": [],
+    "overflow": false,
+    "width": 390
+  },
+  {
+    "page": "assemble",
+    "escapes": [],
+    "overflow": false,
+    "width": 320
+  },
+  {
+    "page": "differentiate",
+    "escapes": [],
+    "overflow": false,
+    "width": 1280
+  },
+  {
+    "page": "differentiate",
+    "escapes": [],
+    "overflow": false,
+    "width": 1152
+  },
+  {
+    "page": "differentiate",
+    "escapes": [],
+    "overflow": false,
+    "width": 1024
+  },
+  {
+    "page": "differentiate",
+    "escapes": [],
+    "overflow": false,
+    "width": 900
+  },
+  {
+    "page": "differentiate",
+    "escapes": [],
+    "overflow": false,
+    "width": 800
+  },
+  {
+    "page": "differentiate",
+    "escapes": [],
+    "overflow": false,
+    "width": 640
+  },
+  {
+    "page": "differentiate",
+    "escapes": [],
+    "overflow": false,
+    "width": 390
+  },
+  {
+    "page": "differentiate",
+    "escapes": [],
+    "overflow": false,
+    "width": 320
+  },
+  {
+    "page": "review",
+    "escapes": [],
+    "overflow": false,
+    "width": 1280
+  },
+  {
+    "page": "review",
+    "escapes": [],
+    "overflow": false,
+    "width": 1152
+  },
+  {
+    "page": "review",
+    "escapes": [],
+    "overflow": false,
+    "width": 1024
+  },
+  {
+    "page": "review",
+    "escapes": [],
+    "overflow": false,
+    "width": 900
+  },
+  {
+    "page": "review",
+    "escapes": [],
+    "overflow": false,
+    "width": 800
+  },
+  {
+    "page": "review",
+    "escapes": [],
+    "overflow": false,
+    "width": 640
+  },
+  {
+    "page": "review",
+    "escapes": [],
+    "overflow": false,
+    "width": 390
+  },
+  {
+    "page": "review",
+    "escapes": [],
+    "overflow": false,
+    "width": 320
+  },
+  {
+    "page": "action",
+    "escapes": [],
+    "overflow": false,
+    "width": 1280
+  },
+  {
+    "page": "action",
+    "escapes": [],
+    "overflow": false,
+    "width": 1152
+  },
+  {
+    "page": "action",
+    "escapes": [],
+    "overflow": false,
+    "width": 1024
+  },
+  {
+    "page": "action",
+    "escapes": [],
+    "overflow": false,
+    "width": 900
+  },
+  {
+    "page": "action",
+    "escapes": [],
+    "overflow": false,
+    "width": 800
+  },
+  {
+    "page": "action",
+    "escapes": [],
+    "overflow": false,
+    "width": 640
+  },
+  {
+    "page": "action",
+    "escapes": [],
+    "overflow": false,
+    "width": 390
+  },
+  {
+    "page": "action",
+    "escapes": [],
+    "overflow": false,
+    "width": 320
+  },
+  {
+    "page": "confirm",
+    "escapes": [],
+    "overflow": false,
+    "width": 1280
+  },
+  {
+    "page": "confirm",
+    "escapes": [],
+    "overflow": false,
+    "width": 1152
+  },
+  {
+    "page": "confirm",
+    "escapes": [],
+    "overflow": false,
+    "width": 1024
+  },
+  {
+    "page": "confirm",
+    "escapes": [],
+    "overflow": false,
+    "width": 900
+  },
+  {
+    "page": "confirm",
+    "escapes": [],
+    "overflow": false,
+    "width": 800
+  },
+  {
+    "page": "confirm",
+    "escapes": [],
+    "overflow": false,
+    "width": 640
+  },
+  {
+    "page": "confirm",
+    "escapes": [],
+    "overflow": false,
+    "width": 390
+  },
+  {
+    "page": "confirm",
+    "escapes": [],
+    "overflow": false,
+    "width": 320
+  },
+  {
+    "page": "schedule",
+    "escapes": [],
+    "overflow": false,
+    "width": 1280
+  },
+  {
+    "page": "schedule",
+    "escapes": [],
+    "overflow": false,
+    "width": 1152
+  },
+  {
+    "page": "schedule",
+    "escapes": [],
+    "overflow": false,
+    "width": 1024
+  },
+  {
+    "page": "schedule",
+    "escapes": [],
+    "overflow": false,
+    "width": 900
+  },
+  {
+    "page": "schedule",
+    "escapes": [],
+    "overflow": false,
+    "width": 800
+  },
+  {
+    "page": "schedule",
+    "escapes": [],
+    "overflow": false,
+    "width": 640
+  },
+  {
+    "page": "schedule",
+    "escapes": [],
+    "overflow": false,
+    "width": 390
+  },
+  {
+    "page": "schedule",
+    "escapes": [],
+    "overflow": false,
+    "width": 320
+  },
+  {
+    "page": "conflict",
+    "escapes": [],
+    "overflow": false,
+    "width": 1280
+  },
+  {
+    "page": "conflict",
+    "escapes": [],
+    "overflow": false,
+    "width": 1152
+  },
+  {
+    "page": "conflict",
+    "escapes": [],
+    "overflow": false,
+    "width": 1024
+  },
+  {
+    "page": "conflict",
+    "escapes": [],
+    "overflow": false,
+    "width": 900
+  },
+  {
+    "page": "conflict",
+    "escapes": [],
+    "overflow": false,
+    "width": 800
+  },
+  {
+    "page": "conflict",
+    "escapes": [],
+    "overflow": false,
+    "width": 640
+  },
+  {
+    "page": "conflict",
+    "escapes": [],
+    "overflow": false,
+    "width": 390
+  },
+  {
+    "page": "conflict",
+    "escapes": [],
+    "overflow": false,
+    "width": 320
+  }
+]
