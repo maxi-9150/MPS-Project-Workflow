@@ -221,6 +221,20 @@ export default function HighFiApp() {
     document.querySelector(".panelbody")?.scrollTo(0, 0);
     window.scrollTo(0, 0);
   }, [page, step, libReview]);
+  useLayoutEffect(() => {
+    const panel = document.querySelector<HTMLElement>(".hipanel");
+    const footer = panel?.querySelector<HTMLElement>(".panelbody > footer");
+    if (!panel || !footer) return;
+    const update = () =>
+      panel.style.setProperty(
+        "--action-bar-height",
+        `${footer.getBoundingClientRect().height}px`,
+      );
+    update();
+    const observer = new ResizeObserver(update);
+    observer.observe(footer);
+    return () => observer.disconnect();
+  }, [page, step, libReview, supportOpen, message]);
   const submitting = useRef(false);
   const timeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   useEffect(() => {
