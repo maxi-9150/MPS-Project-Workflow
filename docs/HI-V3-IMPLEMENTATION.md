@@ -43,7 +43,7 @@ This is an interactive frontend prototype with synthetic data and browser storag
 
 The full guided review is the fractions journey supplied by the v3 walkthrough. Decimals has evidence/detail coverage and percentages explicitly lacks sufficient evidence; neither is claimed as a complete material-delivery flow. Library achievement-level selections are illustrative labels; the local fixture does not establish a real level-to-resource search index. Month and Day are reference-only and explain that Week is the available calendar view. External school/community destinations are not integrated.
 
-The narrow layout was inspected; exhaustive desktop pixel comparison of all frames, full keyboard/screen-reader audit and browser-automated regression remain outstanding. Native dialogs support browser focus/Escape behavior, but that is not a completed accessibility audit. The course's final rubric and production API contracts have not been supplied. The PR remains a draft for team review rather than a claim of full production readiness.
+The [15 Nov UI alignment pass](UI-ALIGNMENT.md) adds 45 captures and 194 passing source-derived container-anchor checks at desktop/reference widths, plus actual browser acceptance of recovery states. This is not a zero-pixel assertion for all 107 source frames. A full keyboard/screen-reader audit and independently runnable browser automation remain outstanding. Native dialogs support browser focus/Escape behavior, but that is not a completed accessibility audit. The course's final rubric and production API contracts have not been supplied. The PR remains a draft for team review rather than a claim of full production readiness.
 
 ## Data provenance
 

@@ -1,0 +1,167 @@
+{
+  "name": "mobile-preview",
+  "assets": [
+    {
+      "height": 32,
+      "loaded": true,
+      "src": "/MPS-Project-Workflow/assets/imgModeText.svg",
+      "width": 103
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "src": "/MPS-Project-Workflow/assets/imgIconCalendarDays.svg",
+      "width": 16
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "src": "/MPS-Project-Workflow/assets/imgIcon.svg",
+      "width": 16
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "src": "/MPS-Project-Workflow/assets/imgIcon1.svg",
+      "width": 16
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "src": "/MPS-Project-Workflow/assets/imgIcon2.svg",
+      "width": 16
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "src": "/MPS-Project-Workflow/assets/imgIcon3.svg",
+      "width": 16
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "src": "/MPS-Project-Workflow/assets/imgIcon4.svg",
+      "width": 16
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "src": "/MPS-Project-Workflow/assets/imgIcon5.svg",
+      "width": 16
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "src": "/MPS-Project-Workflow/assets/imgIcon6.svg",
+      "width": 16
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "src": "/MPS-Project-Workflow/assets/imgIconPencil.svg",
+      "width": 16
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "src": "/MPS-Project-Workflow/assets/imgIconQrCode.svg",
+      "width": 16
+    },
+    {
+      "height": 14,
+      "loaded": true,
+      "src": "/MPS-Project-Workflow/assets/imgIconExternalLink.svg",
+      "width": 14
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "src": "/MPS-Project-Workflow/assets/imgIconArrowLeft.svg",
+      "width": 16
+    },
+    {
+      "height": 24,
+      "loaded": true,
+      "src": "/MPS-Project-Workflow/assets/lucide-file-text.svg",
+      "width": 24
+    }
+  ],
+  "boxes": [
+    {
+      "height": 0,
+      "selector": "profile",
+      "width": 0,
+      "x": 0,
+      "y": 0
+    },
+    {
+      "height": 64,
+      "selector": "hiheader",
+      "width": 366,
+      "x": 12,
+      "y": -254
+    },
+    {
+      "height": 112,
+      "selector": "groupcard",
+      "width": 366,
+      "x": 12,
+      "y": -178
+    },
+    {
+      "height": 112,
+      "selector": "tabs hitabs",
+      "width": 366,
+      "x": 12,
+      "y": -54
+    },
+    {
+      "height": 1249.09375,
+      "selector": "hipanel",
+      "width": 366,
+      "x": 12,
+      "y": 58
+    },
+    {
+      "height": 26,
+      "selector": "flowtitle",
+      "width": 340,
+      "x": 25,
+      "y": 114
+    },
+    {
+      "height": 48,
+      "selector": "histages",
+      "width": 340,
+      "x": 25,
+      "y": 180
+    },
+    {
+      "height": 981.09375,
+      "selector": "materiallayout",
+      "width": 340,
+      "x": 25,
+      "y": 244
+    },
+    {
+      "height": 65,
+      "selector": "FOOTER",
+      "width": 340,
+      "x": 25,
+      "y": 779
+    },
+    {
+      "height": 598,
+      "selector": "v4modal",
+      "width": 356,
+      "x": 17,
+      "y": 123
+    }
+  ],
+  "page": "draft",
+  "step": "0",
+  "viewport": {
+    "height": 844,
+    "width": 390
+  }
+}

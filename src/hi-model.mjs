@@ -25,10 +25,18 @@ export const students = [
   },
   {
     id: "liam",
-    name: "Liam Carter",
-    initials: "LC",
+    name: "Liam King",
+    initials: "LK",
     responses: 0,
     evidence: "Insufficient evidence",
+    suggested: "",
+  },
+  {
+    id: "olivia",
+    name: "Olivia Brown",
+    initials: "OB",
+    responses: 3,
+    evidence: "Repeated evidence",
     suggested: "",
   },
 ];
@@ -102,6 +110,16 @@ export const materials = [
     objective: "Build equivalent fractions with fraction walls",
     includes: "Fraction wall activity · guided examples",
     reason: "Alternative to the selected scaling station",
+  },
+  {
+    id: "area",
+    type: "Station",
+    title: "Equivalent fractions with area models",
+    minutes: 10,
+    questions: 0,
+    objective: "Recognise equivalent fractions with area models",
+    includes: "Guided fraction models",
+    reason: "Alternative station for the shared learning goal",
   },
 ];
 export const levels = ["Threshold", "Satisfactory", "Basic", "Higher"];

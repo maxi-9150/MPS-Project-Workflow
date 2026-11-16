@@ -1,0 +1,203 @@
+{
+  "name": "preview",
+  "assets": [
+    {
+      "height": 32,
+      "loaded": true,
+      "src": "/MPS-Project-Workflow/assets/imgModeText.svg",
+      "width": 103
+    },
+    {
+      "height": 14,
+      "loaded": true,
+      "src": "/MPS-Project-Workflow/assets/imgIconUser.svg",
+      "width": 14
+    },
+    {
+      "height": 14,
+      "loaded": true,
+      "src": "/MPS-Project-Workflow/assets/imgIconChevronsUpDown.svg",
+      "width": 14
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "src": "/MPS-Project-Workflow/assets/imgIconCalendarDays.svg",
+      "width": 16
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "src": "/MPS-Project-Workflow/assets/imgIcon.svg",
+      "width": 16
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "src": "/MPS-Project-Workflow/assets/imgIcon1.svg",
+      "width": 16
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "src": "/MPS-Project-Workflow/assets/imgIcon2.svg",
+      "width": 16
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "src": "/MPS-Project-Workflow/assets/imgIcon3.svg",
+      "width": 16
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "src": "/MPS-Project-Workflow/assets/imgIcon4.svg",
+      "width": 16
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "src": "/MPS-Project-Workflow/assets/imgIcon5.svg",
+      "width": 16
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "src": "/MPS-Project-Workflow/assets/imgIcon6.svg",
+      "width": 16
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "src": "/MPS-Project-Workflow/assets/imgNameFacebookColorsOriginal.svg",
+      "width": 16
+    },
+    {
+      "height": 14,
+      "loaded": true,
+      "src": "/MPS-Project-Workflow/assets/imgIconExternalLink.svg",
+      "width": 14
+    },
+    {
+      "height": 14,
+      "loaded": true,
+      "src": "/MPS-Project-Workflow/assets/imgIconMinus.svg",
+      "width": 14
+    },
+    {
+      "height": 14,
+      "loaded": true,
+      "src": "/MPS-Project-Workflow/assets/imgIconPlus.svg",
+      "width": 14
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "src": "/MPS-Project-Workflow/assets/imgIconPencil.svg",
+      "width": 16
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "src": "/MPS-Project-Workflow/assets/imgIconQrCode.svg",
+      "width": 16
+    },
+    {
+      "height": 14,
+      "loaded": true,
+      "src": "/MPS-Project-Workflow/assets/imgIconExternalLink.svg",
+      "width": 14
+    },
+    {
+      "height": 16,
+      "loaded": true,
+      "src": "/MPS-Project-Workflow/assets/imgIconArrowLeft.svg",
+      "width": 16
+    },
+    {
+      "height": 24,
+      "loaded": true,
+      "src": "/MPS-Project-Workflow/assets/lucide-file-text.svg",
+      "width": 24
+    }
+  ],
+  "boxes": [
+    {
+      "height": 55,
+      "selector": "profile",
+      "width": 223,
+      "x": 16,
+      "y": 72
+    },
+    {
+      "height": 52,
+      "selector": "hiheader",
+      "width": 984,
+      "x": 276,
+      "y": 16
+    },
+    {
+      "height": 66,
+      "selector": "groupcard",
+      "width": 984,
+      "x": 276,
+      "y": 80
+    },
+    {
+      "height": 70,
+      "selector": "tabs hitabs",
+      "width": 984,
+      "x": 276,
+      "y": 158
+    },
+    {
+      "height": 548,
+      "selector": "hipanel",
+      "width": 984,
+      "x": 276,
+      "y": 228
+    },
+    {
+      "height": 24,
+      "selector": "flowtitle",
+      "width": 950,
+      "x": 293,
+      "y": 288
+    },
+    {
+      "height": 24,
+      "selector": "histages",
+      "width": 950,
+      "x": 293,
+      "y": 352
+    },
+    {
+      "height": 426.59375,
+      "selector": "materiallayout",
+      "width": 950,
+      "x": 293,
+      "y": 392
+    },
+    {
+      "height": 53,
+      "selector": "FOOTER",
+      "width": 950,
+      "x": 293,
+      "y": 706
+    },
+    {
+      "height": 506,
+      "selector": "v4modal",
+      "width": 560,
+      "x": 360,
+      "y": 147
+    }
+  ],
+  "page": "draft",
+  "step": "0",
+  "viewport": {
+    "height": 800,
+    "width": 1280
+  }
+}

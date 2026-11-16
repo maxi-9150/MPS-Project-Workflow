@@ -1,4 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
+import { DateControl, TimeControl } from "./DateTime";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Button, Icon, Modal, Sidebar } from "./ui";
 import {
   students,
@@ -147,17 +148,15 @@ function Evidence({ person = "amelia" }: { person?: string }) {
       {rows.map((r) => (
         <div className="evidencerow" key={r[0]}>
           <strong>{r[0]}</strong>
-          <div>
-            {r[1]}
-            <small>{r[2]}</small>
-          </div>
+          <span>{r[1]}</span>
+          <small>{r[2]}</small>
           <Badge tone={r[3] === "Correct" ? "green" : "orange"}>{r[3]}</Badge>
         </div>
       ))}
       <p className="muted">
         {person === "sofia"
           ? "Only one related response is available. Check again before inferring a shared error."
-          : "Evidence describes the responses, not a diagnosis or lasting mastery."}
+          : "Pattern: scales only the numerator or only the denominator in 2 of 3 items."}
       </p>
     </div>
   );
@@ -194,6 +193,9 @@ export default function HighFiApp() {
   const [modal, setModal] = useState("");
   const [info, setInfo] = useState("");
   const [preview, setPreview] = useState<Material | null>(null);
+  const [assignedQuery, setAssignedQuery] = useState("");
+  const [archive, setArchive] = useState(false);
+  const [studentQuery, setStudentQuery] = useState("");
   const [tempStudents, setTempStudents] = useState<string[]>([]);
   const [supportOpen, setSupportOpen] = useState(false);
   const [supportEdit, setSupportEdit] = useState<Record<string, string>>({});
@@ -214,7 +216,11 @@ export default function HighFiApp() {
   const [supportFailure, setSupportFailure] = useState(false);
   const [submitMode, setSubmitMode] = useState("normal");
   const [undoFailure, setUndoFailure] = useState(false);
-  const [calendarView] = useState("Week");
+
+  useLayoutEffect(() => {
+    document.querySelector(".panelbody")?.scrollTo(0, 0);
+    window.scrollTo(0, 0);
+  }, [page, step, libReview]);
   const submitting = useRef(false);
   const timeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   useEffect(() => {
@@ -282,25 +288,32 @@ export default function HighFiApp() {
   };
   const editStudents = () => {
     setTempStudents([...draft.recipients]);
+    setStudentQuery("");
     setModal("students");
   };
   const library = (id: string | null = null) => {
     setReplaceId(id);
+    setLibType(id ? materials.find((m) => m.id === id)!.type : "All types");
     setPicks([]);
     setLibReview(false);
-    setQuery("Finding equivalent fractions");
+    setQuery("equivalent fractions");
     setScenario("normal");
     setLibLoading(true);
     go("library");
     timeout.current = setTimeout(() => setLibLoading(false), 350);
   };
   const sourceCandidates = replaceId
-    ? materials.filter((m) => m.id === "walls" || m.id === replaceId)
-    : materials.filter((m) => m.id !== "walls");
+    ? materials.filter(
+        (m) =>
+          m.id === replaceId ||
+          (m.type === materials.find((x) => x.id === replaceId)?.type &&
+            !draft.selected.includes(m.id)),
+      )
+    : materials.filter((m) => !["walls", "area"].includes(m.id));
   const results = sourceCandidates.filter(
     (m) =>
       (libType === "All types" || m.type === libType) &&
-      (query.toLowerCase().includes("finding equivalent fractions") ||
+      (query.toLowerCase().includes("equivalent fractions") ||
         m.title.toLowerCase().includes(query.toLowerCase())),
   );
   const reviewPicks = () => {
@@ -335,7 +348,15 @@ export default function HighFiApp() {
     );
   };
   const openSupport = () => {
-    setSupportEdit({ ...draft.support });
+    setSupportEdit(
+      Object.keys(draft.support).length
+        ? { ...draft.support }
+        : Object.fromEntries(
+            draft.recipients
+              .filter((id) => !!students.find((s) => s.id === id)?.suggested)
+              .map((id) => [id, students.find((s) => s.id === id)!.suggested]),
+          ),
+    );
     setSupportOpen(true);
   };
   const saveSupport = () => {
@@ -423,7 +444,7 @@ export default function HighFiApp() {
         `${s} belongs to the existing school portal and is outside this teacher-review walkthrough.`,
       );
   };
-  const inGroup = page !== "calendar";
+  const inGroup = !["calendar", "assigned"].includes(page);
   const isDraft = [
     "draft",
     "library",
@@ -439,37 +460,46 @@ export default function HighFiApp() {
         : step;
   function Summary() {
     return (
-      <div className="hisummary">
+      <div className="hisummary exactsummary">
         <h2>Review summary</h2>
-        <small>Students</small>
-        <div className="row">
-          <Avatars
-            people={draft.recipients.map(
-              (id) => students.find((s) => s.id === id)!.name,
-            )}
-          />
-          <strong>{draft.recipients.length}</strong>
+        <section className="summaryblock summarystudents">
+          <small>Students</small>
+          <div className="summaryvalue">
+            <Avatars
+              people={draft.recipients.map(
+                (id) => students.find((s) => s.id === id)!.name,
+              )}
+            />
+            <span>{draft.recipients.length}</span>
+          </div>
           <Button onClick={editStudents}>Edit</Button>
-        </div>
-        <small>Learning goal</small>
-        <p>Finding equivalent fractions</p>
-        <small>Based on</small>
-        <p>
-          Fractions checkpoint
-          <br />
-          <small>12 Oct</small>
-        </p>
-        <div className="rule" />
-        <div className="row">
-          <small>Total time</small>
-          <strong>{total(draft)} min</strong>
-        </div>
-        <small>Assigned test</small>
-        <p>
-          {questionCount(draft)} exercises · estimated{" "}
-          {assignable(draft).reduce((n, m) => n + m.minutes, 0)} min
-        </p>
-        <small>Nothing is sent until you confirm.</small>
+        </section>
+        <section className="summaryblock">
+          <small>Learning goal</small>
+          <p>Finding equivalent fractions</p>
+        </section>
+        <section className="summaryblock">
+          <small>Based on</small>
+          <p>
+            Fractions checkpoint<small>12 Oct</small>
+          </p>
+        </section>
+        <section className="summaryblock">
+          <div className="row">
+            <small>Total time</small>
+            <span>{total(draft)} min</span>
+          </div>
+        </section>
+        <section className="summaryassigned">
+          <small>Assigned test</small>
+          <p>
+            {questionCount(draft)} exercises · estimated{" "}
+            {assignable(draft).reduce((n, m) => n + m.minutes, 0)} min
+          </p>
+        </section>
+        <section className="summaryblock">
+          <small>Nothing is sent until you confirm.</small>
+        </section>
       </div>
     );
   }
@@ -482,8 +512,10 @@ export default function HighFiApp() {
   }) {
     return (
       <div className="himaterial">
+        <div className="materialtype">
+          <Badge>{m.type}</Badge>
+        </div>
         <div className="grow">
-          <Badge tone={m.questions ? "blue" : "plain"}>{m.type}</Badge>
           <h3>{m.title}</h3>
           <small>
             {m.minutes} min ·{" "}
@@ -497,13 +529,17 @@ export default function HighFiApp() {
           {controls && (
             <>
               <Button onClick={() => library(m.id)}>Replace</Button>
-              <Button
-                onClick={() =>
-                  edit({ selected: draft.selected.filter((id) => id !== m.id) })
-                }
-              >
-                Remove
-              </Button>
+              {m.questions > 0 && (
+                <Button
+                  onClick={() =>
+                    edit({
+                      selected: draft.selected.filter((id) => id !== m.id),
+                    })
+                  }
+                >
+                  Remove
+                </Button>
+              )}
             </>
           )}
         </div>
@@ -512,7 +548,7 @@ export default function HighFiApp() {
   }
   function SupportSummary() {
     return (
-      <article className="hicard">
+      <article className="hicard supportsummary">
         <div className="row">
           <h2>Optional support</h2>
           <Button onClick={() => go("draft", 1)}>Edit</Button>
@@ -539,7 +575,7 @@ export default function HighFiApp() {
   }
   function Sequence() {
     return (
-      <article className="hicard">
+      <article className="hicard sequencecard">
         <div className="row">
           <h2>
             Review draft · {draft.selected.length} materials · {total(draft)}{" "}
@@ -547,9 +583,7 @@ export default function HighFiApp() {
           </h2>
           <Button onClick={() => go("draft")}>Edit materials</Button>
         </div>
-        {selected(draft).map((m) => (
-          <React.Fragment key={m.id}>{MaterialRow({ m })}</React.Fragment>
-        ))}
+        {CompactMaterials(selected(draft))}
         <p className="blue">
           Assigned test · {questionCount(draft)} exercises · estimated{" "}
           {assignable(draft).reduce((n, m) => n + m.minutes, 0)} min
@@ -559,6 +593,125 @@ export default function HighFiApp() {
           Teacher resource · not sent · Available for class planning.
         </small>
       </article>
+    );
+  }
+  function CompactMaterials(items: Material[]) {
+    return (
+      <div className="compactmaterials">
+        {items.map((m) => (
+          <div className="compactmaterial" key={m.id}>
+            <div>
+              <Badge>{m.type}</Badge>
+            </div>
+            <span>{m.title}</span>
+            <small>{m.minutes} min</small>
+          </div>
+        ))}
+      </div>
+    );
+  }
+  function Recipients() {
+    return (
+      <section className="confirmsection">
+        <div className="row">
+          <h2>Recipients · {draft.recipients.length}</h2>
+          <Button onClick={editStudents}>Edit recipients</Button>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Student</th>
+              <th>Evidence</th>
+              <th>Saved support</th>
+            </tr>
+          </thead>
+          <tbody>
+            {draft.recipients.map((id) => {
+              const st = students.find((s) => s.id === id)!;
+              return (
+                <tr key={id}>
+                  <td>{st.name}</td>
+                  <td>
+                    {st.evidence}
+                    {id === "sofia" ? " · 1 response" : ""}
+                  </td>
+                  <td>{draft.support[id] || "Shared version"}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </section>
+    );
+  }
+  function Destination() {
+    return (
+      <section className="confirmsection">
+        <div className="row">
+          <h2>Destination</h2>
+          <Button onClick={() => go("draft", 3)}>Edit destination</Button>
+        </div>
+        <p>
+          {draft.action === "plan"
+            ? "Class 6A Curriculum plan + Calendar · whole class"
+            : "Assigned tests · selected students"}
+        </p>
+        {draft.action === "assignment" && (
+          <small>Student entry point · Pending product verification</small>
+        )}
+      </section>
+    );
+  }
+  function SnapshotSummary(d: Draft) {
+    return (
+      <div className="snapshotgrid">
+        <div>
+          <small>Recipients</small>
+          <p>
+            {d.recipients.length} students · {names(d.recipients)}
+          </p>
+        </div>
+        <div>
+          <small>Assigned test · same exercises for every recipient</small>
+          <p>
+            {questionCount(d)} exercises · estimated{" "}
+            {assignable(d).reduce((n, m) => n + m.minutes, 0)} min
+            <br />
+            {assignable(d)
+              .map((m) => m.title)
+              .join(", ")}
+          </p>
+        </div>
+        <div>
+          <small>Availability</small>
+          <p>
+            Start {date(d.start)}, {d.startTime} → End {date(d.end)},{" "}
+            {d.endTime}
+          </p>
+          <small>
+            Example schedule — confirm current Assigned tests field behavior.
+          </small>
+        </div>
+        <div>
+          <small>Saved support · stays in the review draft</small>
+          <p>
+            {Object.keys(d.support).length
+              ? "Teacher support saved"
+              : "One shared version for all recipients"}
+          </p>
+        </div>
+        <div>
+          <small>Teacher resource · not sent</small>
+          <p>
+            {schedulable(d).map((m) => (
+              <React.Fragment key={m.id}>
+                {m.type} · {m.title}
+                <br />
+              </React.Fragment>
+            ))}
+          </p>
+        </div>
+      </div>
     );
   }
   const next = () => {
@@ -575,6 +728,11 @@ export default function HighFiApp() {
   return (
     <div
       className="shell hi"
+      data-page={page}
+      data-step={step}
+      data-action={draft.action}
+      data-scenario={scenario}
+      data-library-review={libReview}
       style={{ "--user-scale": zoom / 100 } as React.CSSProperties}
     >
       <Sidebar
@@ -621,6 +779,7 @@ export default function HighFiApp() {
                     )
                   }
                 >
+                  <Icon name="imgIconPencil" />
                   Edit group
                 </Button>
                 <Button
@@ -630,7 +789,9 @@ export default function HighFiApp() {
                     )
                   }
                 >
-                  Access Code ↗
+                  <Icon name="imgIconQrCode" />
+                  Access Code
+                  <Icon name="imgIconExternalLink" size={14} />
                 </Button>
               </div>
             </div>
@@ -669,1781 +830,2373 @@ export default function HighFiApp() {
           </>
         )}
         <div className="hipanel">
-          {message && (
-            <div
-              className={
-                /failed|could not|unavailable|expired|Choose|Select|Add at least|End must|overlap/i.test(
-                  message,
-                )
-                  ? "banner warn"
-                  : "banner"
-              }
-              role="status"
-            >
-              {message}
-            </div>
-          )}
-          {isDraft && (
-            <>
-              <button
-                className="textlink backlabel"
-                onClick={() =>
-                  page === "library"
-                    ? go("draft")
-                    : page === "schedule" || page === "conflict"
-                      ? go("draft", 3)
-                      : page === "confirm"
+          <div className="panelbody" key={`${page}:${step}`}>
+            {isDraft && (
+              <>
+                <button
+                  className="textlink backlabel"
+                  onClick={() =>
+                    page === "library"
+                      ? go("draft")
+                      : page === "schedule" || page === "conflict"
                         ? go("draft", 3)
-                        : step
-                          ? go("draft", step - 1)
-                          : go("detail")
-                }
-              >
-                ←{" "}
-                {page === "library"
-                  ? "Assemble material"
-                  : page === "schedule" ||
-                      page === "conflict" ||
-                      page === "confirm"
-                    ? "Choose action"
-                    : [
-                        "Finding equivalent fractions",
-                        "Assemble material",
-                        "Differentiate",
-                        "Review draft",
-                      ][step]}
-              </button>
-              <div className="histages" aria-label="Review steps">
-                {[
-                  "Assemble material",
-                  "Differentiate",
-                  "Review draft",
-                  "Choose action",
-                  "Confirm",
-                ].map((s, i) => (
-                  <span
-                    key={s}
-                    className={stage === i ? "active" : i < stage ? "done" : ""}
-                  >
-                    <b>{i < stage ? "✓" : i + 1}</b>
-                    {s}
-                  </span>
-                ))}
-              </div>
-            </>
-          )}
-          {page === "overview" && (
-            <>
-              <div className="segmented">
-                <button
-                  className={knowledge ? "selected" : ""}
-                  onClick={() => setKnowledge(true)}
+                        : page === "confirm"
+                          ? go("draft", 3)
+                          : step
+                            ? go("draft", step - 1)
+                            : go("detail")
+                  }
                 >
-                  Class knowledge gaps
+                  <Icon name="imgIconArrowLeft" />
+                  {page === "library"
+                    ? "Assemble material"
+                    : page === "schedule" ||
+                        page === "conflict" ||
+                        page === "confirm"
+                      ? "Choose action"
+                      : [
+                          "Finding equivalent fractions",
+                          "Assemble material",
+                          "Differentiate",
+                          "Review draft",
+                        ][step]}
                 </button>
-                <button
-                  className={!knowledge ? "selected" : ""}
-                  onClick={() => setKnowledge(false)}
-                >
-                  Suggested groups · 3
-                </button>
-              </div>
-              <h1>
-                {knowledge ? "Recommended review" : "Suggested review groups"}
-              </h1>
-              {knowledge ? (
-                <article className="hicard">
-                  <div className="tableline head">
-                    <span>Lesson station</span>
-                    <span>Class</span>
-                    <span>Revised students</span>
-                  </div>
-                  {[
-                    ...recommendations.map((r) => r.title),
-                    "Comparing fractions",
-                    "Adding unlike fractions",
-                    "Ratios and rates",
-                  ].map((t, i) => (
-                    <button
-                      className="tableline gaprow"
-                      key={t}
-                      onClick={() => {
-                        setRecId(recommendations[i]?.id || "fractions");
-                        go("detail");
-                      }}
-                    >
-                      <strong>{t}</strong>
-                      <span>6 cl.</span>
-                      <span>0/{[3, 2, 2, 4, 5, 3][i]}</span>
-                    </button>
-                  ))}
-                </article>
-              ) : (
-                <>
-                  <div className="infostrip">
-                    <Icon name="imgIcon" />3 suggested groups · 7 of 24 students{" "}
-                    <small>
-                      Suggestions only — nothing is assigned until you review
-                      and confirm.
-                    </small>
-                  </div>
-                  <div className="hifilters">
-                    <label className="sr-only" htmlFor="grade">
-                      Grade
-                    </label>
-                    <select
-                      id="grade"
-                      value={grade}
-                      onChange={(e) => setGrade(e.target.value)}
-                    >
-                      <option value="All">Grade: All</option>
-                      <option value="6">Grade: 6</option>
-                    </select>
-                    <label className="sr-only" htmlFor="source">
-                      Source test
-                    </label>
-                    <select
-                      id="source"
-                      value={source}
-                      onChange={(e) => setSource(e.target.value)}
-                    >
-                      <option value="All">Source test: All</option>
-                      {recommendations.map((r) => (
-                        <option key={r.id} value={r.id}>
-                          {r.source}
-                        </option>
-                      ))}
-                    </select>
-                    <label className="sr-only" htmlFor="evidence">
-                      Evidence status
-                    </label>
-                    <select
-                      id="evidence"
-                      value={evidence}
-                      onChange={(e) => setEvidence(e.target.value)}
-                    >
-                      <option value="All">Evidence status: All</option>
-                      <option>Repeated evidence</option>
-                      <option>Insufficient evidence</option>
-                    </select>
-                    <button
-                      className="textlink"
-                      onClick={() => {
-                        setGrade("All");
-                        setSource("All");
-                        setEvidence("All");
-                      }}
-                    >
-                      Reset
-                    </button>
-                  </div>
-                  {recommendations
-                    .filter(
-                      (r) =>
-                        (source === "All" || source === r.id) &&
-                        (evidence === "All" || evidence === r.evidence),
-                    )
-                    .map((r) => (
-                      <article className="suggestion" key={r.id}>
-                        <div>
-                          <h3>{r.title}</h3>
-                          <small>
-                            {r.source} · {r.day} · Grade 6
-                          </small>
-                        </div>
-                        <div className="row">
-                          <Avatars people={r.people} />
-                          <span>{r.count} students</span>
-                        </div>
-                        <div>
-                          <div className="actions">
-                            {r.id !== "percentages" && (
-                              <Badge tone="orange">Needs review</Badge>
-                            )}
-                            <Badge
-                              tone={r.id === "percentages" ? "plain" : "green"}
-                            >
-                              {r.evidence}
-                            </Badge>
-                          </div>
-                          <small>
-                            {r.id === "percentages"
-                              ? "Only 1 related item per student — check again"
-                              : "Same error on related items"}
-                          </small>
-                        </div>
-                        <div className="actions">
-                          <button
-                            className="textlink"
-                            onClick={() =>
-                              setExpanded(expanded === r.id ? "" : r.id)
-                            }
-                          >
-                            {expanded === r.id
-                              ? "Hide evidence"
-                              : "View evidence"}
-                          </button>
-                          <Button
-                            primary={r.id === "fractions"}
-                            onClick={() => {
-                              setRecId(r.id);
-                              go("detail");
-                            }}
-                          >
-                            View group
-                          </Button>
-                        </div>
-                        {expanded === r.id && (
-                          <div className="suggestionevidence">
-                            <p>
-                              {r.coverage} · {r.error}
-                            </p>
-                            <small>
-                              {r.evidence === "Insufficient evidence"
-                                ? "Check again before choosing a shared review."
-                                : "Review the individual responses before choosing support."}
-                            </small>
-                          </div>
-                        )}
-                      </article>
-                    ))}
-                </>
-              )}
-            </>
-          )}
-          {page === "detail" && (
-            <>
-              <button
-                className="textlink backlabel"
-                onClick={() => go("overview")}
-              >
-                ← Suggested groups
-              </button>
-              <h1>{rec.title}</h1>
-              <div className="actions" aria-label="Recommendation status">
-                <Badge>Suggested group</Badge>
-                <Badge tone={rec.id === "percentages" ? "plain" : "orange"}>
-                  {rec.id === "percentages"
-                    ? "Insufficient evidence"
-                    : "Needs review"}
-                </Badge>
-                {rec.id !== "percentages" && (
-                  <Badge tone="green">Repeated evidence</Badge>
-                )}
-              </div>
-              <div className="facts">
-                <div>
-                  <small>Shared error</small>
-                  <p>{rec.error}</p>
-                </div>
-                <div>
-                  <small>Source</small>
-                  <p>
-                    {rec.source} · {rec.day}
-                  </p>
-                </div>
-                <div>
-                  <small>Evidence</small>
-                  <p>{rec.coverage}</p>
-                </div>
-              </div>
-              {rec.id === "percentages" && (
-                <div className="banner warn">
-                  <strong>Not enough evidence yet</strong>
-                  <p>
-                    Add a short check for these students before creating a
-                    review.
-                  </p>
-                </div>
-              )}
-              <article className="hicard">
-                <div className="row">
-                  <h2>
-                    Students ·{" "}
-                    {rec.id === "fractions"
-                      ? draft.recipients.length
-                      : rec.count}
-                  </h2>
-                  {rec.id === "fractions" && (
-                    <Button onClick={editStudents}>Edit students</Button>
+                <div className="flowtitle">
+                  <h1>
+                    {page === "draft"
+                      ? [
+                          "Assemble material",
+                          "Differentiate",
+                          "Review draft",
+                          "Choose action",
+                        ][step]
+                      : page === "library"
+                        ? libReview
+                          ? replaceId
+                            ? "Review replacement"
+                            : "Review selection"
+                          : replaceId
+                            ? "Replacement options"
+                            : "Add material"
+                        : page === "confirm"
+                          ? draft.action === "plan"
+                            ? "Confirm class plan"
+                            : "Confirm assigned test"
+                          : page === "conflict"
+                            ? "Review conflict"
+                            : scenario === "access"
+                              ? "Calendar access unavailable"
+                              : !schedulable(draft).length
+                                ? "No schedulable content"
+                                : "Schedule in Curriculum plan"}
+                  </h1>
+                  {page !== "confirm" && (
+                    <Badge>
+                      {page === "library"
+                        ? "Library search"
+                        : step === 1 && page === "draft"
+                          ? "Optional"
+                          : "Draft"}
+                    </Badge>
                   )}
                 </div>
-                <div className="tablewrap">
-                  <div className="studenttable">
+                {page !== "confirm" && (
+                  <p className="flowsubtitle">
+                    {page === "library"
+                      ? "Only the Materials section changes. Students, evidence and support stay as they are."
+                      : page === "draft" && step === 0
+                        ? "Draft saved · 10:42"
+                        : page === "draft" && step === 1
+                          ? "Optional — you can continue without changes. By default all students get one shared version."
+                          : page === "schedule" || page === "conflict"
+                            ? `${draft.title} · Class 6A · Whole class · 24 students · Mathematics timetable · ${schedulable(draft).length} items to schedule · ${schedulable(draft).reduce((n, m) => n + m.minutes, 0)} min`
+                            : `${draft.title} · ${draft.recipients.length} students · ${draft.selected.length} materials · ${total(draft)} min`}
+                  </p>
+                )}
+                <div className="histages" aria-label="Review steps">
+                  {[
+                    "Assemble material",
+                    "Differentiate",
+                    "Review draft",
+                    "Choose action",
+                    "Confirm",
+                  ].map((s, i) => (
+                    <span
+                      key={s}
+                      className={
+                        stage === i ? "active" : i < stage ? "done" : ""
+                      }
+                    >
+                      <b>
+                        {i < stage ? (
+                          <Icon name="imgIconCheck" size={14} />
+                        ) : (
+                          i + 1
+                        )}
+                      </b>
+                      {s}
+                    </span>
+                  ))}
+                </div>
+              </>
+            )}
+            {message &&
+              page !== "calendar" &&
+              page !== "success" &&
+              !(page === "library" && libReview) &&
+              !(page === "draft" && step === 1 && supportOpen) && (
+                <div
+                  className={
+                    /failed|could not|unavailable|expired|Choose|Select|Add at least|End must|overlap/i.test(
+                      message,
+                    )
+                      ? "banner warn"
+                      : "banner"
+                  }
+                  role="status"
+                >
+                  {message}
+                </div>
+              )}
+            {page === "overview" && (
+              <>
+                <div className="segmented">
+                  <button
+                    className={knowledge ? "selected" : ""}
+                    onClick={() => setKnowledge(true)}
+                  >
+                    Class knowledge gaps
+                  </button>
+                  <button
+                    className={!knowledge ? "selected" : ""}
+                    onClick={() => setKnowledge(false)}
+                  >
+                    Suggested groups · 3
+                  </button>
+                </div>
+                <h1>
+                  {knowledge ? "Recommended review" : "Suggested review groups"}
+                </h1>
+                {knowledge ? (
+                  <article className="hicard">
                     <div className="tableline head">
-                      <span>Student</span>
-                      <span>Evidence</span>
-                      <span>Last activity</span>
-                      <span />
+                      <span>Lesson station</span>
+                      <span>Class</span>
+                      <span>Revised students</span>
                     </div>
-                    {(rec.id === "fractions"
-                      ? draft.recipients.map(
-                          (id) => students.find((s) => s.id === id)!,
-                        )
-                      : rec.people.map((name, i) => ({
-                          id: rec.id + i,
-                          name,
-                          initials: initials(name),
-                          responses: rec.id === "percentages" ? 1 : 3,
-                          evidence: rec.evidence,
-                          suggested: "",
-                        }))
-                    ).map((s) => (
-                      <React.Fragment key={s.id}>
-                        <div className="tableline">
-                          <div className="row start">
-                            <span className="avatar">{s.initials}</span>
-                            <span>
-                              {s.name}
-                              <small>{s.responses} responses</small>
-                            </span>
+                    {[
+                      ...recommendations.map((r) => r.title),
+                      "Comparing fractions",
+                      "Adding unlike fractions",
+                      "Ratios and rates",
+                    ].map((t, i) => (
+                      <button
+                        className="tableline gaprow"
+                        key={t}
+                        onClick={() => {
+                          setRecId(recommendations[i]?.id || "fractions");
+                          go("detail");
+                        }}
+                      >
+                        <strong>{t}</strong>
+                        <span>6 cl.</span>
+                        <span>0/{[3, 2, 2, 4, 5, 3][i]}</span>
+                      </button>
+                    ))}
+                  </article>
+                ) : (
+                  <>
+                    <div className="infostrip">
+                      <Icon name="imgIcon" />3 suggested groups · 7 of 24
+                      students{" "}
+                      <small>
+                        Suggestions only — nothing is assigned until you review
+                        and confirm.
+                      </small>
+                    </div>
+                    <div className="hifilters">
+                      <label className="sr-only" htmlFor="grade">
+                        Grade
+                      </label>
+                      <select
+                        id="grade"
+                        value={grade}
+                        onChange={(e) => setGrade(e.target.value)}
+                      >
+                        <option value="All">Grade: All</option>
+                        <option value="6">Grade: 6</option>
+                      </select>
+                      <label className="sr-only" htmlFor="source">
+                        Source test
+                      </label>
+                      <select
+                        id="source"
+                        value={source}
+                        onChange={(e) => setSource(e.target.value)}
+                      >
+                        <option value="All">Source test: All</option>
+                        {recommendations.map((r) => (
+                          <option key={r.id} value={r.id}>
+                            {r.source}
+                          </option>
+                        ))}
+                      </select>
+                      <label className="sr-only" htmlFor="evidence">
+                        Evidence status
+                      </label>
+                      <select
+                        id="evidence"
+                        value={evidence}
+                        onChange={(e) => setEvidence(e.target.value)}
+                      >
+                        <option value="All">Evidence status: All</option>
+                        <option>Repeated evidence</option>
+                        <option>Insufficient evidence</option>
+                      </select>
+                      <button
+                        className="textlink"
+                        onClick={() => {
+                          setGrade("All");
+                          setSource("All");
+                          setEvidence("All");
+                        }}
+                      >
+                        Reset
+                      </button>
+                    </div>
+                    {recommendations
+                      .filter(
+                        (r) =>
+                          (source === "All" || source === r.id) &&
+                          (evidence === "All" || evidence === r.evidence),
+                      )
+                      .map((r) => (
+                        <article className="suggestion" key={r.id}>
+                          <div>
+                            <h3>{r.title}</h3>
+                            <small>
+                              {r.source} · {r.day} · Grade 6
+                            </small>
                           </div>
-                          <Badge
-                            tone={
-                              s.evidence === "Repeated evidence"
-                                ? "green"
-                                : "plain"
-                            }
-                          >
-                            {s.evidence}
-                          </Badge>
-                          <span>{rec.day}</span>
-                          {rec.id === "fractions" && (
+                          <div className="row">
+                            <Avatars people={r.people} />
+                            <span>{r.count} students</span>
+                          </div>
+                          <div>
+                            <div className="actions">
+                              {r.id !== "percentages" && (
+                                <Badge tone="orange">Needs review</Badge>
+                              )}
+                              <Badge
+                                tone={
+                                  r.id === "percentages" ? "plain" : "green"
+                                }
+                              >
+                                {r.evidence}
+                              </Badge>
+                            </div>
+                            <small>
+                              {r.id === "percentages"
+                                ? "Only 1 related item per student — check again"
+                                : r.id === "fractions"
+                                  ? "Same error on 2 of 3 related items"
+                                  : "Same error repeated by both students"}
+                            </small>
+                          </div>
+                          <div className="actions">
                             <button
                               className="textlink"
                               onClick={() =>
-                                setExpanded(expanded === s.id ? "" : s.id)
+                                setExpanded(expanded === r.id ? "" : r.id)
                               }
                             >
-                              {expanded === s.id
+                              {expanded === r.id
                                 ? "Hide evidence"
-                                : "Show evidence"}
+                                : "View evidence"}
                             </button>
+                            <Button
+                              primary={r.id === "fractions"}
+                              onClick={() => {
+                                setRecId(r.id);
+                                go("detail");
+                              }}
+                            >
+                              View group
+                            </Button>
+                          </div>
+                          {expanded === r.id && (
+                            <div className="suggestionevidence">
+                              <div className="facts">
+                                <div>
+                                  <small>Shared error</small>
+                                  <p>{r.error}</p>
+                                </div>
+                                <div>
+                                  <small>Source</small>
+                                  <p>
+                                    {r.source} · {r.day}
+                                  </p>
+                                </div>
+                                <div>
+                                  <small>Evidence</small>
+                                  <p>{r.coverage}</p>
+                                </div>
+                              </div>
+                              <small>
+                                Evidence labels describe this assessment only,
+                                not overall mastery.
+                              </small>
+                            </div>
                           )}
-                        </div>
-                        {expanded === s.id && <Evidence person={s.id} />}
-                      </React.Fragment>
-                    ))}
+                        </article>
+                      ))}
+                  </>
+                )}
+              </>
+            )}
+            {page === "detail" && (
+              <>
+                <button
+                  className="textlink backlabel"
+                  onClick={() => go("overview")}
+                >
+                  <Icon name="imgIconArrowLeft" />
+                  Suggested groups
+                </button>
+                <h1>{rec.title}</h1>
+                <div className="actions" aria-label="Recommendation status">
+                  <Badge>Suggested group</Badge>
+                  <Badge tone={rec.id === "percentages" ? "plain" : "orange"}>
+                    {rec.id === "percentages"
+                      ? "Insufficient evidence"
+                      : "Needs review"}
+                  </Badge>
+                  {rec.id !== "percentages" && (
+                    <Badge tone="green">Repeated evidence</Badge>
+                  )}
+                </div>
+                <div className="facts">
+                  <div>
+                    <small>Shared error</small>
+                    <p>{rec.error}</p>
+                  </div>
+                  <div>
+                    <small>Source</small>
+                    <p>
+                      {rec.source} · {rec.day}
+                    </p>
+                  </div>
+                  <div>
+                    <small>Evidence</small>
+                    <p>{rec.coverage}</p>
                   </div>
                 </div>
-              </article>
-              <footer>
-                <Button
-                  onClick={() =>
-                    inform(
-                      "The students share related response patterns. Suggestions are starting points; evidence coverage varies. Sofia has only one related response, so no achievement level is inferred.",
-                    )
-                  }
-                >
-                  Why these students?
-                </Button>
-                <Button
-                  primary
-                  disabled={
-                    rec.id === "percentages" ||
-                    (rec.id === "fractions" && !draft.recipients.length)
-                  }
-                  onClick={begin}
-                >
-                  Create review
-                </Button>
-              </footer>
-            </>
-          )}
-          {page === "draft" && (
-            <>
-              <div className="row">
-                <h1>
-                  {
-                    [
-                      "Assemble material",
-                      "Differentiate",
-                      "Review draft",
-                      "Choose action",
-                    ][step]
-                  }
-                </h1>
-                <Badge>{step === 1 ? "Optional" : "Draft"}</Badge>
-              </div>
-              {step === 0 && (
-                <div className="materiallayout">
-                  <section>
-                    <article className="hicard">
-                      <div className="row">
-                        <h2>
-                          Review draft{" "}
-                          <small>
-                            {draft.selected.length} materials · {total(draft)}{" "}
-                            min
-                          </small>
-                        </h2>
-                        <Button onClick={() => library()}>
-                          Add from library
-                        </Button>
+                {rec.id === "percentages" && (
+                  <div className="banner warn">
+                    <strong>Not enough evidence yet</strong>
+                    <p>
+                      Add a short check for these students before creating a
+                      review.
+                    </p>
+                  </div>
+                )}
+                <article className="hicard detailstudents">
+                  <div className="row">
+                    <h2>
+                      Students ·{" "}
+                      {rec.id === "fractions"
+                        ? draft.recipients.length
+                        : rec.count}
+                    </h2>
+                    {rec.id === "fractions" && (
+                      <Button onClick={editStudents}>Edit students</Button>
+                    )}
+                  </div>
+                  <div className="tablewrap">
+                    <div className="studenttable">
+                      <div className="tableline head">
+                        <span>Student</span>
+                        <span>Evidence</span>
+                        <span>Last activity</span>
+                        <span />
                       </div>
-                      {selected(draft).map((m) => (
-                        <React.Fragment key={m.id}>
-                          {MaterialRow({ m, controls: true })}
+                      {(rec.id === "fractions"
+                        ? draft.recipients.map(
+                            (id) => students.find((s) => s.id === id)!,
+                          )
+                        : rec.people.map((name, i) => ({
+                            id: rec.id + i,
+                            name,
+                            initials: initials(name),
+                            responses: rec.id === "percentages" ? 1 : 3,
+                            evidence: rec.evidence,
+                            suggested: "",
+                          }))
+                      ).map((s) => (
+                        <React.Fragment key={s.id}>
+                          <div className="tableline">
+                            <div className="row start">
+                              <span className="avatar">{s.initials}</span>
+                              <span>
+                                {s.name}
+                                <small>
+                                  {s.responses}{" "}
+                                  {s.responses === 1 ? "response" : "responses"}
+                                </small>
+                              </span>
+                            </div>
+                            <Badge
+                              tone={
+                                s.evidence === "Repeated evidence"
+                                  ? "green"
+                                  : "plain"
+                              }
+                            >
+                              {s.evidence}
+                            </Badge>
+                            <span>{rec.day}</span>
+                            {rec.id === "fractions" && (
+                              <button
+                                className="outline"
+                                onClick={() =>
+                                  setExpanded(expanded === s.id ? "" : s.id)
+                                }
+                              >
+                                {expanded === s.id
+                                  ? "Hide evidence"
+                                  : "Show evidence"}
+                              </button>
+                            )}
+                          </div>
+                          {expanded === s.id && <Evidence person={s.id} />}
                         </React.Fragment>
                       ))}
-                      {!draft.selected.length && (
-                        <p>Add material from the library to continue.</p>
-                      )}
-                    </article>
-                  </section>
-                  {Summary()}
-                </div>
-              )}
-              {step === 1 && (
-                <>
-                  <p className="muted">
-                    Optional — you can continue without changes. By default all
-                    students get one shared version.
+                    </div>
+                  </div>
+                </article>
+                <details className="whyaccordion">
+                  <summary>Why these students?</summary>
+                  <p>
+                    The students share related response patterns. Suggestions
+                    are starting points; evidence coverage varies. Sofia has
+                    only one related response, so no achievement level is
+                    inferred.
                   </p>
-                  {!supportOpen ? (
-                    <article className="hicard">
-                      <div className="row">
-                        <h2>Support</h2>
-                        <Badge>Default</Badge>
-                      </div>
-                      <p>
-                        One shared version · {draft.recipients.length} students
-                        · same {draft.selected.length} materials ·{" "}
-                        {total(draft)} min
-                      </p>
-                      <Button onClick={openSupport}>
-                        Adjust support by level
-                      </Button>
-                    </article>
-                  ) : (
-                    <article className="hicard">
-                      <div className="row">
-                        <h2>Support by achievement level</h2>
-                        <Badge>
-                          {JSON.stringify(draft.support) ===
-                          JSON.stringify(supportEdit)
-                            ? "Saved"
-                            : "Not saved"}
-                        </Badge>
-                      </div>
-                      <div className="tablewrap">
-                        <table>
-                          <thead>
-                            <tr>
-                              <th>Student</th>
-                              <th>Suggested from evidence</th>
-                              <th>Level</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            {draft.recipients.map((id) => {
-                              const s = students.find((s) => s.id === id)!;
-                              return (
-                                <tr key={id}>
-                                  <td>
-                                    {s.name}
-                                    <small>{s.responses} responses</small>
-                                  </td>
-                                  <td>
-                                    {s.suggested
-                                      ? `${s.suggested} · same error on related items`
-                                      : "Insufficient evidence · no level suggested"}
-                                  </td>
-                                  <td>
-                                    <select
-                                      aria-label={`Support level for ${s.name}`}
-                                      value={supportEdit[id] || ""}
-                                      onChange={(e) =>
-                                        setSupportEdit((p) => ({
-                                          ...p,
-                                          [id]: e.target.value,
-                                        }))
-                                      }
-                                    >
-                                      <option value="">Not set</option>
-                                      {levels.map((l) => (
-                                        <option key={l}>{l}</option>
-                                      ))}
-                                    </select>
-                                  </td>
-                                </tr>
-                              );
-                            })}
-                          </tbody>
-                        </table>
-                      </div>
-                      <h3>What differs by level</h3>
-                      {levels.map((l) => (
-                        <div className="tableline supportmap" key={l}>
-                          <strong>{l}</strong>
-                          <span>{supportInfo[l]}</span>
-                          <span>
-                            {l === "Threshold"
-                              ? total(draft) + 3
-                              : l === "Higher"
-                                ? "—"
-                                : total(draft)}
-                            {l !== "Higher" ? " min" : ""}
-                          </span>
+                </details>
+                <footer>
+                  <Button
+                    primary
+                    disabled={
+                      rec.id === "percentages" ||
+                      (rec.id === "fractions" && !draft.recipients.length)
+                    }
+                    onClick={begin}
+                  >
+                    Create review
+                  </Button>
+                </footer>
+              </>
+            )}
+            {page === "draft" && (
+              <>
+                {step === 0 && (
+                  <div className="materiallayout">
+                    <section>
+                      <article className="hicard">
+                        <div className="row">
+                          <h2>
+                            Review draft{" "}
+                            <small>
+                              {draft.selected.length} materials · {total(draft)}{" "}
+                              min
+                            </small>
+                          </h2>
+                          <Button onClick={() => library()}>
+                            Add from library
+                          </Button>
                         </div>
-                      ))}
-                      <div className="actions">
+                        {selected(draft).map((m) => (
+                          <React.Fragment key={m.id}>
+                            {MaterialRow({ m, controls: true })}
+                          </React.Fragment>
+                        ))}
+                        {!draft.selected.length && (
+                          <p>Add material from the library to continue.</p>
+                        )}
+                      </article>
+                    </section>
+                    {Summary()}
+                  </div>
+                )}
+                {step === 1 && (
+                  <>
+                    {!supportOpen ? (
+                      <article className="hicard supportcollapsed">
+                        <div className="row">
+                          <div>
+                            <h2>Support</h2>
+                            <p>
+                              One shared version · {draft.recipients.length}{" "}
+                              students · same {draft.selected.length} materials
+                              · {total(draft)} min
+                            </p>
+                          </div>
+                          <div className="actions">
+                            <Badge tone="solidblue">
+                              {Object.keys(draft.support).length
+                                ? "Saved support"
+                                : "Default"}
+                            </Badge>
+                            <Button onClick={openSupport}>
+                              Adjust support by level
+                            </Button>
+                          </div>
+                        </div>
+                        <small>
+                          Threshold, Satisfactory, Basic and Higher are for your
+                          planning only. Students see neutral labels (Version A,
+                          B, C or D).
+                        </small>
+                      </article>
+                    ) : (
+                      <article className="hicard supporteditor">
+                        <div className="row">
+                          <h2>Support by achievement level</h2>
+                          <Badge>
+                            {JSON.stringify(draft.support) ===
+                            JSON.stringify(supportEdit)
+                              ? "Saved"
+                              : "Not saved"}
+                          </Badge>
+                        </div>
+                        {message.startsWith("Support could") && (
+                          <>
+                            <div className="banner error supporterror">
+                              <strong>Support changes couldn’t be saved</strong>
+                              <p>
+                                Your saved support is unchanged. Your edits are
+                                kept so you can retry.
+                              </p>
+                            </div>
+                            <div className="actions supporterroractions">
+                              <Button onClick={saveSupport}>Retry save</Button>
+                              <Button
+                                onClick={() => {
+                                  setSupportEdit({ ...draft.support });
+                                  setSupportOpen(false);
+                                  setMessage("");
+                                }}
+                              >
+                                Cancel
+                              </Button>
+                            </div>
+                          </>
+                        )}
+                        <div className="tablewrap">
+                          <table>
+                            <thead>
+                              <tr>
+                                <th>Student</th>
+                                <th>Suggested from evidence</th>
+                                <th>Level</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {draft.recipients.map((id) => {
+                                const s = students.find((s) => s.id === id)!;
+                                return (
+                                  <tr key={id}>
+                                    <td>
+                                      {s.name}
+                                      <small>
+                                        {s.responses}{" "}
+                                        {s.responses === 1
+                                          ? "response"
+                                          : "responses"}
+                                      </small>
+                                    </td>
+                                    <td>
+                                      {s.suggested
+                                        ? `${s.suggested} · same error on 2 of 3 items`
+                                        : "Insufficient evidence · no level suggested"}
+                                    </td>
+                                    <td>
+                                      <select
+                                        aria-label={`Support level for ${s.name}`}
+                                        value={supportEdit[id] || ""}
+                                        onChange={(e) =>
+                                          setSupportEdit((p) => ({
+                                            ...p,
+                                            [id]: e.target.value,
+                                          }))
+                                        }
+                                      >
+                                        <option value="">Not set</option>
+                                        {levels.map((l) => (
+                                          <option key={l}>{l}</option>
+                                        ))}
+                                      </select>
+                                    </td>
+                                  </tr>
+                                );
+                              })}
+                            </tbody>
+                          </table>
+                        </div>
+                        <h3>What differs by level</h3>
+                        {levels.map((l) => (
+                          <div className="tableline supportmap" key={l}>
+                            <strong>{l}</strong>
+                            <span>{supportInfo[l]}</span>
+                            <span>
+                              {l === "Threshold"
+                                ? total(draft) + 3
+                                : l === "Higher"
+                                  ? "—"
+                                  : total(draft)}
+                              {l !== "Higher" ? " min" : ""}
+                            </span>
+                          </div>
+                        ))}
+                      </article>
+                    )}
+                    {supportOpen && (
+                      <p className="muted supportnote">
+                        Threshold, Satisfactory, Basic and Higher are for your
+                        planning only. Students see neutral labels (Version A,
+                        B, C or D). Support-to-exercise mapping requires product
+                        confirmation.
+                      </p>
+                    )}
+                  </>
+                )}
+                {step === 2 && (
+                  <div className="reviewdetails">
+                    <article className="hicard">
+                      <div className="row">
+                        <h2>Students · {draft.recipients.length}</h2>
+                        <Button onClick={editStudents}>Edit</Button>
+                      </div>
+                      <Avatars
+                        people={draft.recipients.map(
+                          (id) => students.find((s) => s.id === id)!.name,
+                        )}
+                      />
+                      <p>{names(draft.recipients)}</p>
+                      <small>
+                        Learning goal: Finding equivalent fractions · from
+                        Fractions checkpoint, 12 Oct
+                      </small>
+                    </article>
+                    {Sequence()}
+                    {SupportSummary()}
+                  </div>
+                )}
+                {step === 3 && (
+                  <>
+                    <h2>Where should this review go?</h2>
+                    {[
+                      [
+                        "assignment",
+                        "Assign now",
+                        "Create an Assigned test from the selected exercises for the chosen students.",
+                        "Selected students · Assignable exercises only · Destination: Assigned tests",
+                      ],
+                      [
+                        "plan",
+                        "Add to class plan",
+                        "Add the lesson and station to Class 6A’s Curriculum plan for the whole class. No student assignments are created.",
+                        "Class 6A · Whole class · 24 students · Mathematics timetable",
+                      ],
+                    ].map(([v, t, desc, meta]) => (
+                      <label
+                        key={v}
+                        className={
+                          "hiaction " + (draft.action === v ? "chosen" : "")
+                        }
+                      >
+                        <input
+                          type="radio"
+                          name="destination"
+                          checked={draft.action === v}
+                          onChange={() => edit({ action: v })}
+                        />
+                        <div>
+                          <h2>{t}</h2>
+                          <p>{desc}</p>
+                          <small>{meta}</small>
+                        </div>
+                        <Badge>
+                          {v === "plan" ? "Whole class" : "Selected students"}
+                        </Badge>
+                      </label>
+                    ))}
+                    <p className="muted">
+                      Both options start from this same review draft. Nothing is
+                      sent or scheduled until you confirm.
+                    </p>
+                  </>
+                )}
+                <footer>
+                  {step > 0 && (
+                    <Button
+                      onClick={() => go("draft", step === 2 ? 0 : step - 1)}
+                    >
+                      {step === 2 ? "Back to edit" : "Back"}
+                    </Button>
+                  )}
+                  <div className="actions">
+                    {step === 0 && <Button onClick={save}>Save draft</Button>}
+                    {step === 1 && supportOpen && (
+                      <>
                         <Button
                           onClick={() => {
                             setSupportEdit({ ...draft.support });
                             setSupportOpen(false);
-                            setMessage("Unsaved changes discarded.");
                           }}
                         >
                           Cancel
                         </Button>
-                        <Button onClick={saveSupport}>Save support</Button>
-                      </div>
-                    </article>
-                  )}
-                  <p className="muted">
-                    Threshold, Satisfactory, Basic and Higher are for your
-                    planning only. Students see neutral labels (Version A, B, C
-                    or D). Support-to-exercise mapping requires product
-                    confirmation.
-                  </p>
-                </>
-              )}
-              {step === 2 && (
-                <>
-                  <p>
-                    {draft.title} · {draft.recipients.length} students ·{" "}
-                    {draft.selected.length} materials · {total(draft)} min
-                  </p>
-                  <article className="hicard">
-                    <div className="row">
-                      <h2>Students · {draft.recipients.length}</h2>
-                      <Button onClick={editStudents}>Edit</Button>
-                    </div>
-                    <Avatars
-                      people={draft.recipients.map(
-                        (id) => students.find((s) => s.id === id)!.name,
-                      )}
-                    />
-                    <p>{names(draft.recipients)}</p>
-                    <small>
-                      Learning goal: Finding equivalent fractions · from
-                      Fractions checkpoint, 12 Oct
-                    </small>
-                  </article>
-                  {Sequence()}
-                  {SupportSummary()}
-                </>
-              )}
-              {step === 3 && (
-                <>
-                  <p>
-                    {draft.title} · {draft.recipients.length} students ·{" "}
-                    {draft.selected.length} materials · {total(draft)} min
-                  </p>
-                  <h2>Where should this review go?</h2>
-                  {[
-                    [
-                      "assignment",
-                      "Assign now",
-                      "Create an Assigned test from the selected exercises for the chosen students.",
-                      "Selected students · Assignable exercises only · Destination: Assigned tests",
-                    ],
-                    [
-                      "plan",
-                      "Add to class plan",
-                      "Add the lesson and station to Class 6A’s Curriculum plan for the whole class. No student assignments are created.",
-                      "Class 6A · Whole class · 24 students · Mathematics timetable",
-                    ],
-                  ].map(([v, t, desc, meta]) => (
-                    <label
-                      key={v}
-                      className={
-                        "hiaction " + (draft.action === v ? "chosen" : "")
-                      }
-                    >
-                      <input
-                        type="radio"
-                        name="destination"
-                        checked={draft.action === v}
-                        onChange={() => edit({ action: v })}
-                      />
-                      <div>
-                        <h2>{t}</h2>
-                        <p>{desc}</p>
-                        <small>{meta}</small>
-                      </div>
-                      <Badge>
-                        {v === "plan" ? "Whole class" : "Selected students"}
-                      </Badge>
-                    </label>
-                  ))}
-                  <p className="muted">
-                    Both options start from this same review draft. Nothing is
-                    sent or scheduled until you confirm.
-                  </p>
-                </>
-              )}
-              <footer>
-                <Button
-                  onClick={() => (step ? go("draft", step - 1) : go("detail"))}
-                >
-                  Back
-                </Button>
-                <div className="actions">
-                  {step === 0 && <Button onClick={save}>Save draft</Button>}
-                  {step === 1 && (
+                        {!message.startsWith("Support could") && (
+                          <Button onClick={saveSupport}>Save support</Button>
+                        )}
+                      </>
+                    )}
+                    {step === 1 && !supportOpen && (
+                      <Button
+                        onClick={() => {
+                          setSupportEdit({ ...draft.support });
+                          setSupportOpen(false);
+                          go("draft", 2);
+                        }}
+                      >
+                        Skip differentiation
+                      </Button>
+                    )}
                     <Button
+                      primary
+                      disabled={
+                        !draft.selected.length || !draft.recipients.length
+                      }
                       onClick={() => {
-                        setSupportEdit({ ...draft.support });
-                        setSupportOpen(false);
-                        go("draft", 2);
+                        if (
+                          step === 1 &&
+                          supportOpen &&
+                          JSON.stringify(draft.support) !==
+                            JSON.stringify(supportEdit)
+                        ) {
+                          setModal("unsaved");
+                          return;
+                        }
+                        if (step === 3) {
+                          edit({ reviewed: false });
+                          go(
+                            draft.action === "plan" ? "schedule" : "confirm",
+                            4,
+                          );
+                        } else next();
                       }}
                     >
-                      Skip differentiation
+                      Continue
+                    </Button>
+                  </div>
+                </footer>
+              </>
+            )}
+            {page === "library" && (
+              <>
+                {!libReview ? (
+                  <>
+                    {replaceId && (
+                      <div className="banner replacementcontext">
+                        <strong>Replace one material</strong>
+                        <p>
+                          {materials.find((m) => m.id === replaceId)?.title} ·
+                          Students, evidence and support stay as they are.
+                        </p>
+                      </div>
+                    )}
+                    <div className="librarycontext">
+                      {[
+                        ["Learning need", "Finding equivalent fractions"],
+                        ["Grade", "6"],
+                        ["Skill", "Equivalent fractions"],
+                        ["Achievement levels", libLevel],
+                        [
+                          "Already in draft",
+                          `${draft.selected.length} materials · ${total(draft)} min`,
+                        ],
+                        ["Returns to", "Assemble material"],
+                      ].map(([l, v]) => (
+                        <div key={l}>
+                          <small>{l}</small>
+                          <p>{v}</p>
+                        </div>
+                      ))}
+                    </div>
+                    <div className="librarysearch">
+                      <div className="searchrow">
+                        <input
+                          aria-label="Search materials"
+                          placeholder="Search materials"
+                          value={query}
+                          onChange={(e) => setQuery(e.target.value)}
+                        />
+                        <Button
+                          onClick={() => {
+                            setLibLoading(true);
+                            timeout.current = setTimeout(
+                              () => setLibLoading(false),
+                              350,
+                            );
+                          }}
+                        >
+                          Search
+                        </Button>
+                      </div>
+                      {[
+                        "empty",
+                        "unavailable",
+                        "partial",
+                        "restricted",
+                      ].includes(scenario) ? (
+                        <>
+                          <div className="legacyfilters">
+                            <select aria-label="Topic">
+                              <option>Topic: Fractions</option>
+                            </select>
+                            <select aria-label="Skill">
+                              <option>Skill: Equivalent fractions</option>
+                            </select>
+                            <select aria-label="Grade">
+                              <option>Grade: 6</option>
+                            </select>
+                            <select
+                              aria-label="Achievement levels"
+                              value={libLevel}
+                              onChange={(e) => setLibLevel(e.target.value)}
+                            >
+                              {["All levels", ...levels].map((l) => (
+                                <option key={l} value={l}>
+                                  Level: {l}
+                                </option>
+                              ))}
+                            </select>
+                            <select
+                              aria-label="Content type"
+                              value={libType}
+                              onChange={(e) => setLibType(e.target.value)}
+                            >
+                              {[
+                                "All types",
+                                "Lesson",
+                                "Station",
+                                "Practice set",
+                                "Exercise set",
+                              ].map((t) => (
+                                <option key={t} value={t}>
+                                  Type: {t}
+                                </option>
+                              ))}
+                            </select>
+                            <select aria-label="Source">
+                              <option>Source: All sources</option>
+                            </select>
+                          </div>
+                        </>
+                      ) : (
+                        <>
+                          <div className="searchfilters">
+                            <select aria-label="Topic">
+                              <option>Topic: Fractions</option>
+                            </select>
+                            <select aria-label="Grade">
+                              <option>Grade: 6</option>
+                            </select>
+                            <select
+                              aria-label="Content type"
+                              value={libType}
+                              onChange={(e) => setLibType(e.target.value)}
+                            >
+                              {[
+                                "All types",
+                                "Lesson",
+                                "Station",
+                                "Practice set",
+                                "Exercise set",
+                              ].map((t) => (
+                                <option key={t} value={t}>
+                                  Type: {t}
+                                </option>
+                              ))}
+                            </select>
+                          </div>
+                          <div className="searchfilters">
+                            <small>More filters</small>
+                            <select aria-label="Skill">
+                              <option>Skill: Equivalent fractions</option>
+                            </select>
+                            <select
+                              aria-label="Achievement levels"
+                              value={libLevel}
+                              onChange={(e) => setLibLevel(e.target.value)}
+                            >
+                              {["All levels", ...levels].map((l) => (
+                                <option value={l} key={l}>
+                                  Level: {l}
+                                </option>
+                              ))}
+                            </select>
+                            <select aria-label="Source">
+                              <option>Source: All sources</option>
+                            </select>
+                          </div>
+                        </>
+                      )}
+                    </div>
+                    <div className="row resultcount">
+                      <small>
+                        {scenario === "empty" ? 0 : results.length} results ·
+                        page 1 of 1
+                      </small>
+                      <button
+                        className="textlink"
+                        onClick={() => {
+                          setQuery("");
+                          setLibType("All types");
+                          setLibLevel("All levels");
+                          setScenario("normal");
+                        }}
+                      >
+                        Clear filters
+                      </button>
+                    </div>
+                    {libLoading ? (
+                      <div className="blankstate" role="status">
+                        Searching the resource library…
+                      </div>
+                    ) : scenario === "unavailable" ? (
+                      <div className="blankstate">
+                        <h2>Search is unavailable</h2>
+                        <p>
+                          BBright library didn’t respond. Your query, filters
+                          and selection are kept. Your draft is unchanged.
+                        </p>
+                        <Button onClick={() => setScenario("normal")}>
+                          Retry
+                        </Button>
+                      </div>
+                    ) : scenario === "empty" || !results.length ? (
+                      <div className="blankstate">
+                        <h2>No matching material</h2>
+                        <p>
+                          Nothing in the library matches these filters. Your
+                          draft is unchanged.
+                        </p>
+                        <Button
+                          onClick={() => {
+                            setQuery("");
+                            setLibType("All types");
+                            setScenario("normal");
+                          }}
+                        >
+                          Clear filters
+                        </Button>
+                      </div>
+                    ) : (
+                      <>
+                        {scenario === "partial" && (
+                          <div className="banner warn">
+                            Partial results. Some library sources are
+                            unavailable; available items can still be reviewed.
+                          </div>
+                        )}
+                        {scenario === "restricted" && (
+                          <div className="banner warn">
+                            Some content is permission restricted. Restricted
+                            items cannot be selected.
+                          </div>
+                        )}
+                        <div className="librarylist">
+                          {results
+                            .slice(0, scenario === "partial" ? 3 : undefined)
+                            .map((m, i) => {
+                              const inDraft = draft.selected.includes(m.id);
+                              const restricted =
+                                scenario === "restricted" && i > 2;
+                              return (
+                                <article className="libraryresult" key={m.id}>
+                                  <input
+                                    type={replaceId ? "radio" : "checkbox"}
+                                    name="material-pick"
+                                    aria-label={`Select ${m.title}`}
+                                    checked={picks.includes(m.id)}
+                                    disabled={inDraft || restricted}
+                                    onChange={() =>
+                                      setPicks((p) =>
+                                        replaceId
+                                          ? [m.id]
+                                          : p.includes(m.id)
+                                            ? p.filter((id) => id !== m.id)
+                                            : [...p, m.id],
+                                      )
+                                    }
+                                  />
+                                  <div className="materialtype">
+                                    <Badge>{m.type}</Badge>
+                                  </div>
+                                  <div className="grow">
+                                    <h3>{m.title}</h3>
+                                    <small>
+                                      Grade 6 · {libLevel} · {m.minutes} min ·
+                                      Resource library
+                                    </small>
+                                  </div>
+                                  {inDraft ? (
+                                    <Badge>
+                                      {replaceId === m.id
+                                        ? "Being replaced"
+                                        : "In draft"}
+                                    </Badge>
+                                  ) : restricted ? (
+                                    <Badge>Restricted</Badge>
+                                  ) : null}
+                                  <Button onClick={() => setPreview(m)}>
+                                    Preview
+                                  </Button>
+                                </article>
+                              );
+                            })}
+                        </div>
+                      </>
+                    )}
+                  </>
+                ) : (
+                  <>
+                    <div className="banner">
+                      <strong>Only Materials will change</strong>
+                      <p>
+                        Students ({draft.recipients.length}), evidence and saved
+                        support stay exactly as they are.
+                      </p>
+                    </div>
+                    {message && (
+                      <div className="banner warn" role="alert">
+                        <strong>
+                          {scenario === "stale"
+                            ? "One selected material needs attention"
+                            : "Could not apply materials"}
+                        </strong>
+                        <p>{message}</p>
+                      </div>
+                    )}
+                    <div className="librarylist ordered">
+                      {proposed.map((id, i) => {
+                        const m = materials.find((m) => m.id === id)!;
+                        const staleItem =
+                          scenario === "stale" && !draft.selected.includes(id);
+                        return (
+                          <article className="libraryresult" key={id}>
+                            <span className="number">{i + 1}</span>
+                            <div className="materialtype">
+                              <Badge>{m.type}</Badge>
+                            </div>
+                            <div className="grow">
+                              <h3>{m.title}</h3>
+                              <small>
+                                {staleItem
+                                  ? "Changed by BBright on 16 Oct · no longer available in this version"
+                                  : `${m.minutes} min · Resource library`}
+                              </small>
+                            </div>
+                            {!draft.selected.includes(id) && (
+                              <Badge tone="blue">
+                                {staleItem
+                                  ? "No longer available"
+                                  : replaceId
+                                    ? "Replacement"
+                                    : "New"}
+                              </Badge>
+                            )}
+                            {staleItem ? (
+                              <>
+                                <Button
+                                  onClick={() => {
+                                    setScenario("normal");
+                                    setMessage("");
+                                  }}
+                                >
+                                  Refresh
+                                </Button>
+                                <Button onClick={() => setLibReview(false)}>
+                                  Replace
+                                </Button>
+                              </>
+                            ) : (
+                              <>
+                                <Button
+                                  disabled={i === 0}
+                                  onClick={() =>
+                                    setProposed((p) => {
+                                      const a = [...p];
+                                      [a[i - 1], a[i]] = [a[i], a[i - 1]];
+                                      return a;
+                                    })
+                                  }
+                                >
+                                  Move up
+                                </Button>
+                                <Button
+                                  disabled={i === proposed.length - 1}
+                                  onClick={() =>
+                                    setProposed((p) => {
+                                      const a = [...p];
+                                      [a[i + 1], a[i]] = [a[i], a[i + 1]];
+                                      return a;
+                                    })
+                                  }
+                                >
+                                  Move down
+                                </Button>
+                              </>
+                            )}
+                            {!draft.selected.includes(id) && (
+                              <Button
+                                onClick={() =>
+                                  setProposed((p) => p.filter((x) => x !== id))
+                                }
+                              >
+                                Remove
+                              </Button>
+                            )}
+                          </article>
+                        );
+                      })}
+                    </div>
+                    <p>
+                      {replaceId
+                        ? "1 replacement · same position"
+                        : `${proposed.filter((id) => !draft.selected.includes(id)).length} new materials · no duplicates`}
+                    </p>
+                  </>
+                )}
+                <footer>
+                  {!libReview && (
+                    <small className="selectioncount">
+                      {picks.length} selected
+                    </small>
+                  )}
+                  <Button
+                    onClick={() => {
+                      if (libReview) setLibReview(false);
+                      else go("draft");
+                    }}
+                  >
+                    Cancel
+                  </Button>
+                  {libReview && scenario === "applyfail" && message && (
+                    <Button onClick={() => setLibReview(false)}>
+                      Back to selection
                     </Button>
                   )}
                   <Button
                     primary
                     disabled={
-                      !draft.selected.length || !draft.recipients.length
+                      libLoading ||
+                      (!libReview && !picks.length) ||
+                      (libReview &&
+                        (!proposed.length ||
+                          (scenario === "stale" &&
+                            proposed.some(
+                              (id) => !draft.selected.includes(id),
+                            ))))
                     }
-                    onClick={() => {
-                      if (
-                        step === 1 &&
-                        supportOpen &&
-                        JSON.stringify(draft.support) !==
-                          JSON.stringify(supportEdit)
-                      ) {
-                        setModal("unsaved");
-                        return;
-                      }
-                      if (step === 3) {
-                        edit({ reviewed: false });
-                        go(draft.action === "plan" ? "schedule" : "confirm", 4);
-                      } else next();
-                    }}
+                    onClick={libReview ? apply : reviewPicks}
                   >
-                    Continue
+                    {libReview && scenario === "applyfail" && message
+                      ? "Retry apply"
+                      : libReview
+                        ? replaceId
+                          ? "Replace in review plan"
+                          : "Add selected materials to review plan"
+                        : `Review selection (${picks.length})`}
                   </Button>
-                </div>
-              </footer>
-            </>
-          )}
-          {page === "library" && (
-            <>
-              <div className="row">
-                <h1>
-                  {libReview
-                    ? replaceId
-                      ? "Review replacement"
-                      : "Review selection"
-                    : replaceId
-                      ? "Replacement options"
-                      : "Add material"}
-                </h1>
-                <Badge>Library search</Badge>
-              </div>
-              <p className="muted">
-                Only the Materials section changes. Students, evidence and
-                support stay as they are.
-              </p>
-              {!libReview ? (
-                <>
-                  <div className="libraryfilters">
-                    <label>
-                      Learning need
-                      <input
-                        value={query}
-                        onChange={(e) => setQuery(e.target.value)}
-                      />
-                    </label>
-                    <label>
-                      Grade
-                      <select>
-                        <option>6</option>
-                      </select>
-                    </label>
-                    <label>
-                      Content type
-                      <select
-                        value={libType}
-                        onChange={(e) => setLibType(e.target.value)}
-                      >
+                </footer>
+              </>
+            )}
+            {(page === "schedule" || page === "conflict") && (
+              <>
+                {scenario === "access" ? (
+                  <>
+                    <div className="banner schedulealert">
+                      <h2>
+                        <Icon name="imgIconCircleAlert" />
+                        We can’t read the current Calendar and timetable
+                      </h2>
+                      <p>
+                        Conflicts can’t be checked reliably, so scheduling can’t
+                        continue.
+                      </p>
+                    </div>
+                    <article className="hicard schedulestatus">
+                      <div className="fieldrows">
                         {[
-                          "All types",
-                          "Lesson",
-                          "Station",
-                          "Practice set",
-                          "Exercise set",
-                        ].map((t) => (
-                          <option key={t}>{t}</option>
+                          ["Conflict check", "Not available"],
+                          ["Draft", "Still saved"],
+                          ["Written or moved", "Nothing"],
+                        ].map(([l, v]) => (
+                          <div key={l}>
+                            <small>{l}</small>
+                            <span>{v}</span>
+                          </div>
                         ))}
-                      </select>
-                    </label>
-                    <label>
-                      Achievement levels
-                      <select
-                        value={libLevel}
-                        onChange={(e) => setLibLevel(e.target.value)}
-                      >
-                        <option>All levels</option>
-                        {levels.map((l) => (
-                          <option key={l}>{l}</option>
-                        ))}
-                      </select>
-                    </label>
-                    <Button
-                      primary
-                      onClick={() => {
-                        setLibLoading(true);
-                        timeout.current = setTimeout(
-                          () => setLibLoading(false),
-                          350,
-                        );
-                      }}
-                    >
-                      Search
-                    </Button>
-                  </div>
-                  <div className="row">
-                    <small>
-                      Already in draft: {draft.selected.length} materials ·{" "}
-                      {total(draft)} min
-                    </small>
-                    <button
-                      className="textlink"
-                      onClick={() => {
-                        setQuery("");
-                        setLibType("All types");
-                        setLibLevel("All levels");
-                        setScenario("normal");
-                      }}
-                    >
-                      Clear filters
-                    </button>
-                  </div>
-                  {libLoading ? (
-                    <div className="blankstate" role="status">
-                      Searching the resource library…
-                    </div>
-                  ) : scenario === "unavailable" ? (
-                    <div className="blankstate">
-                      <h2>Source unavailable</h2>
+                      </div>
+                    </article>
+                  </>
+                ) : !schedulable(draft).length ? (
+                  <>
+                    <div className="banner schedulealert">
+                      <h2>
+                        <Icon name="imgIconCircleAlert" />
+                        This draft has no Lesson or Station to add to Curriculum
+                        plan
+                      </h2>
                       <p>
-                        Could not load the resource library. Your draft has not
-                        changed.
+                        The current materials can still be sent with Assign now.
                       </p>
-                      <Button onClick={() => setScenario("normal")}>
-                        Retry
-                      </Button>
                     </div>
-                  ) : scenario === "empty" || !results.length ? (
-                    <div className="blankstate">
-                      <h2>No matching content</h2>
-                      <p>
-                        Try a different learning need or clear filters. Your
-                        current materials stay in the draft.
-                      </p>
-                      <Button
-                        onClick={() => {
-                          setQuery("");
-                          setLibType("All types");
-                          setScenario("normal");
-                        }}
-                      >
-                        Clear filters
-                      </Button>
-                    </div>
-                  ) : (
-                    <>
-                      {scenario === "partial" && (
-                        <div className="banner warn">
-                          Partial results. Some library sources are unavailable;
-                          available items can still be reviewed.
+                    <article className="hicard schedulestatus">
+                      <div className="fieldrows">
+                        <div>
+                          <small>In this draft</small>
+                          <span>
+                            {selected(draft)
+                              .map((m) => `${m.type} · ${m.title}`)
+                              .join(", ")}
+                          </span>
                         </div>
-                      )}
-                      {scenario === "restricted" && (
-                        <div className="banner warn">
-                          Some content is permission restricted. Restricted
-                          items cannot be selected.
+                        <div>
+                          <small>Schedulable items</small>
+                          <span>None</span>
                         </div>
-                      )}
-                      <p className="muted">
-                        {results.length} results · page 1 of 1
-                      </p>
-                      {results
-                        .slice(0, scenario === "partial" ? 3 : undefined)
-                        .map((m, i) => {
-                          const inDraft = draft.selected.includes(m.id);
-                          const restricted = scenario === "restricted" && i > 2;
-                          return (
-                            <article className="libraryresult" key={m.id}>
-                              <input
-                                type={replaceId ? "radio" : "checkbox"}
-                                name="material-pick"
-                                aria-label={`Select ${m.title}`}
-                                checked={picks.includes(m.id)}
-                                disabled={inDraft || restricted}
-                                onChange={() =>
-                                  setPicks((p) =>
-                                    replaceId
-                                      ? [m.id]
-                                      : p.includes(m.id)
-                                        ? p.filter((id) => id !== m.id)
-                                        : [...p, m.id],
-                                  )
-                                }
-                              />
-                              <div className="grow">
-                                <Badge>{m.type}</Badge>
-                                <h3>{m.title}</h3>
-                                <small>
-                                  Grade 6 · {libLevel} · {m.minutes} min ·
-                                  Resource library
-                                </small>
-                              </div>
-                              {inDraft ? (
-                                <Badge>In draft</Badge>
-                              ) : restricted ? (
-                                <Badge>Restricted</Badge>
-                              ) : null}
-                              <Button onClick={() => setPreview(m)}>
-                                Preview
-                              </Button>
-                            </article>
-                          );
-                        })}
-                    </>
-                  )}
-                </>
-              ) : (
-                <>
-                  <div className="banner">
-                    <strong>Only Materials will change</strong>
-                    <p>
-                      Students ({draft.recipients.length}), evidence and saved
-                      support stay exactly as they are.
-                    </p>
-                  </div>
-                  {proposed.map((id, i) => {
-                    const m = materials.find((m) => m.id === id)!;
-                    return (
-                      <article className="libraryresult" key={id}>
-                        <span className="number">{i + 1}</span>
-                        <div className="grow">
-                          <Badge>{m.type}</Badge>
-                          <h3>{m.title}</h3>
-                          <small>{m.minutes} min · Resource library</small>
+                        <div>
+                          <small>Calendar action</small>
+                          <span>Can’t continue</span>
                         </div>
-                        {!draft.selected.includes(id) && (
-                          <Badge tone="blue">
-                            {replaceId ? "Replacement" : "New"}
-                          </Badge>
-                        )}
-                        <Button
-                          disabled={i === 0}
-                          onClick={() =>
-                            setProposed((p) => {
-                              const a = [...p];
-                              [a[i - 1], a[i]] = [a[i], a[i - 1]];
-                              return a;
-                            })
-                          }
-                        >
-                          Move up
-                        </Button>
-                        <Button
-                          disabled={i === proposed.length - 1}
-                          onClick={() =>
-                            setProposed((p) => {
-                              const a = [...p];
-                              [a[i + 1], a[i]] = [a[i], a[i + 1]];
-                              return a;
-                            })
-                          }
-                        >
-                          Move down
-                        </Button>
-                        {!draft.selected.includes(id) && (
-                          <Button
-                            onClick={() =>
-                              setProposed((p) => p.filter((x) => x !== id))
+                      </div>
+                    </article>
+                  </>
+                ) : page === "schedule" ? (
+                  <div className="schedulelayout">
+                    <article className="hicard">
+                      <h2>
+                        Items to schedule · {schedulable(draft).length} items ·{" "}
+                        {schedulable(draft).reduce((n, m) => n + m.minutes, 0)}{" "}
+                        min
+                      </h2>
+                      {CompactMaterials(schedulable(draft))}
+                      <small>
+                        Not scheduled in this action · available if the teacher
+                        later chooses Assign now
+                      </small>
+                      {CompactMaterials(assignable(draft))}
+                      <div className="rule" />
+                      <h2>Date and time</h2>
+                      <div className="schedulefields">
+                        <label>
+                          Date
+                          <DateControl
+                            value={draft.planned}
+                            onChange={(value) =>
+                              edit({
+                                planned: value,
+                                requested: value,
+                                resolution: false,
+                              })
                             }
-                          >
-                            Remove
-                          </Button>
-                        )}
-                      </article>
-                    );
-                  })}
-                  <p>
-                    {replaceId
-                      ? "1 replacement · same position"
-                      : `${proposed.filter((id) => !draft.selected.includes(id)).length} new materials · no duplicates`}
-                  </p>
-                </>
-              )}
-              <footer>
-                <Button
-                  onClick={() => {
-                    if (libReview) setLibReview(false);
-                    else go("draft");
-                  }}
-                >
-                  Cancel
-                </Button>
-                <Button
-                  primary
-                  disabled={
-                    libLoading ||
-                    (!libReview && !picks.length) ||
-                    (libReview && !proposed.length)
-                  }
-                  onClick={libReview ? apply : reviewPicks}
-                >
-                  {libReview
-                    ? replaceId
-                      ? "Replace in review plan"
-                      : "Add selected materials to review plan"
-                    : `Review selection (${picks.length})`}
-                </Button>
-              </footer>
-            </>
-          )}
-          {(page === "schedule" || page === "conflict") && (
-            <>
-              <div className="row">
-                <h1>
-                  {page === "conflict"
-                    ? "Review conflict"
-                    : "Schedule in Curriculum plan"}
-                </h1>
-                <Badge>Draft</Badge>
-              </div>
-              <p>
-                {draft.title} · Class 6A · Whole class · 24 students ·
-                Mathematics timetable
-              </p>
-              <article className="hicard">
-                <h2>
-                  Items to schedule · {schedulable(draft).length} items ·{" "}
-                  {schedulable(draft).reduce((n, m) => n + m.minutes, 0)} min
-                </h2>
-                {schedulable(draft).map((m) => (
-                  <React.Fragment key={m.id}>
-                    {MaterialRow({ m })}
-                  </React.Fragment>
-                ))}
-                {!schedulable(draft).length && (
-                  <div className="banner warn">
-                    No schedulable content. Add a Lesson or Station before
-                    continuing.
-                  </div>
-                )}
-                <p className="muted">
-                  Practice sets are not scheduled. They stay in the review draft
-                  for Assign now.
-                </p>
-              </article>
-              {scenario === "access" ? (
-                <div className="banner warn">
-                  <h2>Calendar access unavailable</h2>
-                  <p>
-                    Your review draft is retained. Retry access or return to
-                    choose action.
-                  </p>
-                  <Button onClick={() => setScenario("normal")}>Retry</Button>
-                </div>
-              ) : page === "schedule" ? (
-                <>
-                  <article className="hicard">
-                    <h2>Date and time</h2>
-                    <div className="libraryfilters">
-                      <label>
-                        Date
-                        <input
-                          type="date"
-                          value={draft.planned}
-                          onChange={(e) =>
-                            edit({
-                              planned: e.target.value,
-                              requested: e.target.value,
-                              resolution: false,
-                            })
-                          }
-                        />
-                      </label>
-                      <label>
-                        Start time
-                        <input
-                          type="time"
-                          value={draft.plannedTime}
-                          onChange={(e) =>
-                            edit({
-                              plannedTime: e.target.value,
-                              requestedTime: e.target.value,
-                              resolution: false,
-                            })
-                          }
-                        />
-                      </label>
-                      <div>
-                        <small>Duration</small>
-                        <p>
+                          />
+                        </label>
+                        <label>
+                          Start time
+                          <TimeControl
+                            value={draft.plannedTime}
+                            onChange={(value) =>
+                              edit({
+                                plannedTime: value,
+                                requestedTime: value,
+                                resolution: false,
+                              })
+                            }
+                          />
+                        </label>
+                        <div>
+                          <small>Duration</small>
+                          <p>
+                            {schedulable(draft).reduce(
+                              (n, m) => n + m.minutes,
+                              0,
+                            )}{" "}
+                            min
+                          </p>
+                        </div>
+                      </div>
+                    </article>
+                    <article className="hicard timetablerail">
+                      <h2>
+                        Timetable · {date(draft.planned).replace(" 2026", "")}
+                      </h2>
+                      {draft.planned === "2026-10-21" && (
+                        <div className="timetableitem">
+                          <strong>Protau</strong>
+                          <small>21 Oct · 09:00–10:00</small>
+                          <Badge>Protau</Badge>
+                        </div>
+                      )}
+                      <div className="timetableitem blue">
+                        <strong>{draft.title}</strong>
+                        <small>
+                          Requested · {date(draft.planned).replace(" 2026", "")}{" "}
+                          · {draft.plannedTime} ·{" "}
                           {schedulable(draft).reduce(
                             (n, m) => n + m.minutes,
                             0,
                           )}{" "}
                           min
-                        </p>
+                        </small>
+                        <div className="actions">
+                          <Badge>Lesson</Badge>
+                          <Badge tone={conflict(draft) ? "orange" : "blue"}>
+                            {conflict(draft) ? "Conflict" : "Planned"}
+                          </Badge>
+                        </div>
                       </div>
-                    </div>
-                  </article>
-                  <article className="hicard">
-                    <h2>Timetable · {date(draft.planned)}</h2>
-                    <div className="timetableitem">
-                      <strong>Protau</strong>
-                      <span>21 Oct · 09:00–10:00</span>
-                    </div>
-                    <div className="timetableitem blue">
-                      <strong>{draft.title}</strong>
-                      <span>
-                        Requested · {date(draft.planned)} · {draft.plannedTime}
-                      </span>
-                    </div>
-                    {conflict(draft) && (
-                      <div className="banner warn">
-                        The requested time overlaps Protau. You can review a
-                        suggested date next.
-                      </div>
-                    )}
-                  </article>
-                </>
-              ) : (
-                <>
-                  <div className="banner warn">
-                    <h2>21 Oct · 09:20 overlaps an existing Protau event</h2>
-                    <p>
-                      Move the new items to 22 Oct · 10:15. The existing Protau
-                      event stays in place. Nothing moves until final
-                      confirmation.
-                    </p>
-                    <label className="checkline">
-                      <input
-                        type="checkbox"
-                        checked={draft.resolution}
-                        onChange={(e) => edit({ resolution: e.target.checked })}
-                      />
-                      Accept this proposed resolution
-                    </label>
+                      <small>
+                        {conflict(draft)
+                          ? "The requested time overlaps Protau. You can review a suggested date next."
+                          : `No existing events on ${date(draft.planned)}. Fractions test stays on 22 Oct · 09:00.`}
+                      </small>
+                    </article>
                   </div>
-                  <article className="hicard">
-                    <h2>Recalculation preview</h2>
-                    <div className="facts">
-                      <div>
-                        <small>Affected item</small>
-                        <p>Fractions test · planned test</p>
+                ) : (
+                  <div className="conflictlayout">
+                    <article className="hicard">
+                      <div className="row">
+                        <h2>Time conflict</h2>
+                        <Badge tone="orange">Needs review</Badge>
                       </div>
-                      <div>
-                        <small>Current date</small>
-                        <p>22 Oct · 09:00</p>
+                      <div className="comparison">
+                        <div>
+                          <small>Already in Calendar</small>
+                          <div className="timetableitem">
+                            <strong>Protau</strong>
+                            <small>21 Oct · 09:00–10:00</small>
+                            <Badge>Protau</Badge>
+                          </div>
+                        </div>
+                        <div>
+                          <small>Draft</small>
+                          <div className="timetableitem">
+                            <strong>{draft.title}</strong>
+                            <small>21 Oct · 09:20 · 13 min</small>
+                            <div className="actions">
+                              <Badge>Lesson</Badge>
+                              <Badge tone="orange">Conflict</Badge>
+                            </div>
+                          </div>
+                        </div>
                       </div>
-                      <div>
-                        <small>Resolved date</small>
-                        <p>26 Oct · 09:00</p>
-                      </div>
-                    </div>
-                    <p>
-                      The planned test moves only after final confirmation. It
-                      has not been assigned to students.
-                    </p>
-                    <Button
-                      onClick={() => {
-                        edit({ resolution: false });
-                        go("schedule", 3);
-                      }}
-                    >
-                      Choose another date
-                    </Button>
-                  </article>
-                </>
-              )}
-              <footer>
-                <Button onClick={() => go("draft", 3)}>Back</Button>
-                <Button
-                  primary
-                  disabled={
-                    !schedulable(draft).length ||
-                    scenario === "access" ||
-                    (page === "conflict" && !draft.resolution)
-                  }
-                  onClick={() => {
-                    if (page === "schedule" && conflict(draft)) {
-                      go("conflict", 3);
-                      return;
-                    }
-                    if (page === "conflict") {
-                      edit({ planned: "2026-10-22", plannedTime: "10:15" });
-                      go("confirm", 4);
-                      return;
-                    }
-                    const err = validate(draft);
-                    if (err) {
-                      setMessage(err);
-                      return;
-                    }
-                    go("confirm", 4);
-                  }}
-                >
-                  Continue
-                </Button>
-              </footer>
-            </>
-          )}
-          {page === "confirm" && (
-            <>
-              <h1>
-                {draft.action === "plan"
-                  ? "Confirm class plan"
-                  : "Confirm assigned test"}
-              </h1>
-              <div className="banner">
-                <strong>
-                  {draft.action === "plan"
-                    ? "Whole-class timetable action"
-                    : "Students receive one Assigned test"}
-                </strong>
-                <p>
-                  {draft.action === "plan"
-                    ? "The lesson and station are added to the whole-class Curriculum plan and Calendar. No student assignments are created. Student-specific support stays in the draft."
-                    : "Every recipient gets the same selected exercises. Lesson and Station stay in your review draft as teacher resources · not sent."}
-                </p>
-              </div>
-              {draft.action === "assignment" ? (
-                <>
-                  <article className="hicard">
-                    <div className="row">
-                      <h2>Recipients · {draft.recipients.length}</h2>
-                      <Button onClick={editStudents}>Edit recipients</Button>
-                    </div>
-                    <div className="tablewrap">
-                      <table>
-                        <thead>
-                          <tr>
-                            <th>Student</th>
-                            <th>Evidence</th>
-                            <th>Saved support</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {draft.recipients.map((id) => {
-                            const s = students.find((s) => s.id === id)!;
-                            return (
-                              <tr key={id}>
-                                <td>{s.name}</td>
-                                <td>
-                                  {s.evidence}
-                                  {id === "sofia" ? " · 1 response" : ""}
-                                </td>
-                                <td>{draft.support[id] || "Shared version"}</td>
-                              </tr>
-                            );
-                          })}
-                        </tbody>
-                      </table>
-                    </div>
-                  </article>
-                  {Sequence()}
-                  {SupportSummary()}
-                  <article className="hicard">
-                    <h2>Assigned test</h2>
-                    <label>
-                      Title
-                      <input
-                        value={draft.title}
-                        onChange={(e) => edit({ title: e.target.value })}
-                      />
-                    </label>
-                    <div className="facts">
-                      <div>
-                        <small>Template</small>
-                        <p>
-                          This review’s practice sets · template name not
-                          confirmed
-                        </p>
-                      </div>
-                      <div>
-                        <small>Test type</small>
-                        <p>Homework</p>
-                      </div>
-                    </div>
-                    <div className="libraryfilters">
-                      {[
-                        ["Start date", "start", "date"],
-                        ["Start time", "startTime", "time"],
-                        ["End date", "end", "date"],
-                        ["End time", "endTime", "time"],
-                      ].map(([l, k, t]) => (
-                        <label key={k}>
-                          {l}
-                          <input
-                            type={t}
-                            value={draft[k as keyof Draft] as string}
-                            onChange={(e) => edit({ [k]: e.target.value })}
-                          />
-                        </label>
-                      ))}
-                    </div>
-                    <small>
-                      Example schedule — confirm current Assigned tests field
-                      behavior.
-                    </small>
-                  </article>
-                </>
-              ) : (
-                <>
-                  <article className="hicard">
-                    <h2>Class · whole class</h2>
-                    <p>Class 6A · 24 students · Mathematics timetable</p>
-                    {schedulable(draft).map((m) => (
-                      <React.Fragment key={m.id}>
-                        {MaterialRow({ m })}
-                      </React.Fragment>
-                    ))}
-                    <p>
-                      One timetable slot ·{" "}
-                      {schedulable(draft).reduce((n, m) => n + m.minutes, 0)}{" "}
-                      min (Lesson, then Station)
-                    </p>
-                    <small>
-                      Practice sets stay in the review draft and are not
-                      scheduled.
-                    </small>
-                  </article>
-                  <article className="hicard">
-                    <div className="row">
-                      <h2>Schedule</h2>
-                      <Button onClick={() => go("schedule", 3)}>
-                        Edit schedule
-                      </Button>
-                    </div>
-                    <p>
-                      Requested: {date(draft.requested)} · {draft.requestedTime}
-                    </p>
-                    <p>
-                      Date and slot: {date(draft.planned)} · {draft.plannedTime}
-                      –
-                      {addMinutes(
-                        draft.plannedTime,
-                        schedulable(draft).reduce((n, m) => n + m.minutes, 0),
-                      )}
-                    </p>
-                    {draft.resolution && (
-                      <div className="banner warn">
-                        <strong>Recalculation</strong>
-                        <p>
-                          Fractions test: 22 Oct 09:00 → 26 Oct 09:00. Moves
-                          only after confirmation. Undo restores the original
-                          date.
-                        </p>
-                      </div>
-                    )}
-                  </article>
-                </>
-              )}
-              <article className="hicard">
-                <div className="row">
-                  <h2>Destination</h2>
-                  <Button onClick={() => go("draft", 3)}>
-                    Edit destination
-                  </Button>
-                </div>
-                <p>
-                  {draft.action === "plan"
-                    ? "Class 6A Curriculum plan + Calendar · whole class"
-                    : "Assigned tests · selected students"}
-                </p>
-                {draft.action === "assignment" && (
-                  <small>
-                    Student entry point · Pending product verification
-                  </small>
-                )}
-              </article>
-              {validate(draft) && (
-                <p role="alert" className="banner warn">
-                  {validate(draft)}
-                </p>
-              )}
-              <label className="checkline confirmation">
-                <input
-                  type="checkbox"
-                  checked={draft.reviewed}
-                  onChange={(e) =>
-                    setDraft((d) => ({ ...d, reviewed: e.target.checked }))
-                  }
-                />
-                {draft.action === "plan"
-                  ? "I’ve checked the class, lesson, slot and planned test date"
-                  : "I’ve checked who receives the exercises and when they open"}
-              </label>
-              <footer>
-                <Button onClick={() => go("draft", 3)}>Back to edit</Button>
-                <Button
-                  primary
-                  disabled={!!validate(draft) || !draft.reviewed}
-                  onClick={submit}
-                >
-                  {draft.action === "plan"
-                    ? "Confirm and add to curriculum plan"
-                    : "Confirm and assign"}
-                </Button>
-              </footer>
-            </>
-          )}
-          {(page === "submitting" || page === "checking") && (
-            <div className="blankstate" role="status">
-              <h1>
-                {page === "checking"
-                  ? "Checking previous submission"
-                  : "Submitting…"}
-              </h1>
-              <p>Your draft is retained. Please wait.</p>
-            </div>
-          )}
-          {page === "submitfailed" && (
-            <div className="blankstate">
-              <h1>Submission interrupted</h1>
-              <p>
-                We could not confirm the result. Your draft is retained. Check
-                the previous submission before retrying so nothing is
-                duplicated.
-              </p>
-              <div className="actions">
-                <Button onClick={() => go("confirm", 4)}>Back to draft</Button>
-                <Button primary onClick={recover}>
-                  Check previous submission
-                </Button>
-              </div>
-            </div>
-          )}
-          {page === "success" && active && (
-            <>
-              <h1>
-                {active.action === "plan"
-                  ? "Planned and synced"
-                  : "Assigned test created"}
-              </h1>
-              <p>
-                {active.title} · {active.snapshot.selected.length} review-draft
-                materials · {total(active.snapshot)} min
-              </p>
-              {active.action === "plan" ? (
-                <>
-                  <div className="banner">
-                    <strong>Added to Curriculum plan and Calendar</strong>
-                    <p>
-                      Class 6A · Whole class · 24 students ·{" "}
-                      {active.calendar.length} linked items
-                    </p>
-                  </div>
-                  <article className="hicard">
-                    {active.calendar.map((e) => (
-                      <div className="timetableitem" key={e.id}>
-                        <strong>{e.title}</strong>
+                      <div className="rule" />
+                      <label className="checkline resolution">
+                        <input
+                          type="checkbox"
+                          checked={draft.resolution}
+                          onChange={(e) =>
+                            edit({ resolution: e.target.checked })
+                          }
+                        />
                         <span>
-                          {date(e.date)} · {e.start}–{e.end}
+                          Move new items to 22 Oct · 10:15
+                          <small>
+                            Existing Protau stays in place. Nothing moves until
+                            final confirmation.
+                          </small>
                         </span>
+                      </label>
+                    </article>
+                    <article className="hicard">
+                      <h2>Recalculation preview</h2>
+                      <div className="fieldrows">
+                        <div>
+                          <small>Affected item</small>
+                          <span>Fractions test</span>
+                        </div>
+                        <div>
+                          <small>Current date</small>
+                          <span>22 Oct · 09:00</span>
+                        </div>
+                        <div>
+                          <small>Resolved date</small>
+                          <span>26 Oct · 09:00</span>
+                        </div>
+                        <div>
+                          <small>Impact</small>
+                          <span>
+                            Planned test only · not assigned to students
+                          </span>
+                        </div>
                       </div>
-                    ))}
-                    {active.movesTest && (
-                      <p>
-                        Fractions test moved to 26 Oct · 09:00 after your
-                        confirmation.
-                      </p>
-                    )}
-                  </article>
-                  <p>
-                    Practice sets remain in the review draft. No student
-                    assignment was created.
-                  </p>
-                  {UndoControls()}
-                </>
-              ) : (
-                <>
-                  <div className="banner">
-                    The selected students received one local sample Assigned
-                    test. Lesson and Station are not sent.
+                      <small>
+                        The planned test moves only after final confirmation.
+                      </small>
+                      <Button
+                        onClick={() => {
+                          edit({ resolution: false });
+                          go("schedule", 3);
+                        }}
+                      >
+                        Choose another date
+                      </Button>
+                    </article>
                   </div>
-                  <article className="hicard">
-                    <h2>Recipients</h2>
-                    <p>{names(active.recipients)}</p>
-                    <h2>Assigned test · same exercises for every recipient</h2>
-                    <p>
-                      {questionCount(active.snapshot)} exercises ·{" "}
-                      {active.sentMaterials
-                        .map((id) => materials.find((m) => m.id === id)!.title)
-                        .join(", ")}
-                    </p>
-                    <h2>Availability</h2>
-                    <p>
-                      {date(active.snapshot.start)} {active.snapshot.startTime}{" "}
-                      → {date(active.snapshot.end)} {active.snapshot.endTime}
-                    </p>
-                    <small>
-                      Saved support stays in the teacher draft. Student entry
-                      point is pending product verification.
-                    </small>
-                  </article>
-                </>
-              )}
-              <footer>
-                <Button onClick={() => go("overview")}>Back to group</Button>
-                <Button
-                  primary
-                  onClick={() =>
-                    go(active.action === "plan" ? "calendar" : "assigned")
-                  }
-                >
-                  {active.action === "plan"
-                    ? "Open Calendar"
-                    : "Open in Assigned tests"}
-                </Button>
-              </footer>
-            </>
-          )}
-          {page === "assigned" && (
-            <>
-              <h1>Assigned tests</h1>
-              <p className="muted">
-                Review tracked after assigning · Sample data stored in this
-                browser
-              </p>
-              {records
-                .filter((r) => r.action === "assignment")
-                .map((r) => (
-                  <article className="hicard" key={r.id}>
-                    <div className="row">
-                      <h2>{r.title}</h2>
-                      <Badge tone="blue">Not started</Badge>
-                    </div>
-                    <p>
-                      {r.recipients.length} students ·{" "}
-                      {questionCount(r.snapshot)} exercises · {r.snapshot.start}
-                      –{r.snapshot.end}
-                    </p>
+                )}
+                {scenario === "access" ? (
+                  <footer>
+                    <Button onClick={() => go("draft", 3)}>
+                      Back to choose action
+                    </Button>
+                    <Button primary onClick={() => setScenario("normal")}>
+                      Try again
+                    </Button>
+                  </footer>
+                ) : !schedulable(draft).length ? (
+                  <footer>
+                    <Button onClick={() => go("draft")}>Edit materials</Button>
                     <Button
                       primary
                       onClick={() => {
-                        setCurrent(r.id);
-                        go("progress");
+                        edit({ action: "assignment" });
+                        go("confirm", 4);
                       }}
                     >
-                      View progress &amp; evidence
+                      Choose Assign now
                     </Button>
-                  </article>
-                ))}
-              {!records.some((r) => r.action === "assignment") && (
-                <div className="blankstate">
-                  <h2>No assigned review yet</h2>
-                  <Button onClick={() => go("overview")}>
-                    Back to suggested groups
-                  </Button>
+                  </footer>
+                ) : (
+                  <>
+                    <footer>
+                      <Button onClick={() => go("draft", 3)}>Back</Button>
+                      <Button
+                        primary
+                        disabled={
+                          !schedulable(draft).length ||
+                          scenario === "access" ||
+                          (page === "conflict" && !draft.resolution)
+                        }
+                        onClick={() => {
+                          if (page === "schedule" && conflict(draft)) {
+                            go("conflict", 3);
+                            return;
+                          }
+                          if (page === "conflict") {
+                            edit({
+                              planned: "2026-10-22",
+                              plannedTime: "10:15",
+                            });
+                            go("confirm", 4);
+                            return;
+                          }
+                          const err = validate(draft);
+                          if (err) {
+                            setMessage(err);
+                            return;
+                          }
+                          go("confirm", 4);
+                        }}
+                      >
+                        Continue
+                      </Button>
+                    </footer>
+                  </>
+                )}
+              </>
+            )}
+            {page === "confirm" && (
+              <>
+                <div className="banner confirmcallout">
+                  <strong>
+                    <span className="infomark" aria-hidden="true">
+                      ⓘ
+                    </span>
+                    {draft.action === "plan"
+                      ? "Whole-class timetable action"
+                      : "Students receive one Assigned test"}
+                  </strong>
+                  <p>
+                    {draft.action === "plan"
+                      ? "The lesson and station are added to the whole-class Curriculum plan and Calendar. No student assignments are created. Student-specific support stays in the draft."
+                      : "The recipients below get the same Assigned test exercises in BBright. Lesson and Station stay in your review draft as teacher resources · not sent."}
+                  </p>
                 </div>
-              )}
-            </>
-          )}
-          {page === "progress" && (
-            <>
-              <div className="banner">
-                Sample progress from 15 Oct, one day after assigning. These
-                responses are illustrative, not live student activity.
-              </div>
-              <div className="row">
-                <h1>Assigned test progress</h1>
-                <Badge tone="blue">In progress</Badge>
-              </div>
-              <p>Equivalent fractions review · from Assigned tests</p>
-              <p>Completion: 1 completed · 1 in progress · 1 not started</p>
-              <div className="tablewrap">
-                <table>
-                  <thead>
-                    <tr>
-                      <th>Student</th>
-                      <th>Progress</th>
-                      <th>Completion</th>
-                      <th>Evidence since review</th>
-                      <th />
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {students
-                      .slice(0, 3)
-                      .filter(
-                        (s) =>
-                          !active || active.snapshot.recipients.includes(s.id),
-                      )
-                      .map((s, i) => (
-                        <tr key={s.id}>
-                          <td>
-                            {s.name}
+                <div className="confirmlayout">
+                  <article className="hicard">
+                    {draft.action === "assignment" ? (
+                      Recipients()
+                    ) : (
+                      <section className="confirmsection">
+                        <h2>Class · whole class</h2>
+                        <p>Class 6A · 24 students · Mathematics timetable</p>
+                      </section>
+                    )}
+                    <section className="confirmsection">
+                      <div className="row">
+                        <h2>
+                          {draft.action === "plan"
+                            ? "Items to schedule"
+                            : `Review draft · ${draft.selected.length} materials · ${total(draft)} min`}
+                        </h2>
+                        <Button onClick={() => go("draft")}>
+                          Edit materials
+                        </Button>
+                      </div>
+                      {draft.action === "assignment" && (
+                        <p>
+                          Assigned test · {questionCount(draft)} exercises ·
+                          estimated{" "}
+                          {assignable(draft).reduce((n, m) => n + m.minutes, 0)}{" "}
+                          min
+                        </p>
+                      )}
+                      {CompactMaterials(
+                        draft.action === "plan"
+                          ? schedulable(draft)
+                          : selected(draft),
+                      )}
+                      <small>
+                        {draft.action === "plan"
+                          ? "Practice sets stay in the review draft and are not scheduled."
+                          : "Assigned test (Assign now): practice sets only. Lesson and Station: Teacher resource · not sent · Available for class planning."}
+                      </small>
+                    </section>
+                    {draft.action === "assignment" && (
+                      <section className="confirmsection">
+                        <div className="row">
+                          <h2>Optional support</h2>
+                          <Button onClick={() => go("draft", 1)}>
+                            Edit support
+                          </Button>
+                        </div>
+                        <p>
+                          {Object.keys(draft.support).length
+                            ? names(
+                                draft.recipients.filter(
+                                  (id) => !!draft.support[id],
+                                ),
+                              )
+                            : "One shared version for all students"}
+                        </p>
+                        <small>
+                          Saved support stays in the teacher review draft.
+                        </small>
+                      </section>
+                    )}
+                    {Destination()}
+                  </article>
+                  <article className="hicard confirmrail">
+                    {draft.action === "assignment" ? (
+                      <>
+                        <h2>Assigned test</h2>
+                        <div className="fieldrows">
+                          <label>
+                            Title
+                            <textarea
+                              rows={2}
+                              aria-label="Assigned test title"
+                              value={draft.title}
+                              onChange={(e) => edit({ title: e.target.value })}
+                            />
+                          </label>
+                          <div>
+                            <small>Template</small>
+                            <span>
+                              This review’s practice sets · template name not
+                              confirmed
+                            </span>
+                          </div>
+                          <div>
+                            <small>Test type</small>
+                            <span>Homework</span>
+                          </div>
+                          {(
+                            [
+                              ["Start date", "start", "date"],
+                              ["Start time", "startTime", "time"],
+                              ["End date", "end", "date"],
+                              ["End time", "endTime", "time"],
+                            ] as const
+                          ).map(([label, key, type]) => (
+                            <label key={key}>
+                              {label}
+                              {type === "date" ? (
+                                <DateControl
+                                  label={`Choose ${label.toLowerCase()}`}
+                                  value={draft[key]}
+                                  onChange={(value) => edit({ [key]: value })}
+                                />
+                              ) : (
+                                <TimeControl
+                                  label={`Choose ${label.toLowerCase()}`}
+                                  value={draft[key]}
+                                  onChange={(value) => edit({ [key]: value })}
+                                />
+                              )}
+                            </label>
+                          ))}
+                        </div>
+                        <small>
+                          Example schedule — confirm current Assigned tests
+                          field behavior.
+                        </small>
+                      </>
+                    ) : (
+                      <>
+                        <div className="row">
+                          <h2>Schedule</h2>
+                          <Button onClick={() => go("schedule", 3)}>
+                            Edit schedule
+                          </Button>
+                        </div>
+                        <div className="fieldrows">
+                          <div>
+                            <small>Preferred</small>
+                            <span>
+                              {date(draft.requested)} · {draft.requestedTime}
+                            </span>
+                          </div>
+                          <div>
+                            <small>Resolved</small>
+                            <span>
+                              {date(draft.planned)} · {draft.plannedTime}
+                            </span>
+                          </div>
+                          {schedulable(draft).map((m, i) => (
+                            <div key={m.id}>
+                              <small>{m.type} ends</small>
+                              <span>
+                                {addMinutes(
+                                  draft.plannedTime,
+                                  schedulable(draft)
+                                    .slice(0, i + 1)
+                                    .reduce((n, x) => n + x.minutes, 0),
+                                )}
+                              </span>
+                            </div>
+                          ))}
+                        </div>
+                        {draft.resolution && (
+                          <section className="confirmsection recalculation">
+                            <h2>Recalculation</h2>
+                            <p>
+                              Fractions test
+                              <br />
+                              22 Oct 09:00 → 26 Oct 09:00
+                            </p>
                             <small>
-                              {i === 2
-                                ? "Not opened yet"
-                                : "Last active 15 Oct"}
+                              Moves only after confirmation. Undo restores the
+                              original date. The planned test is not assigned to
+                              students.
                             </small>
-                          </td>
-                          <td>
-                            {
-                              [
-                                "All exercises answered",
-                                "Some exercises answered",
-                                "No exercises answered",
-                              ][i]
-                            }
-                          </td>
-                          <td>
-                            <Badge>
-                              {["Completed", "In progress", "Not started"][i]}
-                            </Badge>
-                          </td>
-                          <td>
-                            <Badge tone={i === 0 ? "green" : "plain"}>
-                              {i === 0 ? "Secure" : "Insufficient evidence"}
-                            </Badge>
-                            <small>
-                              {
-                                [
-                                  "Correct on 3 of 3 review items",
-                                  "1 correct item so far",
-                                  "No new responses yet",
-                                ][i]
-                              }
-                            </small>
-                          </td>
-                          <td>
-                            <Button
-                              onClick={() => {
-                                setExpanded(s.id);
-                                setModal("followevidence");
-                              }}
-                            >
-                              View evidence
-                            </Button>
-                          </td>
-                        </tr>
-                      ))}
-                  </tbody>
-                </table>
-              </div>
-              <p className="muted">
-                Evidence labels describe the latest responses only, not mastery.
-                A later check is needed to confirm that understanding holds.
-              </p>
-              <Button onClick={() => go("assigned")}>
-                Back to Assigned tests
-              </Button>
-            </>
-          )}
-          {page === "followup" && (
-            <>
-              <button className="textlink" onClick={() => go("progress")}>
-                ← Equivalent fractions review
-              </button>
-              <h1>Plan follow-up · Noah Wilson</h1>
-              <Badge>Insufficient evidence</Badge>
-              <p>
-                Suggested from the review evidence (15 Oct). Nothing is sent
-                until the follow-up draft is reviewed and confirmed.
-              </p>
-              <article className="hicard">
-                <h2>Evidence summary</h2>
-                <p>
-                  Fractions checkpoint, 12 Oct: incorrect (2/3 = 4/8) · Review
-                  practice, 15 Oct: 1 correct item so far (2/3 = 6/9)
-                </p>
-                <h2>Suggested recipients · 2 students</h2>
-                <p>Noah Wilson · Insufficient evidence</p>
-                <p>Sofia Martin · No new evidence yet</p>
-                <small>
-                  Both students may benefit from a short follow-up check before
-                  the next lesson.
-                </small>
-              </article>
-              <article className="hicard">
-                <h2>Recommended materials · 2 items · 11 min</h2>
-                {materials
-                  .filter((m) => ["station", "practice"].includes(m.id))
-                  .map((m) => (
-                    <React.Fragment key={m.id}>
-                      {MaterialRow({ m })}
-                    </React.Fragment>
-                  ))}
-              </article>
-              <footer>
-                <Button onClick={() => go("progress")}>Back to progress</Button>
-                <Button
-                  primary
-                  onClick={() => {
-                    setDraft({
-                      ...fresh(),
-                      recipients: ["noah", "sofia"],
-                      selected: ["station", "practice"],
-                      followup: true,
-                    });
-                    setSupportOpen(false);
-                    go("draft");
-                  }}
-                >
-                  Create follow-up draft
-                </Button>
-              </footer>
-            </>
-          )}
-          {page === "calendar" && (
-            <>
-              <h1>Calendar</h1>
-              <p>
-                Class 6A · Whole class · 24 students · Mathematics timetable ·
-                Mon 19 Oct – Sun 1 Nov
-              </p>
-              <small>
-                Planned from the Finding equivalent fractions recommendation.
-              </small>
-              <div className="row">
-                <div className="segmented">
-                  {["Month", "Week", "Day"].map((v) => (
-                    <button
-                      className={calendarView === v ? "selected" : ""}
-                      key={v}
-                      onClick={() =>
-                        v === "Week"
-                          ? undefined
-                          : inform(
-                              `${v} view is a design reference only. Use Week to inspect linked schedule items.`,
-                            )
+                          </section>
+                        )}
+                      </>
+                    )}
+                  </article>
+                </div>
+                {validate(draft) && (
+                  <p role="alert" className="banner warn">
+                    {validate(draft)}
+                  </p>
+                )}
+                <footer>
+                  <label className="checkline confirmation">
+                    <input
+                      type="checkbox"
+                      checked={draft.reviewed}
+                      onChange={(e) =>
+                        setDraft((d) => ({ ...d, reviewed: e.target.checked }))
+                      }
+                    />
+                    {draft.action === "plan"
+                      ? "I’ve checked the class, lesson, slot and planned test date"
+                      : "I’ve checked who receives the exercises and when they open"}
+                  </label>
+                  <Button onClick={() => go("draft", 3)}>Back to edit</Button>
+                  <Button
+                    primary
+                    disabled={!!validate(draft) || !draft.reviewed}
+                    onClick={submit}
+                  >
+                    {draft.action === "plan"
+                      ? "Confirm and add to curriculum plan"
+                      : "Confirm and assign"}
+                  </Button>
+                </footer>
+              </>
+            )}
+            {["submitting", "checking", "submitfailed", "success"].includes(
+              page,
+            ) && (
+              <>
+                <article className="hicard statuscard">
+                  <div className="statusheading">
+                    <span
+                      className={
+                        "statusglyph " +
+                        (page === "submitfailed"
+                          ? "failure"
+                          : page === "success"
+                            ? "complete"
+                            : "loading")
                       }
                     >
-                      {v}
-                    </button>
-                  ))}
-                </div>
-                <div className="actions">
-                  <Button onClick={() => go("draft", 2)}>Review draft</Button>
-                  <Button onClick={() => go("overview")}>Back to group</Button>
-                </div>
-              </div>
-              {active?.action === "plan" && UndoControls()}
-              <div className="calendarwrap">
-                <div
-                  className="hicalendar"
-                  style={{
-                    gridTemplateColumns: "190px repeat(14,minmax(66px,1fr))",
-                  }}
-                >
-                  <div className="calhead">
-                    {calendarView === "Month"
-                      ? "October 2026"
-                      : "19 Oct – 1 Nov"}
+                      {page === "success"
+                        ? "✓"
+                        : page === "submitfailed"
+                          ? "!"
+                          : "◌"}
+                    </span>
+                    <h1>
+                      {page === "success"
+                        ? active?.action === "plan"
+                          ? "Added to Curriculum plan and Calendar"
+                          : "Assigned test created"
+                        : page === "checking"
+                          ? "Checking previous submission"
+                          : page === "submitfailed"
+                            ? draft.action === "plan"
+                              ? "Could not add to curriculum plan"
+                              : "Assigned test could not be created"
+                            : "Submitting"}
+                    </h1>
                   </div>
-                  {Array.from({ length: 14 }, (_, i) => (
-                    <div className="calhead" key={i}>
-                      <small>
-                        {
-                          ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"][
-                            i % 7
-                          ]
-                        }
-                      </small>
-                      <p>{i === 13 ? 1 : 19 + i}</p>
-                    </div>
-                  ))}
-                  {[
-                    {
-                      title: "Lessons",
-                      events: records
-                        .flatMap((r) => r.calendar)
-                        .filter((e) => e.type === "Lesson"),
-                    },
-                    {
-                      title: "Stations",
-                      events: records
-                        .flatMap((r) => r.calendar)
-                        .filter((e) => e.type === "Station"),
-                    },
-                    {
-                      title: "Protau",
-                      events: [
-                        {
-                          id: "protau",
-                          title: "Protau",
-                          date: "2026-10-21",
-                          start: "09:00",
-                          end: "10:00",
-                        },
-                      ],
-                    },
-                    {
-                      title: "Planned tests",
-                      events: [
-                        {
-                          id: "test",
-                          title: "Fractions test",
-                          date: testDate(records),
-                          start: "09:00",
-                          end: "09:45",
-                        },
-                      ],
-                    },
-                  ].map((row) => (
-                    <React.Fragment key={row.title}>
-                      <div className="calhead">
-                        <strong>{row.title}</strong>
-                        <small>Class 6A · Mathematics</small>
+                  <p>
+                    {draft.title} · {draft.recipients.length} students ·{" "}
+                    {draft.selected.length} review-draft materials ·{" "}
+                    {total(draft)} min
+                  </p>
+                  <p>
+                    {page === "submitfailed"
+                      ? "We couldn’t finish creating the record. Your recipients, exercises and dates are kept. Retry first checks for your earlier attempt, so you end up with one record — never two."
+                      : page === "submitting"
+                        ? "Creating the confirmed action. Keep this page open; your draft is retained."
+                        : page === "checking"
+                          ? "Checking your earlier attempt before retrying. Your draft is retained."
+                          : active?.action === "plan"
+                            ? "Added to Curriculum plan and Calendar. No student assignment was created."
+                            : "The selected students received one Assigned test with the exercises below. Lesson and Station stay in your review draft · not sent."}
+                  </p>
+                  {draft.action === "assignment" &&
+                    page !== "submitting" &&
+                    SnapshotSummary(
+                      active?.action === "assignment" && page === "success"
+                        ? active.snapshot
+                        : draft,
+                    )}
+                  {draft.action === "plan" && page === "success" && active && (
+                    <>
+                      <div className="statusplan">
+                        {active.calendar.map((e) => (
+                          <div key={e.id}>
+                            <small>{e.type}</small>
+                            <p>
+                              {e.title}
+                              <br />
+                              {date(e.date)} · {e.start}–{e.end}
+                            </p>
+                          </div>
+                        ))}
                       </div>
-                      {Array.from({ length: 14 }, (_, i) => {
-                        const day = new Date("2026-10-19T12:00:00Z");
-                        day.setUTCDate(day.getUTCDate() + i);
-                        const d = day.toISOString().slice(0, 10);
-                        return (
-                          <div className="calcell" key={i}>
-                            {row.events
-                              .filter((e) => e.date === d)
-                              .map((e) => (
-                                <button
-                                  className={
-                                    "calevent " +
-                                    (row.title === "Planned tests"
-                                      ? "testevent"
-                                      : "")
-                                  }
-                                  key={e.id}
+                      <div className="rule" />
+                      <div className="snapshotgrid">
+                        <div>
+                          <small>Destination</small>
+                          <p>Class 6A Curriculum plan + Calendar</p>
+                        </div>
+                        <div>
+                          <small>Planned test</small>
+                          <p>
+                            {active.movesTest
+                              ? "Fractions test → 26 Oct · 09:00"
+                              : "Fractions test stays on 22 Oct · 09:00"}
+                          </p>
+                        </div>
+                      </div>
+                      {UndoControls()}
+                    </>
+                  )}
+                  {draft.action === "assignment" && page !== "submitfailed" && (
+                    <>
+                      <div className="rule" />
+                      <div className="statusmeta">
+                        <div>
+                          <small>Teacher destination</small>
+                          <p>Assigned tests</p>
+                        </div>
+                        <div>
+                          <small>Student destination</small>
+                          <p>
+                            Student entry point · Pending product verification
+                          </p>
+                        </div>
+                        <div>
+                          <small>Track it</small>
+                          <p>Assigned tests → Equivalent fractions review</p>
+                        </div>
+                      </div>
+                    </>
+                  )}
+                </article>
+                {page === "submitfailed" ? (
+                  <footer>
+                    <Button onClick={() => go("confirm", 4)}>
+                      Back to confirmation
+                    </Button>
+                    <Button primary onClick={recover}>
+                      Retry safely
+                    </Button>
+                  </footer>
+                ) : page === "success" && active ? (
+                  <footer>
+                    <Button onClick={() => go("overview")}>
+                      Back to group
+                    </Button>
+                    <Button
+                      primary
+                      onClick={() =>
+                        go(active.action === "plan" ? "calendar" : "assigned")
+                      }
+                    >
+                      {active.action === "plan"
+                        ? "Open Calendar"
+                        : "Open in Assigned tests"}
+                    </Button>
+                  </footer>
+                ) : null}
+              </>
+            )}
+            {page === "assigned" && (
+              <>
+                <header className="assignedheader">
+                  <h1>Assigned tests</h1>
+                </header>
+                <div className="segmented">
+                  <button
+                    className={!archive ? "selected" : ""}
+                    onClick={() => setArchive(false)}
+                  >
+                    Assigned tests{" "}
+                    <Badge tone="green">
+                      +{records.filter((r) => r.action === "assignment").length}
+                    </Badge>
+                  </button>
+                  <button
+                    className={archive ? "selected" : ""}
+                    onClick={() => setArchive(true)}
+                  >
+                    Archive
+                  </button>
+                </div>
+                <div className="row assignedfilters">
+                  <h2>Assigned tests</h2>
+                  <div className="actions">
+                    <select aria-label="Assigned test groups">
+                      <option>All groups</option>
+                      <option>6A</option>
+                    </select>
+                    <select aria-label="Assigned test status">
+                      <option>All tests</option>
+                      <option>In progress</option>
+                    </select>
+                    <input
+                      aria-label="Search assigned tests"
+                      placeholder="Search"
+                      value={assignedQuery}
+                      onChange={(e) => setAssignedQuery(e.target.value)}
+                    />
+                    <Button primary onClick={() => go("draft")}>
+                      Assign new test
+                    </Button>
+                  </div>
+                </div>
+                <div className="tablewrap assignedtable">
+                  <table>
+                    <thead>
+                      <tr>
+                        {[
+                          "Name",
+                          "Details",
+                          "Status",
+                          "Completion deadline",
+                          "Average score",
+                          "Solved the test",
+                          "Actions",
+                        ].map((t) => (
+                          <th key={t}>{t}</th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {!archive &&
+                        records
+                          .filter(
+                            (r) =>
+                              r.action === "assignment" &&
+                              r.title
+                                .toLowerCase()
+                                .includes(assignedQuery.toLowerCase()),
+                          )
+                          .map((r) => (
+                            <tr key={r.id}>
+                              <td>
+                                <strong>{r.title}</strong>
+                                <Badge tone="blue">New</Badge>
+                                <small>
+                                  {r.recipients.length} students · Opens{" "}
+                                  {date(r.snapshot.start).replace(" 2026", "")},{" "}
+                                  {r.snapshot.startTime} → closes{" "}
+                                  {date(r.snapshot.end).replace(" 2026", "")},{" "}
+                                  {r.snapshot.endTime} · From Recommended review
+                                  › Finding equivalent fractions
+                                </small>
+                              </td>
+                              <td>6A</td>
+                              <td>
+                                <Badge tone="blue">In progress</Badge>
+                              </td>
+                              <td>
+                                {date(r.snapshot.end).replace(" 2026", "")},{" "}
+                                {r.snapshot.endTime}
+                              </td>
+                              <td>—</td>
+                              <td>0/{r.recipients.length}</td>
+                              <td>
+                                <Button
+                                  onClick={() => {
+                                    setCurrent(r.id);
+                                    go("progress");
+                                  }}
+                                >
+                                  Check
+                                </Button>
+                              </td>
+                            </tr>
+                          ))}
+                      {!archive &&
+                        ["Comparing fractions", "Decimal place value"]
+                          .filter((t) =>
+                            t
+                              .toLowerCase()
+                              .includes(assignedQuery.toLowerCase()),
+                          )
+                          .map((t, i) => (
+                            <tr key={t}>
+                              <td>{t}</td>
+                              <td>6A</td>
+                              <td>
+                                <Badge>Awaiting review</Badge>
+                              </td>
+                              <td>Ended</td>
+                              <td>{i === 0 ? "64%" : "71%"}</td>
+                              <td>{i === 0 ? "4/4" : "2/2"}</td>
+                              <td>
+                                <Button
                                   onClick={() =>
                                     inform(
-                                      `${e.title} · ${date(e.date)} · ${e.start}–${e.end}. ${e.id === "test" ? "Planned timetable test, not assigned to students." : ""}`,
+                                      "This is a reference record from the existing portal. Use the newly created fractions review to inspect progress in this prototype.",
                                     )
                                   }
                                 >
-                                  {e.title}
-                                  <small>{e.start}</small>
-                                </button>
-                              ))}
-                          </div>
-                        );
-                      })}
-                    </React.Fragment>
-                  ))}
+                                  Check
+                                </Button>
+                              </td>
+                            </tr>
+                          ))}
+                    </tbody>
+                  </table>
+                  {archive && (
+                    <p className="blankstate">
+                      No archived tests in this prototype.
+                    </p>
+                  )}
                 </div>
-              </div>
-              <p className="muted">
-                Undo removes the linked Lesson and Station and restores any
-                moved planned test. Assigned tests are separate.
-              </p>
-            </>
-          )}
+                <p className="muted">
+                  Prototype state: created review records are saved in this
+                  browser. The other rows are example records. Check opens
+                  Assigned test progress.
+                </p>
+                <footer>
+                  <Button onClick={() => go("overview")}>Back to group</Button>
+                </footer>
+              </>
+            )}
+            {page === "progress" && (
+              <>
+                <div className="banner progressnotice">
+                  <strong>Review tracked after assigning</strong>
+                  <p>
+                    Sample progress from 15 Oct, one day after assigning. These
+                    responses are illustrative, not live student activity.
+                  </p>
+                </div>
+                <div className="flowtitle">
+                  <h1>Assigned test progress</h1>
+                  <Badge tone="blue">In progress</Badge>
+                </div>
+                <p>Equivalent fractions review · from Assigned tests</p>
+                <p>Completion: 1 completed · 1 in progress · 1 not started</p>
+                <div className="tablewrap progresstable">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Student</th>
+                        <th>Progress</th>
+                        <th>Completion</th>
+                        <th>Evidence since review</th>
+                        <th />
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {students
+                        .slice(0, 3)
+                        .filter(
+                          (s) =>
+                            !active ||
+                            active.snapshot.recipients.includes(s.id),
+                        )
+                        .map((s, i) => (
+                          <tr key={s.id}>
+                            <td>
+                              {s.name}
+                              <small>
+                                {i === 2
+                                  ? "Not opened yet"
+                                  : "Last active 15 Oct"}
+                              </small>
+                            </td>
+                            <td>
+                              {
+                                [
+                                  "All exercises answered",
+                                  "Some exercises answered",
+                                  "No exercises answered",
+                                ][i]
+                              }
+                            </td>
+                            <td>
+                              <Badge>
+                                {["Completed", "In progress", "Not started"][i]}
+                              </Badge>
+                            </td>
+                            <td>
+                              <Badge tone={i === 0 ? "green" : "plain"}>
+                                {i === 0 ? "Secure" : "Insufficient evidence"}
+                              </Badge>
+                              <small>
+                                {
+                                  [
+                                    "Correct on 3 of 3 review items",
+                                    "1 correct item so far",
+                                    "No new responses yet",
+                                  ][i]
+                                }
+                              </small>
+                            </td>
+                            <td>
+                              <Button
+                                onClick={() => {
+                                  setExpanded(s.id);
+                                  setModal("followevidence");
+                                }}
+                              >
+                                View evidence
+                              </Button>
+                            </td>
+                          </tr>
+                        ))}
+                    </tbody>
+                  </table>
+                </div>
+                <p className="muted">
+                  Evidence labels describe the latest responses only, not
+                  mastery. A later check is needed to confirm that understanding
+                  holds.
+                </p>
+                <Button onClick={() => go("assigned")}>
+                  Back to Assigned tests
+                </Button>
+              </>
+            )}
+            {page === "followup" && (
+              <>
+                <button
+                  className="textlink backlabel"
+                  onClick={() => go("progress")}
+                >
+                  <Icon name="imgIconArrowLeft" />
+                  Equivalent fractions review
+                </button>
+                <div className="flowtitle">
+                  <h1>Plan follow-up · Noah Wilson</h1>
+                  <Badge>Insufficient evidence</Badge>
+                </div>
+                <p className="flowsubtitle">
+                  Suggested from the review evidence (15 Oct). Nothing is sent
+                  until the follow-up draft is reviewed and confirmed.
+                </p>
+                <article className="hicard followupcard">
+                  <div className="followupfacts">
+                    <div>
+                      <small>Student</small>
+                      <p>Noah Wilson</p>
+                    </div>
+                    <div>
+                      <small>Learning goal</small>
+                      <p>Finding equivalent fractions</p>
+                    </div>
+                  </div>
+                  <div className="rule" />
+                  <small>Evidence summary</small>
+                  <p>
+                    Fractions checkpoint, 12 Oct: incorrect (2/3 = 4/8) · Review
+                    practice, 15 Oct: 1 correct item so far (2/3 = 6/9)
+                  </p>
+                  <div className="row">
+                    <h2>Suggested recipients · 2 students</h2>
+                    <Badge>Suggested for teacher review</Badge>
+                  </div>
+                  <div className="row">
+                    <span>Noah Wilson</span>
+                    <Badge>Insufficient evidence</Badge>
+                  </div>
+                  <div className="row">
+                    <span>Sofia Martin</span>
+                    <Badge>No new evidence yet</Badge>
+                  </div>
+                  <small>
+                    Both students may benefit from a short follow-up check
+                    before the next lesson.
+                  </small>
+                  <div className="rule" />
+                  <h2>Recommended materials · 2 items · 11 min</h2>
+                  {CompactMaterials(
+                    materials.filter((m) =>
+                      ["station", "practice"].includes(m.id),
+                    ),
+                  )}
+                </article>
+                <footer>
+                  <Button onClick={() => go("progress")}>
+                    Back to progress
+                  </Button>
+                  <Button
+                    primary
+                    onClick={() => {
+                      setDraft({
+                        ...fresh(),
+                        recipients: ["noah", "sofia"],
+                        selected: ["station", "practice"],
+                        followup: true,
+                      });
+                      setSupportOpen(false);
+                      go("draft");
+                    }}
+                  >
+                    Create follow-up draft
+                  </Button>
+                </footer>
+              </>
+            )}
+            {page === "calendar" && (
+              <>
+                <div className="calendarheading">
+                  <div>
+                    <h1>Calendar</h1>
+                    <p>
+                      Class 6A · Whole class · 24 students · Mathematics
+                      timetable ·<br />
+                      Mon 19 Oct – Sun 1 Nov
+                    </p>
+                    <small>
+                      Planned from the Finding equivalent fractions
+                      recommendation.
+                    </small>
+                  </div>
+                  <div className="actions">
+                    <div className="segmented">
+                      {["Month", "Day", "14 days · proposed"].map((v) => (
+                        <button
+                          key={v}
+                          className={v.startsWith("14") ? "selected" : ""}
+                          onClick={() =>
+                            !v.startsWith("14") &&
+                            inform(
+                              `${v} view is a design reference only. Use the 14-day view to inspect linked schedule items.`,
+                            )
+                          }
+                        >
+                          {v}
+                        </button>
+                      ))}
+                    </div>
+                    <Button onClick={() => go("draft", 2)}>Review draft</Button>
+                    <Button onClick={() => go("overview")}>
+                      Back to group
+                    </Button>
+                  </div>
+                </div>
+                {active?.action === "plan"
+                  ? UndoControls()
+                  : message && (
+                      <div className="banner row linkedstatus">
+                        <Icon name="imgIconCalendarDays" />
+                        <div>
+                          <strong>
+                            {message.startsWith("Undo complete")
+                              ? "Undo complete"
+                              : message}
+                          </strong>
+                          <p>
+                            Linked items removed; the planned test is restored.
+                          </p>
+                        </div>
+                      </div>
+                    )}
+                <div className="timelinewrap">
+                  <div className="timeline">
+                    <div className="timelinedays">
+                      <div />
+                      {Array.from({ length: 14 }, (_, i) => (
+                        <div className={i === 3 ? "current" : ""} key={i}>
+                          <small>
+                            {
+                              ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"][
+                                i % 7
+                              ]
+                            }
+                          </small>
+                          <p>{i === 13 ? 1 : 19 + i}</p>
+                        </div>
+                      ))}
+                    </div>
+                    {[
+                      {
+                        title: "Lessons",
+                        events: records
+                          .flatMap((r) => r.calendar)
+                          .filter((e) => e.type === "Lesson"),
+                      },
+                      {
+                        title: "Stations",
+                        events: records
+                          .flatMap((r) => r.calendar)
+                          .filter((e) => e.type === "Station"),
+                      },
+                      {
+                        title: "Protau",
+                        events: [
+                          {
+                            id: "protau",
+                            title: "Protau",
+                            date: "2026-10-21",
+                            start: "09:00",
+                            end: "10:00",
+                          },
+                        ],
+                      },
+                      {
+                        title: "Planned tests",
+                        events: [
+                          {
+                            id: "test",
+                            title: "Fractions test",
+                            date: testDate(records),
+                            start: "09:00",
+                            end: "09:45",
+                          },
+                        ],
+                      },
+                    ].map((row) => (
+                      <div
+                        className={
+                          "timelinelane " +
+                          (row.events.some(
+                            (e) => e.id !== "test" && e.id !== "protau",
+                          )
+                            ? "linked"
+                            : "")
+                        }
+                        key={row.title}
+                      >
+                        <div className="lanelabel">
+                          <strong>{row.title}</strong>
+                          <small>
+                            {row.title === "Planned tests"
+                              ? "Fractions test · planned test · not assigned to students"
+                              : row.title === "Protau"
+                                ? "Class 6A"
+                                : "Class 6A · Mathematics"}
+                          </small>
+                        </div>
+                        {Array.from({ length: 14 }, (_, i) => {
+                          const d = new Date("2026-10-19T12:00:00Z");
+                          d.setUTCDate(d.getUTCDate() + i);
+                          return (
+                            <div className="daycell" key={i}>
+                              {row.events
+                                .filter(
+                                  (e) =>
+                                    e.date === d.toISOString().slice(0, 10),
+                                )
+                                .map((e) => (
+                                  <button
+                                    className={
+                                      "timelineevent " +
+                                      (e.id === "test"
+                                        ? "plannedtest"
+                                        : e.id === "protau"
+                                          ? ""
+                                          : "linked")
+                                    }
+                                    key={e.id}
+                                    onClick={() =>
+                                      inform(
+                                        `${e.title} · ${date(e.date)} · ${e.start}–${e.end}. ${e.id === "test" ? "Planned timetable test, not assigned to students." : ""}`,
+                                      )
+                                    }
+                                  >
+                                    {row.title === "Lessons"
+                                      ? "Lesson"
+                                      : row.title === "Stations"
+                                        ? "Station"
+                                        : e.id === "test"
+                                          ? "Test"
+                                          : "Protau"}
+                                    <small>{e.start}</small>
+                                  </button>
+                                ))}
+                            </div>
+                          );
+                        })}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </>
+            )}
+          </div>
         </div>
         <details
           className="testpanel"
+          hidden={!new URLSearchParams(window.location.search).has("testing")}
           open={testPanel}
           onToggle={(e) => setTestPanel(e.currentTarget.open)}
         >
@@ -2505,13 +3258,13 @@ export default function HighFiApp() {
           </div>
         </details>
       </main>
-      {busy && (
-        <div className="pending" role="status">
-          {page === "checking"
-            ? "Checking previous submission…"
-            : "Submitting…"}
-        </div>
-      )}
+      <div className="sr-only" role="status" aria-live="polite">
+        {busy
+          ? page === "checking"
+            ? "Checking previous submission"
+            : "Submitting"
+          : ""}
+      </div>
       {modal === "info" && (
         <Modal title="Information" onClose={() => setModal("")}>
           <p>{info}</p>
@@ -2523,33 +3276,54 @@ export default function HighFiApp() {
       {modal === "students" && (
         <Modal title="Edit students" onClose={() => setModal("")}>
           <p>
-            Choose the students for this review. Changes apply only when you
-            save.
+            The suggestion includes 3 students. Add or remove students before
+            creating the review.
           </p>
-          {students.map((s) => (
-            <label className="checkline pickstudent" key={s.id}>
-              <input
-                type="checkbox"
-                checked={tempStudents.includes(s.id)}
-                onChange={() =>
-                  setTempStudents((p) =>
-                    p.includes(s.id)
-                      ? p.filter((id) => id !== s.id)
-                      : [...p, s.id],
-                  )
-                }
-              />
-              <span className="avatar">{s.initials}</span>
-              <span>
-                {s.name}
-                <small>
-                  {s.responses} related responses · {s.evidence}
-                </small>
-              </span>
-            </label>
-          ))}
-          <p>{tempStudents.length} selected</p>
+          <input
+            aria-label="Search students in Class 6A"
+            placeholder="Search students in Class 6A"
+            value={studentQuery}
+            onChange={(e) => setStudentQuery(e.target.value)}
+          />
+          <div className="studentoptions">
+            {students
+              .filter((s) =>
+                s.name.toLowerCase().includes(studentQuery.toLowerCase()),
+              )
+              .map((s) => (
+                <label className="checkline pickstudent" key={s.id}>
+                  <input
+                    type="checkbox"
+                    checked={tempStudents.includes(s.id)}
+                    onChange={() =>
+                      setTempStudents((p) =>
+                        p.includes(s.id)
+                          ? p.filter((id) => id !== s.id)
+                          : [...p, s.id],
+                      )
+                    }
+                  />
+                  <span className="avatar">{s.initials}</span>
+                  <span>
+                    {s.name}
+                    <small>
+                      {s.id === "liam"
+                        ? "Not in a suggested group"
+                        : s.id === "olivia"
+                          ? "Suggested for Decimal place value"
+                          : s.id === "sofia"
+                            ? "Same error on 1 item · limited evidence"
+                            : "Same error on 2 items"}
+                    </small>
+                  </span>
+                  {["amelia", "noah", "sofia"].includes(s.id) && (
+                    <Badge>Suggested</Badge>
+                  )}
+                </label>
+              ))}
+          </div>
           <footer>
+            <small>{tempStudents.length} selected</small>
             <Button onClick={() => setModal("")}>Cancel</Button>
             <Button
               primary
@@ -2609,17 +3383,53 @@ export default function HighFiApp() {
           <p>
             {preview.type} · {preview.minutes} min · Grade 6 · Resource library
           </p>
-          <article className="hicard">
-            <h3>Objective</h3>
-            <p>{preview.objective}</p>
-            <h3>Includes</h3>
-            <p>{preview.includes}</p>
-            <h3>Why suggested</h3>
-            <p>{preview.reason}</p>
-          </article>
-          <Button primary onClick={() => setPreview(null)}>
-            Close
-          </Button>
+          <div className="previewarea">
+            <Icon name="lucide-file-text" size={24} />
+            <small>
+              {preview.type === "Lesson"
+                ? "Lesson preview · 4 screens"
+                : preview.type === "Station"
+                  ? "Station preview · 6 steps"
+                  : `${preview.questions} questions · instant feedback`}
+            </small>
+          </div>
+          <div className="previewdetails">
+            <div>
+              <small>Objective</small>
+              <span>{preview.objective}</span>
+            </div>
+            <div>
+              <small>Includes</small>
+              <span>{preview.includes}</span>
+            </div>
+            <div>
+              <small>Why suggested</small>
+              <span>{preview.reason}</span>
+            </div>
+          </div>
+          <footer>
+            {page === "library" &&
+            !libReview &&
+            !draft.selected.includes(preview.id) ? (
+              <Button
+                primary
+                onClick={() => {
+                  setPicks((p) =>
+                    replaceId
+                      ? [preview.id]
+                      : Array.from(new Set([...p, preview.id])),
+                  );
+                  setPreview(null);
+                }}
+              >
+                Add to selection
+              </Button>
+            ) : (
+              <Button primary onClick={() => setPreview(null)}>
+                Close
+              </Button>
+            )}
+          </footer>
         </Modal>
       )}
       {modal === "followevidence" && (
@@ -2628,16 +3438,18 @@ export default function HighFiApp() {
           onClose={() => setModal("")}
         >
           <p>
-            Equivalent fractions review compared with the Fractions checkpoint
+            {expanded === "sofia"
+              ? "Equivalent fractions review · not opened yet"
+              : "Equivalent fractions review compared with the Fractions checkpoint"}
           </p>
           <div className="beforeafter">
             <article>
-              <h3>Before · 12 Oct</h3>
+              <h3>Before · Fractions checkpoint, 12 Oct</h3>
               <p>{expanded === "noah" ? "2/3 = 4/8" : "2/3 = 2/12"}</p>
               <Badge tone="orange">Incorrect</Badge>
             </article>
             <article>
-              <h3>After · 15 Oct</h3>
+              <h3>After · Review practice, 15 Oct</h3>
               <p>
                 {expanded === "amelia"
                   ? "2/3 = 8/12"
@@ -2650,6 +3462,13 @@ export default function HighFiApp() {
               </Badge>
             </article>
           </div>
+          <h3 className="followevidencelabel">
+            {expanded === "amelia"
+              ? "Secure on the latest review items"
+              : expanded === "noah"
+                ? "Insufficient evidence"
+                : "Needs review · no new evidence"}
+          </h3>
           <p>
             {expanded === "amelia"
               ? "Correct on all 3 review items. This is not mastery — a later check confirms whether it holds."
@@ -2677,9 +3496,13 @@ export default function HighFiApp() {
   );
   function UndoControls() {
     if (!active || active.action !== "plan") return null;
-    const seconds = Math.max(0, Math.ceil((active.undoUntil - tick) / 1000));
+    const seconds = Math.max(
+      0,
+      Math.min(30, Math.ceil((active.undoUntil - tick) / 1000)),
+    );
     return (
-      <div className="banner row">
+      <div className="banner row linkedstatus">
+        <Icon name="imgIconCalendarDays" />
         <div>
           <strong>Added to Curriculum plan and Calendar</strong>
           <p>
@@ -2690,6 +3513,7 @@ export default function HighFiApp() {
           </p>
         </div>
         <Button disabled={!seconds} onClick={undoPlan}>
+          <Icon name="imgIconUndo2" />
           Undo
         </Button>
       </div>

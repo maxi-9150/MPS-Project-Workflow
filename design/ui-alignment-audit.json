@@ -1,0 +1,3953 @@
+{
+  "baseline": "High-fid v1 & Prototyping · BBright baseline v3 · Client feedback",
+  "source_section": "1699:14238",
+  "captures": [
+    {
+      "name": "assemble",
+      "page": "draft",
+      "viewport": {
+        "height": 800,
+        "width": 1280
+      },
+      "all_visible_images_loaded": true,
+      "screenshot": "screenshots/ui-audit/assemble.png"
+    },
+    {
+      "name": "assigned-tests",
+      "page": "assigned",
+      "viewport": {
+        "height": 800,
+        "width": 1280
+      },
+      "all_visible_images_loaded": true,
+      "screenshot": "screenshots/ui-audit/assigned-tests.png"
+    },
+    {
+      "name": "assignment-created",
+      "page": "success",
+      "viewport": {
+        "height": 800,
+        "width": 1280
+      },
+      "all_visible_images_loaded": true,
+      "screenshot": "screenshots/ui-audit/assignment-created.png"
+    },
+    {
+      "name": "calendar-access-unavailable",
+      "page": "schedule",
+      "viewport": {
+        "height": 800,
+        "width": 1280
+      },
+      "all_visible_images_loaded": true,
+      "screenshot": "screenshots/ui-audit/calendar-access-unavailable.png"
+    },
+    {
+      "name": "calendar-undo",
+      "page": "calendar",
+      "viewport": {
+        "height": 800,
+        "width": 1280
+      },
+      "all_visible_images_loaded": true,
+      "screenshot": "screenshots/ui-audit/calendar-undo.png"
+    },
+    {
+      "name": "calendar",
+      "page": "calendar",
+      "viewport": {
+        "height": 800,
+        "width": 1280
+      },
+      "all_visible_images_loaded": true,
+      "screenshot": "screenshots/ui-audit/calendar.png"
+    },
+    {
+      "name": "choose-action",
+      "page": "draft",
+      "viewport": {
+        "height": 800,
+        "width": 1280
+      },
+      "all_visible_images_loaded": true,
+      "screenshot": "screenshots/ui-audit/choose-action.png"
+    },
+    {
+      "name": "confirm-assignment",
+      "page": "confirm",
+      "viewport": {
+        "height": 800,
+        "width": 1280
+      },
+      "all_visible_images_loaded": true,
+      "screenshot": "screenshots/ui-audit/confirm-assignment.png"
+    },
+    {
+      "name": "confirm-plan",
+      "page": "confirm",
+      "viewport": {
+        "height": 800,
+        "width": 1280
+      },
+      "all_visible_images_loaded": true,
+      "screenshot": "screenshots/ui-audit/confirm-plan.png"
+    },
+    {
+      "name": "conflict",
+      "page": "conflict",
+      "viewport": {
+        "height": 800,
+        "width": 1280
+      },
+      "all_visible_images_loaded": true,
+      "screenshot": "screenshots/ui-audit/conflict.png"
+    },
+    {
+      "name": "detail-decimal",
+      "page": "detail",
+      "viewport": {
+        "height": 800,
+        "width": 1280
+      },
+      "all_visible_images_loaded": true,
+      "screenshot": "screenshots/ui-audit/detail-decimal.png"
+    },
+    {
+      "name": "detail-percentages",
+      "page": "detail",
+      "viewport": {
+        "height": 800,
+        "width": 1280
+      },
+      "all_visible_images_loaded": true,
+      "screenshot": "screenshots/ui-audit/detail-percentages.png"
+    },
+    {
+      "name": "detail",
+      "page": "detail",
+      "viewport": {
+        "height": 800,
+        "width": 1280
+      },
+      "all_visible_images_loaded": true,
+      "screenshot": "screenshots/ui-audit/detail.png"
+    },
+    {
+      "name": "differentiate",
+      "page": "draft",
+      "viewport": {
+        "height": 800,
+        "width": 1280
+      },
+      "all_visible_images_loaded": true,
+      "screenshot": "screenshots/ui-audit/differentiate.png"
+    },
+    {
+      "name": "edit-students",
+      "page": "detail",
+      "viewport": {
+        "height": 800,
+        "width": 1280
+      },
+      "all_visible_images_loaded": true,
+      "screenshot": "screenshots/ui-audit/edit-students.png"
+    },
+    {
+      "name": "knowledge-gaps",
+      "page": "overview",
+      "viewport": {
+        "height": 800,
+        "width": 1280
+      },
+      "all_visible_images_loaded": true,
+      "screenshot": "screenshots/ui-audit/knowledge-gaps.png"
+    },
+    {
+      "name": "library-apply-failed",
+      "page": "library",
+      "viewport": {
+        "height": 800,
+        "width": 1280
+      },
+      "all_visible_images_loaded": true,
+      "screenshot": "screenshots/ui-audit/library-apply-failed.png"
+    },
+    {
+      "name": "library-empty",
+      "page": "library",
+      "viewport": {
+        "height": 800,
+        "width": 1280
+      },
+      "all_visible_images_loaded": true,
+      "screenshot": "screenshots/ui-audit/library-empty.png"
+    },
+    {
+      "name": "library-partial",
+      "page": "library",
+      "viewport": {
+        "height": 800,
+        "width": 1280
+      },
+      "all_visible_images_loaded": true,
+      "screenshot": "screenshots/ui-audit/library-partial.png"
+    },
+    {
+      "name": "library-restricted",
+      "page": "library",
+      "viewport": {
+        "height": 800,
+        "width": 1280
+      },
+      "all_visible_images_loaded": true,
+      "screenshot": "screenshots/ui-audit/library-restricted.png"
+    },
+    {
+      "name": "library-review",
+      "page": "library",
+      "viewport": {
+        "height": 800,
+        "width": 1280
+      },
+      "all_visible_images_loaded": true,
+      "screenshot": "screenshots/ui-audit/library-review.png"
+    },
+    {
+      "name": "library-stale",
+      "page": "library",
+      "viewport": {
+        "height": 800,
+        "width": 1280
+      },
+      "all_visible_images_loaded": true,
+      "screenshot": "screenshots/ui-audit/library-stale.png"
+    },
+    {
+      "name": "library-unavailable",
+      "page": "library",
+      "viewport": {
+        "height": 800,
+        "width": 1280
+      },
+      "all_visible_images_loaded": true,
+      "screenshot": "screenshots/ui-audit/library-unavailable.png"
+    },
+    {
+      "name": "library",
+      "page": "library",
+      "viewport": {
+        "height": 800,
+        "width": 1280
+      },
+      "all_visible_images_loaded": true,
+      "screenshot": "screenshots/ui-audit/library.png"
+    },
+    {
+      "name": "mobile-assemble",
+      "page": "draft",
+      "viewport": {
+        "height": 844,
+        "width": 390
+      },
+      "all_visible_images_loaded": true,
+      "screenshot": "screenshots/ui-audit/mobile-assemble.png"
+    },
+    {
+      "name": "mobile-overview",
+      "page": "overview",
+      "viewport": {
+        "height": 844,
+        "width": 390
+      },
+      "all_visible_images_loaded": true,
+      "screenshot": "screenshots/ui-audit/mobile-overview.png"
+    },
+    {
+      "name": "mobile-preview",
+      "page": "draft",
+      "viewport": {
+        "height": 844,
+        "width": 390
+      },
+      "all_visible_images_loaded": true,
+      "screenshot": "screenshots/ui-audit/mobile-preview.png"
+    },
+    {
+      "name": "overview",
+      "page": "overview",
+      "viewport": {
+        "height": 800,
+        "width": 1280
+      },
+      "all_visible_images_loaded": true,
+      "screenshot": "screenshots/ui-audit/overview.png"
+    },
+    {
+      "name": "plan-created",
+      "page": "success",
+      "viewport": {
+        "height": 800,
+        "width": 1280
+      },
+      "all_visible_images_loaded": true,
+      "screenshot": "screenshots/ui-audit/plan-created.png"
+    },
+    {
+      "name": "preview",
+      "page": "draft",
+      "viewport": {
+        "height": 800,
+        "width": 1280
+      },
+      "all_visible_images_loaded": true,
+      "screenshot": "screenshots/ui-audit/preview.png"
+    },
+    {
+      "name": "progress",
+      "page": "progress",
+      "viewport": {
+        "height": 800,
+        "width": 1280
+      },
+      "all_visible_images_loaded": true,
+      "screenshot": "screenshots/ui-audit/progress.png"
+    },
+    {
+      "name": "responsive-1024-assemble",
+      "page": "draft",
+      "viewport": {
+        "height": 800,
+        "width": 1024
+      },
+      "all_visible_images_loaded": true,
+      "screenshot": "screenshots/ui-audit/responsive-1024-assemble.png"
+    },
+    {
+      "name": "responsive-1024-calendar",
+      "page": "calendar",
+      "viewport": {
+        "height": 800,
+        "width": 1024
+      },
+      "all_visible_images_loaded": true,
+      "screenshot": "screenshots/ui-audit/responsive-1024-calendar.png"
+    },
+    {
+      "name": "responsive-1024-confirm",
+      "page": "confirm",
+      "viewport": {
+        "height": 800,
+        "width": 1024
+      },
+      "all_visible_images_loaded": true,
+      "screenshot": "screenshots/ui-audit/responsive-1024-confirm.png"
+    },
+    {
+      "name": "responsive-1024-library",
+      "page": "library",
+      "viewport": {
+        "height": 800,
+        "width": 1024
+      },
+      "all_visible_images_loaded": true,
+      "screenshot": "screenshots/ui-audit/responsive-1024-library.png"
+    },
+    {
+      "name": "responsive-1024-overview",
+      "page": "overview",
+      "viewport": {
+        "height": 800,
+        "width": 1024
+      },
+      "all_visible_images_loaded": true,
+      "screenshot": "screenshots/ui-audit/responsive-1024-overview.png"
+    },
+    {
+      "name": "responsive-1024-progress",
+      "page": "progress",
+      "viewport": {
+        "height": 800,
+        "width": 1024
+      },
+      "all_visible_images_loaded": true,
+      "screenshot": "screenshots/ui-audit/responsive-1024-progress.png"
+    },
+    {
+      "name": "responsive-1024-schedule",
+      "page": "schedule",
+      "viewport": {
+        "height": 800,
+        "width": 1024
+      },
+      "all_visible_images_loaded": true,
+      "screenshot": "screenshots/ui-audit/responsive-1024-schedule.png"
+    },
+    {
+      "name": "responsive-1024-support",
+      "page": "draft",
+      "viewport": {
+        "height": 800,
+        "width": 1024
+      },
+      "all_visible_images_loaded": true,
+      "screenshot": "screenshots/ui-audit/responsive-1024-support.png"
+    },
+    {
+      "name": "review",
+      "page": "draft",
+      "viewport": {
+        "height": 800,
+        "width": 1280
+      },
+      "all_visible_images_loaded": true,
+      "screenshot": "screenshots/ui-audit/review.png"
+    },
+    {
+      "name": "schedule",
+      "page": "schedule",
+      "viewport": {
+        "height": 800,
+        "width": 1280
+      },
+      "all_visible_images_loaded": true,
+      "screenshot": "screenshots/ui-audit/schedule.png"
+    },
+    {
+      "name": "submission-failed",
+      "page": "submitfailed",
+      "viewport": {
+        "height": 800,
+        "width": 1280
+      },
+      "all_visible_images_loaded": true,
+      "screenshot": "screenshots/ui-audit/submission-failed.png"
+    },
+    {
+      "name": "submission-recovered",
+      "page": "success",
+      "viewport": {
+        "height": 800,
+        "width": 1280
+      },
+      "all_visible_images_loaded": true,
+      "screenshot": "screenshots/ui-audit/submission-recovered.png"
+    },
+    {
+      "name": "support-editor",
+      "page": "draft",
+      "viewport": {
+        "height": 800,
+        "width": 1280
+      },
+      "all_visible_images_loaded": true,
+      "screenshot": "screenshots/ui-audit/support-editor.png"
+    },
+    {
+      "name": "support-save-failed",
+      "page": "draft",
+      "viewport": {
+        "height": 800,
+        "width": 1280
+      },
+      "all_visible_images_loaded": true,
+      "screenshot": "screenshots/ui-audit/support-save-failed.png"
+    }
+  ],
+  "anchor_checks": [
+    {
+      "capture": "assemble",
+      "selector": "profile",
+      "actual": [
+        16,
+        72,
+        223,
+        55
+      ],
+      "figma": [
+        16,
+        72,
+        223,
+        55
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "assemble",
+      "selector": "hiheader",
+      "actual": [
+        276,
+        16,
+        984,
+        52
+      ],
+      "figma": [
+        276,
+        16,
+        984,
+        52
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "assemble",
+      "selector": "groupcard",
+      "actual": [
+        276,
+        80,
+        984,
+        66
+      ],
+      "figma": [
+        276,
+        80,
+        984,
+        66
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "assemble",
+      "selector": "tabs hitabs",
+      "actual": [
+        276,
+        158,
+        984,
+        70
+      ],
+      "figma": [
+        276,
+        158,
+        984,
+        70
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "assemble",
+      "selector": "hipanel",
+      "actual": [
+        276,
+        228,
+        984,
+        548
+      ],
+      "figma": [
+        276,
+        228,
+        984,
+        548
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "assignment-created",
+      "selector": "profile",
+      "actual": [
+        16,
+        72,
+        223,
+        55
+      ],
+      "figma": [
+        16,
+        72,
+        223,
+        55
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "assignment-created",
+      "selector": "hiheader",
+      "actual": [
+        276,
+        16,
+        984,
+        52
+      ],
+      "figma": [
+        276,
+        16,
+        984,
+        52
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "assignment-created",
+      "selector": "groupcard",
+      "actual": [
+        276,
+        80,
+        984,
+        66
+      ],
+      "figma": [
+        276,
+        80,
+        984,
+        66
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "assignment-created",
+      "selector": "tabs hitabs",
+      "actual": [
+        276,
+        158,
+        984,
+        70
+      ],
+      "figma": [
+        276,
+        158,
+        984,
+        70
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "assignment-created",
+      "selector": "hipanel",
+      "actual": [
+        276,
+        228,
+        984,
+        548
+      ],
+      "figma": [
+        276,
+        228,
+        984,
+        548
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "calendar-access-unavailable",
+      "selector": "profile",
+      "actual": [
+        16,
+        72,
+        223,
+        55
+      ],
+      "figma": [
+        16,
+        72,
+        223,
+        55
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "calendar-access-unavailable",
+      "selector": "hiheader",
+      "actual": [
+        276,
+        16,
+        984,
+        52
+      ],
+      "figma": [
+        276,
+        16,
+        984,
+        52
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "calendar-access-unavailable",
+      "selector": "groupcard",
+      "actual": [
+        276,
+        80,
+        984,
+        66
+      ],
+      "figma": [
+        276,
+        80,
+        984,
+        66
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "calendar-access-unavailable",
+      "selector": "tabs hitabs",
+      "actual": [
+        276,
+        158,
+        984,
+        70
+      ],
+      "figma": [
+        276,
+        158,
+        984,
+        70
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "calendar-access-unavailable",
+      "selector": "hipanel",
+      "actual": [
+        276,
+        228,
+        984,
+        548
+      ],
+      "figma": [
+        276,
+        228,
+        984,
+        548
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "calendar",
+      "selector": "calendarheading",
+      "actual": [
+        293,
+        33,
+        950,
+        88
+      ],
+      "figma": [
+        293,
+        33,
+        950,
+        88
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "calendar",
+      "selector": "timeline",
+      "actual": [
+        293,
+        219,
+        950,
+        562
+      ],
+      "figma": [
+        293,
+        219,
+        950,
+        562
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "choose-action",
+      "selector": "profile",
+      "actual": [
+        16,
+        72,
+        223,
+        55
+      ],
+      "figma": [
+        16,
+        72,
+        223,
+        55
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "choose-action",
+      "selector": "hiheader",
+      "actual": [
+        276,
+        16,
+        984,
+        52
+      ],
+      "figma": [
+        276,
+        16,
+        984,
+        52
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "choose-action",
+      "selector": "groupcard",
+      "actual": [
+        276,
+        80,
+        984,
+        66
+      ],
+      "figma": [
+        276,
+        80,
+        984,
+        66
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "choose-action",
+      "selector": "tabs hitabs",
+      "actual": [
+        276,
+        158,
+        984,
+        70
+      ],
+      "figma": [
+        276,
+        158,
+        984,
+        70
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "choose-action",
+      "selector": "hipanel",
+      "actual": [
+        276,
+        228,
+        984,
+        548
+      ],
+      "figma": [
+        276,
+        228,
+        984,
+        548
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "confirm-assignment",
+      "selector": "profile",
+      "actual": [
+        16,
+        72,
+        223,
+        55
+      ],
+      "figma": [
+        16,
+        72,
+        223,
+        55
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "confirm-assignment",
+      "selector": "hiheader",
+      "actual": [
+        276,
+        16,
+        984,
+        52
+      ],
+      "figma": [
+        276,
+        16,
+        984,
+        52
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "confirm-assignment",
+      "selector": "groupcard",
+      "actual": [
+        276,
+        80,
+        984,
+        66
+      ],
+      "figma": [
+        276,
+        80,
+        984,
+        66
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "confirm-assignment",
+      "selector": "tabs hitabs",
+      "actual": [
+        276,
+        158,
+        984,
+        70
+      ],
+      "figma": [
+        276,
+        158,
+        984,
+        70
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "confirm-assignment",
+      "selector": "hipanel",
+      "actual": [
+        276,
+        228,
+        984,
+        548
+      ],
+      "figma": [
+        276,
+        228,
+        984,
+        548
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "confirm-plan",
+      "selector": "profile",
+      "actual": [
+        16,
+        72,
+        223,
+        55
+      ],
+      "figma": [
+        16,
+        72,
+        223,
+        55
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "confirm-plan",
+      "selector": "hiheader",
+      "actual": [
+        276,
+        16,
+        984,
+        52
+      ],
+      "figma": [
+        276,
+        16,
+        984,
+        52
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "confirm-plan",
+      "selector": "groupcard",
+      "actual": [
+        276,
+        80,
+        984,
+        66
+      ],
+      "figma": [
+        276,
+        80,
+        984,
+        66
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "confirm-plan",
+      "selector": "tabs hitabs",
+      "actual": [
+        276,
+        158,
+        984,
+        70
+      ],
+      "figma": [
+        276,
+        158,
+        984,
+        70
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "confirm-plan",
+      "selector": "hipanel",
+      "actual": [
+        276,
+        228,
+        984,
+        548
+      ],
+      "figma": [
+        276,
+        228,
+        984,
+        548
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "conflict",
+      "selector": "profile",
+      "actual": [
+        16,
+        72,
+        223,
+        55
+      ],
+      "figma": [
+        16,
+        72,
+        223,
+        55
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "conflict",
+      "selector": "hiheader",
+      "actual": [
+        276,
+        16,
+        984,
+        52
+      ],
+      "figma": [
+        276,
+        16,
+        984,
+        52
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "conflict",
+      "selector": "groupcard",
+      "actual": [
+        276,
+        80,
+        984,
+        66
+      ],
+      "figma": [
+        276,
+        80,
+        984,
+        66
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "conflict",
+      "selector": "tabs hitabs",
+      "actual": [
+        276,
+        158,
+        984,
+        70
+      ],
+      "figma": [
+        276,
+        158,
+        984,
+        70
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "conflict",
+      "selector": "hipanel",
+      "actual": [
+        276,
+        228,
+        984,
+        548
+      ],
+      "figma": [
+        276,
+        228,
+        984,
+        548
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "detail-decimal",
+      "selector": "profile",
+      "actual": [
+        16,
+        72,
+        223,
+        55
+      ],
+      "figma": [
+        16,
+        72,
+        223,
+        55
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "detail-decimal",
+      "selector": "hiheader",
+      "actual": [
+        276,
+        16,
+        984,
+        52
+      ],
+      "figma": [
+        276,
+        16,
+        984,
+        52
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "detail-decimal",
+      "selector": "groupcard",
+      "actual": [
+        276,
+        80,
+        984,
+        66
+      ],
+      "figma": [
+        276,
+        80,
+        984,
+        66
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "detail-decimal",
+      "selector": "tabs hitabs",
+      "actual": [
+        276,
+        158,
+        984,
+        70
+      ],
+      "figma": [
+        276,
+        158,
+        984,
+        70
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "detail-decimal",
+      "selector": "hipanel",
+      "actual": [
+        276,
+        228,
+        984,
+        548
+      ],
+      "figma": [
+        276,
+        228,
+        984,
+        548
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "detail-percentages",
+      "selector": "profile",
+      "actual": [
+        16,
+        72,
+        223,
+        55
+      ],
+      "figma": [
+        16,
+        72,
+        223,
+        55
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "detail-percentages",
+      "selector": "hiheader",
+      "actual": [
+        276,
+        16,
+        984,
+        52
+      ],
+      "figma": [
+        276,
+        16,
+        984,
+        52
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "detail-percentages",
+      "selector": "groupcard",
+      "actual": [
+        276,
+        80,
+        984,
+        66
+      ],
+      "figma": [
+        276,
+        80,
+        984,
+        66
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "detail-percentages",
+      "selector": "tabs hitabs",
+      "actual": [
+        276,
+        158,
+        984,
+        70
+      ],
+      "figma": [
+        276,
+        158,
+        984,
+        70
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "detail-percentages",
+      "selector": "hipanel",
+      "actual": [
+        276,
+        228,
+        984,
+        548
+      ],
+      "figma": [
+        276,
+        228,
+        984,
+        548
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "detail",
+      "selector": "profile",
+      "actual": [
+        16,
+        72,
+        223,
+        55
+      ],
+      "figma": [
+        16,
+        72,
+        223,
+        55
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "detail",
+      "selector": "hiheader",
+      "actual": [
+        276,
+        16,
+        984,
+        52
+      ],
+      "figma": [
+        276,
+        16,
+        984,
+        52
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "detail",
+      "selector": "groupcard",
+      "actual": [
+        276,
+        80,
+        984,
+        66
+      ],
+      "figma": [
+        276,
+        80,
+        984,
+        66
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "detail",
+      "selector": "tabs hitabs",
+      "actual": [
+        276,
+        158,
+        984,
+        70
+      ],
+      "figma": [
+        276,
+        158,
+        984,
+        70
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "detail",
+      "selector": "hipanel",
+      "actual": [
+        276,
+        228,
+        984,
+        548
+      ],
+      "figma": [
+        276,
+        228,
+        984,
+        548
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "differentiate",
+      "selector": "profile",
+      "actual": [
+        16,
+        72,
+        223,
+        55
+      ],
+      "figma": [
+        16,
+        72,
+        223,
+        55
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "differentiate",
+      "selector": "hiheader",
+      "actual": [
+        276,
+        16,
+        984,
+        52
+      ],
+      "figma": [
+        276,
+        16,
+        984,
+        52
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "differentiate",
+      "selector": "groupcard",
+      "actual": [
+        276,
+        80,
+        984,
+        66
+      ],
+      "figma": [
+        276,
+        80,
+        984,
+        66
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "differentiate",
+      "selector": "tabs hitabs",
+      "actual": [
+        276,
+        158,
+        984,
+        70
+      ],
+      "figma": [
+        276,
+        158,
+        984,
+        70
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "differentiate",
+      "selector": "hipanel",
+      "actual": [
+        276,
+        228,
+        984,
+        548
+      ],
+      "figma": [
+        276,
+        228,
+        984,
+        548
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "edit-students",
+      "selector": "profile",
+      "actual": [
+        16,
+        72,
+        223,
+        55
+      ],
+      "figma": [
+        16,
+        72,
+        223,
+        55
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "edit-students",
+      "selector": "hiheader",
+      "actual": [
+        276,
+        16,
+        984,
+        52
+      ],
+      "figma": [
+        276,
+        16,
+        984,
+        52
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "edit-students",
+      "selector": "groupcard",
+      "actual": [
+        276,
+        80,
+        984,
+        66
+      ],
+      "figma": [
+        276,
+        80,
+        984,
+        66
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "edit-students",
+      "selector": "tabs hitabs",
+      "actual": [
+        276,
+        158,
+        984,
+        70
+      ],
+      "figma": [
+        276,
+        158,
+        984,
+        70
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "edit-students",
+      "selector": "hipanel",
+      "actual": [
+        276,
+        228,
+        984,
+        548
+      ],
+      "figma": [
+        276,
+        228,
+        984,
+        548
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "knowledge-gaps",
+      "selector": "profile",
+      "actual": [
+        16,
+        72,
+        223,
+        55
+      ],
+      "figma": [
+        16,
+        72,
+        223,
+        55
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "knowledge-gaps",
+      "selector": "hiheader",
+      "actual": [
+        276,
+        16,
+        984,
+        52
+      ],
+      "figma": [
+        276,
+        16,
+        984,
+        52
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "knowledge-gaps",
+      "selector": "groupcard",
+      "actual": [
+        276,
+        80,
+        984,
+        66
+      ],
+      "figma": [
+        276,
+        80,
+        984,
+        66
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "knowledge-gaps",
+      "selector": "tabs hitabs",
+      "actual": [
+        276,
+        158,
+        984,
+        70
+      ],
+      "figma": [
+        276,
+        158,
+        984,
+        70
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "knowledge-gaps",
+      "selector": "hipanel",
+      "actual": [
+        276,
+        228,
+        984,
+        548
+      ],
+      "figma": [
+        276,
+        228,
+        984,
+        548
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "library-apply-failed",
+      "selector": "profile",
+      "actual": [
+        16,
+        72,
+        223,
+        55
+      ],
+      "figma": [
+        16,
+        72,
+        223,
+        55
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "library-apply-failed",
+      "selector": "hiheader",
+      "actual": [
+        276,
+        16,
+        984,
+        52
+      ],
+      "figma": [
+        276,
+        16,
+        984,
+        52
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "library-apply-failed",
+      "selector": "groupcard",
+      "actual": [
+        276,
+        80,
+        984,
+        66
+      ],
+      "figma": [
+        276,
+        80,
+        984,
+        66
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "library-apply-failed",
+      "selector": "tabs hitabs",
+      "actual": [
+        276,
+        158,
+        984,
+        70
+      ],
+      "figma": [
+        276,
+        158,
+        984,
+        70
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "library-apply-failed",
+      "selector": "hipanel",
+      "actual": [
+        276,
+        228,
+        984,
+        548
+      ],
+      "figma": [
+        276,
+        228,
+        984,
+        548
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "library-empty",
+      "selector": "profile",
+      "actual": [
+        16,
+        72,
+        223,
+        55
+      ],
+      "figma": [
+        16,
+        72,
+        223,
+        55
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "library-empty",
+      "selector": "hiheader",
+      "actual": [
+        276,
+        16,
+        984,
+        52
+      ],
+      "figma": [
+        276,
+        16,
+        984,
+        52
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "library-empty",
+      "selector": "groupcard",
+      "actual": [
+        276,
+        80,
+        984,
+        66
+      ],
+      "figma": [
+        276,
+        80,
+        984,
+        66
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "library-empty",
+      "selector": "tabs hitabs",
+      "actual": [
+        276,
+        158,
+        984,
+        70
+      ],
+      "figma": [
+        276,
+        158,
+        984,
+        70
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "library-empty",
+      "selector": "hipanel",
+      "actual": [
+        276,
+        228,
+        984,
+        548
+      ],
+      "figma": [
+        276,
+        228,
+        984,
+        548
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "library-partial",
+      "selector": "profile",
+      "actual": [
+        16,
+        72,
+        223,
+        55
+      ],
+      "figma": [
+        16,
+        72,
+        223,
+        55
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "library-partial",
+      "selector": "hiheader",
+      "actual": [
+        276,
+        16,
+        984,
+        52
+      ],
+      "figma": [
+        276,
+        16,
+        984,
+        52
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "library-partial",
+      "selector": "groupcard",
+      "actual": [
+        276,
+        80,
+        984,
+        66
+      ],
+      "figma": [
+        276,
+        80,
+        984,
+        66
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "library-partial",
+      "selector": "tabs hitabs",
+      "actual": [
+        276,
+        158,
+        984,
+        70
+      ],
+      "figma": [
+        276,
+        158,
+        984,
+        70
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "library-partial",
+      "selector": "hipanel",
+      "actual": [
+        276,
+        228,
+        984,
+        548
+      ],
+      "figma": [
+        276,
+        228,
+        984,
+        548
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "library-restricted",
+      "selector": "profile",
+      "actual": [
+        16,
+        72,
+        223,
+        55
+      ],
+      "figma": [
+        16,
+        72,
+        223,
+        55
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "library-restricted",
+      "selector": "hiheader",
+      "actual": [
+        276,
+        16,
+        984,
+        52
+      ],
+      "figma": [
+        276,
+        16,
+        984,
+        52
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "library-restricted",
+      "selector": "groupcard",
+      "actual": [
+        276,
+        80,
+        984,
+        66
+      ],
+      "figma": [
+        276,
+        80,
+        984,
+        66
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "library-restricted",
+      "selector": "tabs hitabs",
+      "actual": [
+        276,
+        158,
+        984,
+        70
+      ],
+      "figma": [
+        276,
+        158,
+        984,
+        70
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "library-restricted",
+      "selector": "hipanel",
+      "actual": [
+        276,
+        228,
+        984,
+        548
+      ],
+      "figma": [
+        276,
+        228,
+        984,
+        548
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "library-review",
+      "selector": "profile",
+      "actual": [
+        16,
+        72,
+        223,
+        55
+      ],
+      "figma": [
+        16,
+        72,
+        223,
+        55
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "library-review",
+      "selector": "hiheader",
+      "actual": [
+        276,
+        16,
+        984,
+        52
+      ],
+      "figma": [
+        276,
+        16,
+        984,
+        52
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "library-review",
+      "selector": "groupcard",
+      "actual": [
+        276,
+        80,
+        984,
+        66
+      ],
+      "figma": [
+        276,
+        80,
+        984,
+        66
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "library-review",
+      "selector": "tabs hitabs",
+      "actual": [
+        276,
+        158,
+        984,
+        70
+      ],
+      "figma": [
+        276,
+        158,
+        984,
+        70
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "library-review",
+      "selector": "hipanel",
+      "actual": [
+        276,
+        228,
+        984,
+        548
+      ],
+      "figma": [
+        276,
+        228,
+        984,
+        548
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "library-stale",
+      "selector": "profile",
+      "actual": [
+        16,
+        72,
+        223,
+        55
+      ],
+      "figma": [
+        16,
+        72,
+        223,
+        55
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "library-stale",
+      "selector": "hiheader",
+      "actual": [
+        276,
+        16,
+        984,
+        52
+      ],
+      "figma": [
+        276,
+        16,
+        984,
+        52
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "library-stale",
+      "selector": "groupcard",
+      "actual": [
+        276,
+        80,
+        984,
+        66
+      ],
+      "figma": [
+        276,
+        80,
+        984,
+        66
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "library-stale",
+      "selector": "tabs hitabs",
+      "actual": [
+        276,
+        158,
+        984,
+        70
+      ],
+      "figma": [
+        276,
+        158,
+        984,
+        70
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "library-stale",
+      "selector": "hipanel",
+      "actual": [
+        276,
+        228,
+        984,
+        548
+      ],
+      "figma": [
+        276,
+        228,
+        984,
+        548
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "library-unavailable",
+      "selector": "profile",
+      "actual": [
+        16,
+        72,
+        223,
+        55
+      ],
+      "figma": [
+        16,
+        72,
+        223,
+        55
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "library-unavailable",
+      "selector": "hiheader",
+      "actual": [
+        276,
+        16,
+        984,
+        52
+      ],
+      "figma": [
+        276,
+        16,
+        984,
+        52
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "library-unavailable",
+      "selector": "groupcard",
+      "actual": [
+        276,
+        80,
+        984,
+        66
+      ],
+      "figma": [
+        276,
+        80,
+        984,
+        66
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "library-unavailable",
+      "selector": "tabs hitabs",
+      "actual": [
+        276,
+        158,
+        984,
+        70
+      ],
+      "figma": [
+        276,
+        158,
+        984,
+        70
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "library-unavailable",
+      "selector": "hipanel",
+      "actual": [
+        276,
+        228,
+        984,
+        548
+      ],
+      "figma": [
+        276,
+        228,
+        984,
+        548
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "library",
+      "selector": "profile",
+      "actual": [
+        16,
+        72,
+        223,
+        55
+      ],
+      "figma": [
+        16,
+        72,
+        223,
+        55
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "library",
+      "selector": "hiheader",
+      "actual": [
+        276,
+        16,
+        984,
+        52
+      ],
+      "figma": [
+        276,
+        16,
+        984,
+        52
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "library",
+      "selector": "groupcard",
+      "actual": [
+        276,
+        80,
+        984,
+        66
+      ],
+      "figma": [
+        276,
+        80,
+        984,
+        66
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "library",
+      "selector": "tabs hitabs",
+      "actual": [
+        276,
+        158,
+        984,
+        70
+      ],
+      "figma": [
+        276,
+        158,
+        984,
+        70
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "library",
+      "selector": "hipanel",
+      "actual": [
+        276,
+        228,
+        984,
+        548
+      ],
+      "figma": [
+        276,
+        228,
+        984,
+        548
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "overview",
+      "selector": "profile",
+      "actual": [
+        16,
+        72,
+        223,
+        55
+      ],
+      "figma": [
+        16,
+        72,
+        223,
+        55
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "overview",
+      "selector": "hiheader",
+      "actual": [
+        276,
+        16,
+        984,
+        52
+      ],
+      "figma": [
+        276,
+        16,
+        984,
+        52
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "overview",
+      "selector": "groupcard",
+      "actual": [
+        276,
+        80,
+        984,
+        66
+      ],
+      "figma": [
+        276,
+        80,
+        984,
+        66
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "overview",
+      "selector": "tabs hitabs",
+      "actual": [
+        276,
+        158,
+        984,
+        70
+      ],
+      "figma": [
+        276,
+        158,
+        984,
+        70
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "overview",
+      "selector": "hipanel",
+      "actual": [
+        276,
+        228,
+        984,
+        548
+      ],
+      "figma": [
+        276,
+        228,
+        984,
+        548
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "plan-created",
+      "selector": "profile",
+      "actual": [
+        16,
+        72,
+        223,
+        55
+      ],
+      "figma": [
+        16,
+        72,
+        223,
+        55
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "plan-created",
+      "selector": "hiheader",
+      "actual": [
+        276,
+        16,
+        984,
+        52
+      ],
+      "figma": [
+        276,
+        16,
+        984,
+        52
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "plan-created",
+      "selector": "groupcard",
+      "actual": [
+        276,
+        80,
+        984,
+        66
+      ],
+      "figma": [
+        276,
+        80,
+        984,
+        66
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "plan-created",
+      "selector": "tabs hitabs",
+      "actual": [
+        276,
+        158,
+        984,
+        70
+      ],
+      "figma": [
+        276,
+        158,
+        984,
+        70
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "plan-created",
+      "selector": "hipanel",
+      "actual": [
+        276,
+        228,
+        984,
+        548
+      ],
+      "figma": [
+        276,
+        228,
+        984,
+        548
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "preview",
+      "selector": "profile",
+      "actual": [
+        16,
+        72,
+        223,
+        55
+      ],
+      "figma": [
+        16,
+        72,
+        223,
+        55
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "preview",
+      "selector": "hiheader",
+      "actual": [
+        276,
+        16,
+        984,
+        52
+      ],
+      "figma": [
+        276,
+        16,
+        984,
+        52
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "preview",
+      "selector": "groupcard",
+      "actual": [
+        276,
+        80,
+        984,
+        66
+      ],
+      "figma": [
+        276,
+        80,
+        984,
+        66
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "preview",
+      "selector": "tabs hitabs",
+      "actual": [
+        276,
+        158,
+        984,
+        70
+      ],
+      "figma": [
+        276,
+        158,
+        984,
+        70
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "preview",
+      "selector": "hipanel",
+      "actual": [
+        276,
+        228,
+        984,
+        548
+      ],
+      "figma": [
+        276,
+        228,
+        984,
+        548
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "progress",
+      "selector": "profile",
+      "actual": [
+        16,
+        72,
+        223,
+        55
+      ],
+      "figma": [
+        16,
+        72,
+        223,
+        55
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "progress",
+      "selector": "hiheader",
+      "actual": [
+        276,
+        16,
+        984,
+        52
+      ],
+      "figma": [
+        276,
+        16,
+        984,
+        52
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "progress",
+      "selector": "groupcard",
+      "actual": [
+        276,
+        80,
+        984,
+        66
+      ],
+      "figma": [
+        276,
+        80,
+        984,
+        66
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "progress",
+      "selector": "tabs hitabs",
+      "actual": [
+        276,
+        158,
+        984,
+        70
+      ],
+      "figma": [
+        276,
+        158,
+        984,
+        70
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "progress",
+      "selector": "hipanel",
+      "actual": [
+        276,
+        228,
+        984,
+        548
+      ],
+      "figma": [
+        276,
+        228,
+        984,
+        548
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "responsive-1024-assemble",
+      "selector": "profile",
+      "actual": [
+        16,
+        20,
+        39,
+        50
+      ],
+      "figma": [
+        16,
+        20,
+        39,
+        50
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "responsive-1024-assemble",
+      "selector": "hiheader",
+      "actual": [
+        92,
+        16,
+        912,
+        52
+      ],
+      "figma": [
+        92,
+        16,
+        912,
+        52
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "responsive-1024-assemble",
+      "selector": "groupcard",
+      "actual": [
+        92,
+        80,
+        912,
+        66
+      ],
+      "figma": [
+        92,
+        80,
+        912,
+        66
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "responsive-1024-assemble",
+      "selector": "tabs hitabs",
+      "actual": [
+        92,
+        158,
+        912,
+        70
+      ],
+      "figma": [
+        92,
+        158,
+        912,
+        70
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "responsive-1024-assemble",
+      "selector": "hipanel",
+      "actual": [
+        92,
+        228,
+        912,
+        548
+      ],
+      "figma": [
+        92,
+        228,
+        912,
+        548
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "responsive-1024-calendar",
+      "selector": "calendarheading",
+      "actual": [
+        109,
+        33,
+        878,
+        88
+      ],
+      "figma": [
+        109,
+        33,
+        878,
+        88
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "responsive-1024-calendar",
+      "selector": "timeline",
+      "actual": [
+        109,
+        219,
+        878,
+        562
+      ],
+      "figma": [
+        109,
+        219,
+        878,
+        562
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "responsive-1024-confirm",
+      "selector": "profile",
+      "actual": [
+        16,
+        20,
+        39,
+        50
+      ],
+      "figma": [
+        16,
+        20,
+        39,
+        50
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "responsive-1024-confirm",
+      "selector": "hiheader",
+      "actual": [
+        92,
+        16,
+        912,
+        52
+      ],
+      "figma": [
+        92,
+        16,
+        912,
+        52
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "responsive-1024-confirm",
+      "selector": "groupcard",
+      "actual": [
+        92,
+        80,
+        912,
+        66
+      ],
+      "figma": [
+        92,
+        80,
+        912,
+        66
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "responsive-1024-confirm",
+      "selector": "tabs hitabs",
+      "actual": [
+        92,
+        158,
+        912,
+        70
+      ],
+      "figma": [
+        92,
+        158,
+        912,
+        70
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "responsive-1024-confirm",
+      "selector": "hipanel",
+      "actual": [
+        92,
+        228,
+        912,
+        548
+      ],
+      "figma": [
+        92,
+        228,
+        912,
+        548
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "responsive-1024-library",
+      "selector": "profile",
+      "actual": [
+        16,
+        20,
+        39,
+        50
+      ],
+      "figma": [
+        16,
+        20,
+        39,
+        50
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "responsive-1024-library",
+      "selector": "hiheader",
+      "actual": [
+        92,
+        16,
+        912,
+        52
+      ],
+      "figma": [
+        92,
+        16,
+        912,
+        52
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "responsive-1024-library",
+      "selector": "groupcard",
+      "actual": [
+        92,
+        80,
+        912,
+        66
+      ],
+      "figma": [
+        92,
+        80,
+        912,
+        66
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "responsive-1024-library",
+      "selector": "tabs hitabs",
+      "actual": [
+        92,
+        158,
+        912,
+        70
+      ],
+      "figma": [
+        92,
+        158,
+        912,
+        70
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "responsive-1024-library",
+      "selector": "hipanel",
+      "actual": [
+        92,
+        228,
+        912,
+        548
+      ],
+      "figma": [
+        92,
+        228,
+        912,
+        548
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "responsive-1024-overview",
+      "selector": "profile",
+      "actual": [
+        16,
+        20,
+        39,
+        50
+      ],
+      "figma": [
+        16,
+        20,
+        39,
+        50
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "responsive-1024-overview",
+      "selector": "hiheader",
+      "actual": [
+        92,
+        16,
+        912,
+        52
+      ],
+      "figma": [
+        92,
+        16,
+        912,
+        52
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "responsive-1024-overview",
+      "selector": "groupcard",
+      "actual": [
+        92,
+        80,
+        912,
+        66
+      ],
+      "figma": [
+        92,
+        80,
+        912,
+        66
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "responsive-1024-overview",
+      "selector": "tabs hitabs",
+      "actual": [
+        92,
+        158,
+        912,
+        70
+      ],
+      "figma": [
+        92,
+        158,
+        912,
+        70
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "responsive-1024-overview",
+      "selector": "hipanel",
+      "actual": [
+        92,
+        228,
+        912,
+        548
+      ],
+      "figma": [
+        92,
+        228,
+        912,
+        548
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "responsive-1024-progress",
+      "selector": "profile",
+      "actual": [
+        16,
+        20,
+        39,
+        50
+      ],
+      "figma": [
+        16,
+        20,
+        39,
+        50
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "responsive-1024-progress",
+      "selector": "hiheader",
+      "actual": [
+        92,
+        16,
+        912,
+        52
+      ],
+      "figma": [
+        92,
+        16,
+        912,
+        52
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "responsive-1024-progress",
+      "selector": "groupcard",
+      "actual": [
+        92,
+        80,
+        912,
+        66
+      ],
+      "figma": [
+        92,
+        80,
+        912,
+        66
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "responsive-1024-progress",
+      "selector": "tabs hitabs",
+      "actual": [
+        92,
+        158,
+        912,
+        70
+      ],
+      "figma": [
+        92,
+        158,
+        912,
+        70
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "responsive-1024-progress",
+      "selector": "hipanel",
+      "actual": [
+        92,
+        228,
+        912,
+        548
+      ],
+      "figma": [
+        92,
+        228,
+        912,
+        548
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "responsive-1024-schedule",
+      "selector": "profile",
+      "actual": [
+        16,
+        20,
+        39,
+        50
+      ],
+      "figma": [
+        16,
+        20,
+        39,
+        50
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "responsive-1024-schedule",
+      "selector": "hiheader",
+      "actual": [
+        92,
+        16,
+        912,
+        52
+      ],
+      "figma": [
+        92,
+        16,
+        912,
+        52
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "responsive-1024-schedule",
+      "selector": "groupcard",
+      "actual": [
+        92,
+        80,
+        912,
+        66
+      ],
+      "figma": [
+        92,
+        80,
+        912,
+        66
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "responsive-1024-schedule",
+      "selector": "tabs hitabs",
+      "actual": [
+        92,
+        158,
+        912,
+        70
+      ],
+      "figma": [
+        92,
+        158,
+        912,
+        70
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "responsive-1024-schedule",
+      "selector": "hipanel",
+      "actual": [
+        92,
+        228,
+        912,
+        548
+      ],
+      "figma": [
+        92,
+        228,
+        912,
+        548
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "responsive-1024-support",
+      "selector": "profile",
+      "actual": [
+        16,
+        20,
+        39,
+        50
+      ],
+      "figma": [
+        16,
+        20,
+        39,
+        50
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "responsive-1024-support",
+      "selector": "hiheader",
+      "actual": [
+        92,
+        16,
+        912,
+        52
+      ],
+      "figma": [
+        92,
+        16,
+        912,
+        52
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "responsive-1024-support",
+      "selector": "groupcard",
+      "actual": [
+        92,
+        80,
+        912,
+        66
+      ],
+      "figma": [
+        92,
+        80,
+        912,
+        66
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "responsive-1024-support",
+      "selector": "tabs hitabs",
+      "actual": [
+        92,
+        158,
+        912,
+        70
+      ],
+      "figma": [
+        92,
+        158,
+        912,
+        70
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "responsive-1024-support",
+      "selector": "hipanel",
+      "actual": [
+        92,
+        228,
+        912,
+        548
+      ],
+      "figma": [
+        92,
+        228,
+        912,
+        548
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "review",
+      "selector": "profile",
+      "actual": [
+        16,
+        72,
+        223,
+        55
+      ],
+      "figma": [
+        16,
+        72,
+        223,
+        55
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "review",
+      "selector": "hiheader",
+      "actual": [
+        276,
+        16,
+        984,
+        52
+      ],
+      "figma": [
+        276,
+        16,
+        984,
+        52
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "review",
+      "selector": "groupcard",
+      "actual": [
+        276,
+        80,
+        984,
+        66
+      ],
+      "figma": [
+        276,
+        80,
+        984,
+        66
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "review",
+      "selector": "tabs hitabs",
+      "actual": [
+        276,
+        158,
+        984,
+        70
+      ],
+      "figma": [
+        276,
+        158,
+        984,
+        70
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "review",
+      "selector": "hipanel",
+      "actual": [
+        276,
+        228,
+        984,
+        548
+      ],
+      "figma": [
+        276,
+        228,
+        984,
+        548
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "schedule",
+      "selector": "profile",
+      "actual": [
+        16,
+        72,
+        223,
+        55
+      ],
+      "figma": [
+        16,
+        72,
+        223,
+        55
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "schedule",
+      "selector": "hiheader",
+      "actual": [
+        276,
+        16,
+        984,
+        52
+      ],
+      "figma": [
+        276,
+        16,
+        984,
+        52
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "schedule",
+      "selector": "groupcard",
+      "actual": [
+        276,
+        80,
+        984,
+        66
+      ],
+      "figma": [
+        276,
+        80,
+        984,
+        66
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "schedule",
+      "selector": "tabs hitabs",
+      "actual": [
+        276,
+        158,
+        984,
+        70
+      ],
+      "figma": [
+        276,
+        158,
+        984,
+        70
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "schedule",
+      "selector": "hipanel",
+      "actual": [
+        276,
+        228,
+        984,
+        548
+      ],
+      "figma": [
+        276,
+        228,
+        984,
+        548
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "submission-failed",
+      "selector": "profile",
+      "actual": [
+        16,
+        72,
+        223,
+        55
+      ],
+      "figma": [
+        16,
+        72,
+        223,
+        55
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "submission-failed",
+      "selector": "hiheader",
+      "actual": [
+        276,
+        16,
+        984,
+        52
+      ],
+      "figma": [
+        276,
+        16,
+        984,
+        52
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "submission-failed",
+      "selector": "groupcard",
+      "actual": [
+        276,
+        80,
+        984,
+        66
+      ],
+      "figma": [
+        276,
+        80,
+        984,
+        66
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "submission-failed",
+      "selector": "tabs hitabs",
+      "actual": [
+        276,
+        158,
+        984,
+        70
+      ],
+      "figma": [
+        276,
+        158,
+        984,
+        70
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "submission-failed",
+      "selector": "hipanel",
+      "actual": [
+        276,
+        228,
+        984,
+        548
+      ],
+      "figma": [
+        276,
+        228,
+        984,
+        548
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "submission-recovered",
+      "selector": "profile",
+      "actual": [
+        16,
+        72,
+        223,
+        55
+      ],
+      "figma": [
+        16,
+        72,
+        223,
+        55
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "submission-recovered",
+      "selector": "hiheader",
+      "actual": [
+        276,
+        16,
+        984,
+        52
+      ],
+      "figma": [
+        276,
+        16,
+        984,
+        52
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "submission-recovered",
+      "selector": "groupcard",
+      "actual": [
+        276,
+        80,
+        984,
+        66
+      ],
+      "figma": [
+        276,
+        80,
+        984,
+        66
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "submission-recovered",
+      "selector": "tabs hitabs",
+      "actual": [
+        276,
+        158,
+        984,
+        70
+      ],
+      "figma": [
+        276,
+        158,
+        984,
+        70
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "submission-recovered",
+      "selector": "hipanel",
+      "actual": [
+        276,
+        228,
+        984,
+        548
+      ],
+      "figma": [
+        276,
+        228,
+        984,
+        548
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "support-editor",
+      "selector": "profile",
+      "actual": [
+        16,
+        72,
+        223,
+        55
+      ],
+      "figma": [
+        16,
+        72,
+        223,
+        55
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "support-editor",
+      "selector": "hiheader",
+      "actual": [
+        276,
+        16,
+        984,
+        52
+      ],
+      "figma": [
+        276,
+        16,
+        984,
+        52
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "support-editor",
+      "selector": "groupcard",
+      "actual": [
+        276,
+        80,
+        984,
+        66
+      ],
+      "figma": [
+        276,
+        80,
+        984,
+        66
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "support-editor",
+      "selector": "tabs hitabs",
+      "actual": [
+        276,
+        158,
+        984,
+        70
+      ],
+      "figma": [
+        276,
+        158,
+        984,
+        70
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "support-editor",
+      "selector": "hipanel",
+      "actual": [
+        276,
+        228,
+        984,
+        548
+      ],
+      "figma": [
+        276,
+        228,
+        984,
+        548
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "support-save-failed",
+      "selector": "profile",
+      "actual": [
+        16,
+        72,
+        223,
+        55
+      ],
+      "figma": [
+        16,
+        72,
+        223,
+        55
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "support-save-failed",
+      "selector": "hiheader",
+      "actual": [
+        276,
+        16,
+        984,
+        52
+      ],
+      "figma": [
+        276,
+        16,
+        984,
+        52
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "support-save-failed",
+      "selector": "groupcard",
+      "actual": [
+        276,
+        80,
+        984,
+        66
+      ],
+      "figma": [
+        276,
+        80,
+        984,
+        66
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "support-save-failed",
+      "selector": "tabs hitabs",
+      "actual": [
+        276,
+        158,
+        984,
+        70
+      ],
+      "figma": [
+        276,
+        158,
+        984,
+        70
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    },
+    {
+      "capture": "support-save-failed",
+      "selector": "hipanel",
+      "actual": [
+        276,
+        228,
+        984,
+        548
+      ],
+      "figma": [
+        276,
+        228,
+        984,
+        548
+      ],
+      "max_delta_px": 0,
+      "pass": true
+    }
+  ],
+  "anchor_passed": 194,
+  "anchor_failed": 0,
+  "scope": "Source-derived common container anchors at 1280×800 and 1024×800, plus image load checks. This does not assert a zero-pixel difference for every leaf or every source frame."
+}

@@ -1,3 +1,7 @@
+# UI acceptance · 15 Nov 2026
+
+See [the full UI alignment audit](UI-ALIGNMENT.md): 45 captures, 194 passing source-derived container-anchor checks, both action branches and recovery, and all 23 domain tests passing. Verified the 1280×800 and 1024×800 references plus a 390×844 usability smoke check. Failure controls are hidden from the default client view; append `?testing=1` to use them.
+
 # Detail badge alignment · 15 Nov 2026
 
 Corrected the recommendation detail header against cached Figma D02 (`1699:14352`): Suggested group, Needs review and Repeated evidence now share the status row beneath the title. Browser DOM geometry at 1280×800 confirmed all three labels have the same y coordinate (338.39 px). At narrow widths the row wraps naturally. Screenshot: `screenshots/hi-v3-detail-badges.png`. All 23 domain tests and production build passed. This check covers this header, not all outstanding visual differences.
