@@ -919,11 +919,9 @@ export default function HighFiApp() {
               >
                 ← Suggested groups
               </button>
-              <div className="row">
-                <h1>{rec.title}</h1>
+              <h1>{rec.title}</h1>
+              <div className="actions" aria-label="Recommendation status">
                 <Badge>Suggested group</Badge>
-              </div>
-              <div className="actions">
                 <Badge tone={rec.id === "percentages" ? "plain" : "orange"}>
                   {rec.id === "percentages"
                     ? "Insufficient evidence"

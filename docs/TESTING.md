@@ -1,3 +1,7 @@
+# Detail badge alignment · 15 Nov 2026
+
+Corrected the recommendation detail header against cached Figma D02 (`1699:14352`): Suggested group, Needs review and Repeated evidence now share the status row beneath the title. Browser DOM geometry at 1280×800 confirmed all three labels have the same y coordinate (338.39 px). At narrow widths the row wraps naturally. Screenshot: `screenshots/hi-v3-detail-badges.png`. All 23 domain tests and production build passed. This check covers this header, not all outstanding visual differences.
+
 # Current verification · 14 Nov 2026
 
 See [high-fidelity v3 acceptance and limits](HI-V3-IMPLEMENTATION.md#verification). The following records are historical.
